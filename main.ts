@@ -492,11 +492,35 @@ function story_intro () {
         })
     })
 }
+function pig_to_Arnold () {
+    story.startCutscene(function () {
+        controller.moveSprite(Arnold, 0, 0)
+        story.spriteSayText(pig, "you have to be carefull")
+        story.spriteSayText(pig, "Piggy is roaming around killing everyone he can")
+        story.spriteSayText(pig, "I heard he killed half of the cows and hes only been here for a week!")
+        controller.moveSprite(Arnold, 100, 100)
+        story.cancelAllCutscenes()
+    })
+}
 function tilemap_to_pixels (position: number) {
     return position * 16 + 8
 }
+function talking_to_someone (player2: Sprite, guytalkingto: Sprite, direction: number, valtalkingto: number) {
+    if ((player2.x > guytalkingto.x - 40 && player2.x < guytalkingto.x || player2.x < guytalkingto.x + 40 && player2.x > guytalkingto.x) && (player2.y > guytalkingto.y - 20 && player2.y < guytalkingto.y || player2.y < guytalkingto.y + 20 && player2.y > guytalkingto.y)) {
+        a_button_signal.setPosition(guytalkingto.x - direction * 5, guytalkingto.y)
+        if (controller.A.isPressed()) {
+            if (valtalkingto == 1) {
+                pig_to_Arnold()
+            }
+        }
+    } else {
+        a_button_signal.setPosition(-1000, 0)
+        return
+    }
+}
 let facing = 0
 let cursor_is = 0
+let a_button_signal: Sprite = null
 let pig: Sprite = null
 let Arnold: Sprite = null
 let The_barn: Sprite = null
@@ -831,6 +855,17 @@ pig = sprites.create(img`
     ......fffff.....fffff....
     `, SpriteKind.Player)
 pig.setPosition(-2100, 0)
+a_button_signal = sprites.create(img`
+    . 1 1 1 1 1 1 . 
+    1 2 2 2 2 2 2 1 
+    1 2 1 1 1 1 2 1 
+    1 2 1 1 1 1 2 1 
+    1 2 2 2 2 2 2 1 
+    1 2 1 1 1 1 2 1 
+    1 2 1 1 1 1 2 1 
+    . 1 1 1 1 1 1 . 
+    `, SpriteKind.Player)
+a_button_signal.setPosition(-2100, 0)
 cursor_is = 1
 facing = 1
 game.onUpdate(function () {
@@ -846,19 +881,7 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    if (Arnold.x > pig.x - 20 && Arnold.x < pig.x || (Arnold.x < pig.x + 20 && Arnold.x > pig.x || (Arnold.y > pig.x - 20 && Arnold.y > pig.y || 0 == 0 && 0 == 0))) {
-        if (cursor_is < 0) {
-            timer.after(2000, function () {
-                story.startCutscene(function () {
-                    controller.moveSprite(Arnold, 0, 0)
-                    story.spriteSayText(pig, "you have to be carefull")
-                    story.spriteSayText(pig, "Piggy is roaming around the farm killing everyone he can")
-                    story.spriteSayText(pig, "I heard he already killed of all of the cows!")
-                    story.spriteSayText(pig, "and hes only been here for a week!")
-                    controller.moveSprite(Arnold, 100, 100)
-                    story.cancelAllCutscenes()
-                })
-            })
-        }
+    if (cursor_is < 0) {
+        talking_to_someone(Arnold, pig, 1, 1)
     }
 })
