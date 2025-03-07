@@ -134,9 +134,9 @@ function start_game () {
         `)
     tiles.setCurrentTilemap(tilemap`level6`)
     controller.moveSprite(Arnold)
-    Arnold.setPosition(tilemap_to_pixels(3), tilemap_to_pixels(11))
-    The_barn.setPosition(tilemap_to_pixels(10), tilemap_to_pixels(6))
-    Zac.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(12))
+    Arnold.setPosition(tilemap_to_pixels(3), tilemap_to_pixels(21))
+    The_barn.setPosition(tilemap_to_pixels(10), tilemap_to_pixels(13))
+    Binglep.setPosition(tilemap_to_pixels(21), tilemap_to_pixels(21))
     scene.cameraFollowSprite(Arnold)
 }
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
@@ -150,7 +150,7 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase < 0) {
+        if (cutscene_phase == 0) {
             facing = 2
             Arnold.setImage(img`
                 ..ff.ff..................
@@ -174,15 +174,15 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 function Zac_to_Arnold () {
     story.startCutscene(function () {
         controller.moveSprite(Arnold, 0, 0)
-        story.spriteSayText(Zac, "you have to be carefull")
-        Binglep.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(11))
-        Binglep.setVelocity(50, 0)
+        story.spriteSayText(Binglep, "you have to be carefull Arnold")
+        Zac.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(20))
+        Zac.setVelocity(50, 0)
         story.cancelCurrentCutscene()
     })
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase < 0) {
+        if (cutscene_phase == 0) {
             facing = 1
             Arnold.setImage(img`
                 ..................ff.ff..
@@ -202,6 +202,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
                 `)
         }
     }
+})
+controller.A.onEvent(ControllerButtonEvent.Released, function () {
+	
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (cursor_is > 0) {
@@ -507,11 +510,41 @@ function story_intro () {
 }
 function Zac_to_Arnold_pt2 () {
     story.startCutscene(function () {
-        story.spriteSayText(Binglep, "shut up you keep yaping about")
-        story.spriteSayText(Binglep, "oh! Piggys going to kill us!")
-        story.spriteSayText(Binglep, "Im sure the farmer will deal with it.")
-        story.spriteSayText(Zac, "Yeah well hes been here for a week and the ")
-        story.spriteSayText(Zac, "farmer has done nothing!")
+        Arnold.setImage(img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......f333f.....f333f....
+            ......fffff.....fffff....
+            `)
+        story.spriteSayText(Zac, "shut up Biglep you keep yapping about")
+        Zac.setVelocity(-50, 0)
+        Zac.setImage(img`
+            ..ff.fff.................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f7f7ffff................
+            f7777777f................
+            fff77777fffffffffffffff..
+            f777777777777777777777f..
+            ffff777777777777777777f..
+            ...fff7777777777777777fff
+            ......f77777777777777777f
+            ......f777fffffff777ffff.
+            ......f777f.....f777f....
+            ......fffff.....fffff....
+            `)
+        cutscene_phase = 3
+        story.cancelCurrentCutscene()
     })
 }
 function tilemap_to_pixels (position: number) {
@@ -521,7 +554,7 @@ function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction:
     if (Math.sqrt((guytalkingto.x - player2.x) ** 2 + (guytalkingto.y - player2.y) ** 2) < 50) {
         a_button_signal.setPosition(guytalkingto.x - A_direction * A_amount, guytalkingto.y)
         if (controller.A.isPressed()) {
-            if (cutscene_happening == 1) {
+            if (game_state == 1) {
                 Zac_to_Arnold()
             }
             cutscene_phase = 1
@@ -533,7 +566,7 @@ function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction:
     }
 }
 let cutscene_phase = 0
-let cutscene_happening = 0
+let game_state = 0
 let facing = 0
 let cursor_is = 0
 let a_button_signal: Sprite = null
@@ -857,34 +890,34 @@ Arnold = sprites.create(img`
     `, SpriteKind.Player)
 Arnold.setPosition(-2100, 0)
 Zac = sprites.create(img`
-    ..ff.fff.................
-    ..f2f22f.................
-    ..ffffbf.................
-    .f3f3ffff................
-    f3333333f................
-    fff33333fffffffffffffff..
-    f333333333333333333333f..
-    ffff333333333333333333f..
-    ...fff3333333333333333fff
-    ......f33333333333333333f
-    ......f333fffffff333ffff.
-    ......f333f.....f333f....
-    ......fffff.....fffff....
+    .................fff.ff..
+    .................f22f2f..
+    .................fbffff..
+    ................ffff7f7f.
+    ................f7777777f
+    ..fffffffffffffff77777fff
+    ..f777777777777777777777f
+    ..f777777777777777777ffff
+    fff7777777777777777fff...
+    f77777777777777777f......
+    .ffff777fffffff777f......
+    ....f777f.....f777f......
+    ....fffff.....fffff......
     `, SpriteKind.Player)
 Zac.setPosition(-2100, 0)
 Binglep = sprites.create(img`
-    . . . . . . . . . . . . . . . . f f . f f . . 
-    . . . . . . . . . . . . . . . f 2 2 f 2 f . . 
-    . . . . . . . . . . . . . . . f b f f f f . . 
-    . . . . . . . . . . . . . . . f f f 3 f 3 f . 
-    . . . . f f f f f f f f f f f f 3 3 3 3 3 3 f 
-    f f . . f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f f f 
-    . f . . f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-    . f f f f 3 3 3 3 3 3 3 3 3 3 3 f f f f f f . 
-    . . . . f 3 f f f f f f f f f 3 f . . . . . . 
-    . . . . f 3 f . . . . . . . f 3 f . . . . . . 
-    . . . . f 3 f . . . . . . . f 3 f . . . . . . 
-    . . . . f f f . . . . . . . f f f . . . . . . 
+    . . f f . f f . . . . . . . . . . . . . . . . 
+    . . f 2 f 2 2 f . . . . . . . . . . . . . . . 
+    . . f f f f b f . . . . . . . . . . . . . . . 
+    . f 3 f 3 f f f . . . . . . . . . . . . . . . 
+    f 3 3 3 3 3 3 f f f f f f f f f f f f . . . . 
+    f f f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f . . f f 
+    f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f . . f . 
+    . f f f f f f 3 3 3 3 3 3 3 3 3 3 3 f f f f . 
+    . . . . . . f 3 f f f f f f f f f 3 f . . . . 
+    . . . . . . f 3 f . . . . . . . f 3 f . . . . 
+    . . . . . . f 3 f . . . . . . . f 3 f . . . . 
+    . . . . . . f f f . . . . . . . f f f . . . . 
     `, SpriteKind.Player)
 Binglep.setPosition(-2100, 0)
 a_button_signal = sprites.create(img`
@@ -900,25 +933,45 @@ a_button_signal = sprites.create(img`
 a_button_signal.setPosition(-2100, 0)
 cursor_is = 1
 facing = 1
-cutscene_happening = 1
+game_state = 1
 cutscene_phase = 0
 // this is where stuff besides just talking happens in a cutscene
 game.onUpdate(function () {
     if (cursor_is < 0) {
-        if (cutscene_happening == 1 && cutscene_phase == 1) {
-            if (Binglep.x > tilemap_to_pixels(16)) {
+        if (game_state == 1 && cutscene_phase == 1) {
+            if (Zac.x > tilemap_to_pixels(16)) {
                 cutscene_phase = 2
-                Binglep.setVelocity(0, 0)
+                Zac.setVelocity(0, 0)
                 Zac_to_Arnold_pt2()
             }
+        } else if (game_state == 1 && cutscene_phase == 3) {
+            cutscene_phase = 4
+            timer.after(2000, function () {
+                Zac.setPosition(-2100, 0)
+                game_state = 2
+                cutscene_phase = 0
+                scene.centerCameraAt(tilemap_to_pixels(11), tilemap_to_pixels(4))
+                story.startCutscene(function () {
+                    tiles.setCurrentTilemap(tilemap`level6`)
+                    story.printText("Hello there! I am your unstucker!", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText("incase if you ever get stuck and dont know what to do", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText("I'll unstuck you! so now I wanted to tell you", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText("something that if I didn't tell you you would probally", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText("be stuckright now: there are different areas across the", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText(" map, each area has an exit, in this area the exit is", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText("the barn because the back door in the barn leads you ", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.printText("to the rest of the areas.", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
+                    story.cancelCurrentCutscene()
+                })
+            })
         }
     }
 })
 // this is where I ask what cutscene has started
 game.onUpdate(function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0) {
-            talking_to_someone(Arnold, Zac, 1, 5)
+        if (game_state == 1 && cutscene_phase == 0) {
+            talking_to_someone(Arnold, Binglep, 1, 5)
         }
     }
 })
