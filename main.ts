@@ -136,7 +136,7 @@ function start_game () {
     controller.moveSprite(Arnold)
     Arnold.setPosition(tilemap_to_pixels(3), tilemap_to_pixels(11))
     The_barn.setPosition(tilemap_to_pixels(10), tilemap_to_pixels(6))
-    pig.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(12))
+    Zac.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(12))
     scene.cameraFollowSprite(Arnold)
 }
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
@@ -150,44 +150,57 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        facing = 2
-        Arnold.setImage(img`
-            ..ff.ff..................
-            ..f2f22f.................
-            ..ffffbf.................
-            .f3f3ffff................
-            f3333333f................
-            f3333333fffffffffffff....
-            fff333333333333333333f...
-            f333333333333333333333f..
-            ffff333333333333333333f..
-            ...fff3333333333333333fff
-            ......f33333333333333333f
-            ......f333fffffff333ffff.
-            ......f333f.....f333f....
-            ......fffff.....fffff....
-            `)
+        if (cutscene_phase < 0) {
+            facing = 2
+            Arnold.setImage(img`
+                ..ff.ff..................
+                ..f2f22f.................
+                ..ffffbf.................
+                .f3f3ffff................
+                f3333333f................
+                f3333333fffffffffffff....
+                fff333333333333333333f...
+                f333333333333333333333f..
+                ffff333333333333333333f..
+                ...fff3333333333333333fff
+                ......f33333333333333333f
+                ......f333fffffff333ffff.
+                ......f333f.....f333f....
+                ......fffff.....fffff....
+                `)
+        }
     }
 })
+function Zac_to_Arnold () {
+    story.startCutscene(function () {
+        controller.moveSprite(Arnold, 0, 0)
+        story.spriteSayText(Zac, "you have to be carefull")
+        Binglep.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(11))
+        Binglep.setVelocity(50, 0)
+        story.cancelCurrentCutscene()
+    })
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        facing = 1
-        Arnold.setImage(img`
-            ..................ff.ff..
-            .................f22f2f..
-            .................fbffff..
-            ................ffff3f3f.
-            ................f3333333f
-            ....fffffffffffff3333333f
-            ...f333333333333333333fff
-            ..f333333333333333333333f
-            ..f333333333333333333ffff
-            fff3333333333333333fff...
-            f33333333333333333f......
-            .ffff333fffffff333f......
-            ....f333f.....f333f......
-            ....fffff.....fffff......
-            `)
+        if (cutscene_phase < 0) {
+            facing = 1
+            Arnold.setImage(img`
+                ..................ff.ff..
+                .................f22f2f..
+                .................fbffff..
+                ................ffff3f3f.
+                ................f3333333f
+                ....fffffffffffff3333333f
+                ...f333333333333333333fff
+                ..f333333333333333333333f
+                ..f333333333333333333ffff
+                fff3333333333333333fff...
+                f33333333333333333f......
+                .ffff333fffffff333f......
+                ....f333f.....f333f......
+                ....fffff.....fffff......
+                `)
+        }
     }
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
@@ -492,36 +505,40 @@ function story_intro () {
         })
     })
 }
-function pig_to_Arnold () {
+function Zac_to_Arnold_pt2 () {
     story.startCutscene(function () {
-        controller.moveSprite(Arnold, 0, 0)
-        story.spriteSayText(pig, "you have to be carefull")
-        story.spriteSayText(pig, "Piggy is roaming around killing everyone he can")
-        story.spriteSayText(pig, "I heard he killed half of the cows and hes only been here for a week!")
-        controller.moveSprite(Arnold, 100, 100)
-        story.cancelAllCutscenes()
+        story.spriteSayText(Binglep, "shut up you keep yaping about")
+        story.spriteSayText(Binglep, "oh! Piggys going to kill us!")
+        story.spriteSayText(Binglep, "Im sure the farmer will deal with it.")
+        story.spriteSayText(Zac, "Yeah well hes been here for a week and the ")
+        story.spriteSayText(Zac, "farmer has done nothing!")
     })
 }
 function tilemap_to_pixels (position: number) {
     return position * 16 + 8
 }
-function talking_to_someone (player2: Sprite, guytalkingto: Sprite, direction: number, valtalkingto: number) {
-    if ((player2.x > guytalkingto.x - 40 && player2.x < guytalkingto.x || player2.x < guytalkingto.x + 40 && player2.x > guytalkingto.x) && (player2.y > guytalkingto.y - 20 && player2.y < guytalkingto.y || player2.y < guytalkingto.y + 20 && player2.y > guytalkingto.y)) {
-        a_button_signal.setPosition(guytalkingto.x - direction * 5, guytalkingto.y)
+function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction: number, A_amount: number) {
+    if (Math.sqrt((guytalkingto.x - player2.x) ** 2 + (guytalkingto.y - player2.y) ** 2) < 50) {
+        a_button_signal.setPosition(guytalkingto.x - A_direction * A_amount, guytalkingto.y)
         if (controller.A.isPressed()) {
-            if (valtalkingto == 1) {
-                pig_to_Arnold()
+            if (cutscene_happening == 1) {
+                Zac_to_Arnold()
             }
+            cutscene_phase = 1
+            a_button_signal.setPosition(-1000, 0)
         }
     } else {
         a_button_signal.setPosition(-1000, 0)
         return
     }
 }
+let cutscene_phase = 0
+let cutscene_happening = 0
 let facing = 0
 let cursor_is = 0
 let a_button_signal: Sprite = null
-let pig: Sprite = null
+let Binglep: Sprite = null
+let Zac: Sprite = null
 let Arnold: Sprite = null
 let The_barn: Sprite = null
 let Piggy: Sprite = null
@@ -839,7 +856,7 @@ Arnold = sprites.create(img`
     ....fffff.....fffff......
     `, SpriteKind.Player)
 Arnold.setPosition(-2100, 0)
-pig = sprites.create(img`
+Zac = sprites.create(img`
     ..ff.fff.................
     ..f2f22f.................
     ..ffffbf.................
@@ -854,7 +871,22 @@ pig = sprites.create(img`
     ......f333f.....f333f....
     ......fffff.....fffff....
     `, SpriteKind.Player)
-pig.setPosition(-2100, 0)
+Zac.setPosition(-2100, 0)
+Binglep = sprites.create(img`
+    . . . . . . . . . . . . . . . . f f . f f . . 
+    . . . . . . . . . . . . . . . f 2 2 f 2 f . . 
+    . . . . . . . . . . . . . . . f b f f f f . . 
+    . . . . . . . . . . . . . . . f f f 3 f 3 f . 
+    . . . . f f f f f f f f f f f f 3 3 3 3 3 3 f 
+    f f . . f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f f f 
+    . f . . f 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+    . f f f f 3 3 3 3 3 3 3 3 3 3 3 f f f f f f . 
+    . . . . f 3 f f f f f f f f f 3 f . . . . . . 
+    . . . . f 3 f . . . . . . . f 3 f . . . . . . 
+    . . . . f 3 f . . . . . . . f 3 f . . . . . . 
+    . . . . f f f . . . . . . . f f f . . . . . . 
+    `, SpriteKind.Player)
+Binglep.setPosition(-2100, 0)
 a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     1 2 2 2 2 2 2 1 
@@ -868,6 +900,28 @@ a_button_signal = sprites.create(img`
 a_button_signal.setPosition(-2100, 0)
 cursor_is = 1
 facing = 1
+cutscene_happening = 1
+cutscene_phase = 0
+// this is where stuff besides just talking happens in a cutscene
+game.onUpdate(function () {
+    if (cursor_is < 0) {
+        if (cutscene_happening == 1 && cutscene_phase == 1) {
+            if (Binglep.x > tilemap_to_pixels(16)) {
+                cutscene_phase = 2
+                Binglep.setVelocity(0, 0)
+                Zac_to_Arnold_pt2()
+            }
+        }
+    }
+})
+// this is where I ask what cutscene has started
+game.onUpdate(function () {
+    if (cursor_is < 0) {
+        if (cutscene_phase == 0) {
+            talking_to_someone(Arnold, Zac, 1, 5)
+        }
+    }
+})
 game.onUpdate(function () {
     if (cursor_is == 2) {
         cursor.setPosition(20, story_iintro.y)
@@ -878,10 +932,5 @@ game.onUpdate(function () {
         story_intro()
     } else if (cursor_is == 1 && controller.A.isPressed()) {
         start_game()
-    }
-})
-game.onUpdate(function () {
-    if (cursor_is < 0) {
-        talking_to_someone(Arnold, pig, 1, 1)
     }
 })
