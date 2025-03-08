@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const generator = SpriteKind.create()
     export const plug = SpriteKind.create()
     export const generatortop = SpriteKind.create()
+    export const areapicture = SpriteKind.create()
 }
 function start_game () {
     cursor_is = -1
@@ -172,13 +173,20 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function Zac_to_Arnold () {
-    story.startCutscene(function () {
-        controller.moveSprite(Arnold, 0, 0)
-        story.spriteSayText(Binglep, "you have to be carefull Arnold")
-        Zac.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(20))
-        Zac.setVelocity(50, 0)
-        story.cancelCurrentCutscene()
-    })
+    if (false) {
+        story.startCutscene(function () {
+            controller.moveSprite(Arnold, 0, 0)
+            story.spriteSayText(Binglep, "you have to be carefull Arnold")
+            story.spriteSayText(Binglep, "Piggy is roaming around killing everyone he can")
+            story.spriteSayText(Binglep, "I heard he killed half of the cows and hes only been here for a week!")
+            story.spriteSayText(Arnold, "I know I am brainstorming ideas to stop him")
+            story.spriteSayText(Binglep, "Isn't what we do obvious? It's to run and hide!")
+            story.spriteSayText(Arnold, "we shoudn't just run and hide, we have to stop piggy!")
+            Zac.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(20))
+            Zac.setVelocity(50, 0)
+            story.cancelCurrentCutscene()
+        })
+    }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
@@ -205,6 +213,59 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
 	
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.areapicture, function (sprite, otherSprite) {
+    animation.runImageAnimation(
+    otherSprite,
+    [img`
+        . 8 8 8 8 8 8 . 
+        8 8 8 8 8 8 8 8 
+        8 8 8 8 8 8 8 8 
+        8 8 8 9 9 8 8 8 
+        8 8 8 9 9 8 8 8 
+        8 8 8 8 8 8 8 8 
+        8 8 8 8 8 8 8 8 
+        . 8 8 8 8 8 8 . 
+        `,img`
+        . 8 8 8 8 8 8 . 
+        8 8 8 8 8 8 8 8 
+        8 8 8 9 9 8 8 8 
+        8 8 9 9 9 9 8 8 
+        8 8 9 9 9 9 8 8 
+        8 8 8 9 9 8 8 8 
+        8 8 8 8 8 8 8 8 
+        . 8 8 8 8 8 8 . 
+        `,img`
+        . 8 8 8 8 8 8 . 
+        8 8 8 9 9 8 8 8 
+        8 8 9 9 9 9 8 8 
+        8 9 9 9 9 9 9 8 
+        8 9 9 9 9 9 9 8 
+        8 8 9 9 9 9 8 8 
+        8 8 8 9 9 8 8 8 
+        . 8 8 8 8 8 8 . 
+        `,img`
+        . 8 8 8 8 8 8 . 
+        8 9 9 9 9 9 9 8 
+        8 9 9 9 9 9 9 8 
+        8 9 9 9 9 9 9 8 
+        8 9 9 9 9 9 9 8 
+        8 9 9 9 9 9 9 8 
+        8 9 9 9 9 9 9 8 
+        . 8 8 8 8 8 8 . 
+        `,img`
+        . 9 9 9 9 9 9 . 
+        9 9 9 9 9 9 9 9 
+        9 9 9 9 9 9 9 9 
+        9 9 9 9 9 9 9 9 
+        9 9 9 9 9 9 9 9 
+        9 9 9 9 9 9 9 9 
+        9 9 9 9 9 9 9 9 
+        . 9 9 9 9 9 9 . 
+        `],
+    200,
+    false
+    )
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (cursor_is > 0) {
@@ -509,43 +570,279 @@ function story_intro () {
     })
 }
 function Zac_to_Arnold_pt2 () {
-    story.startCutscene(function () {
-        Arnold.setImage(img`
-            ..ff.ff..................
-            ..f2f22f.................
-            ..ffffbf.................
-            .f3f3ffff................
-            f3333333f................
-            f3333333fffffffffffff....
-            fff333333333333333333f...
-            f333333333333333333333f..
-            ffff333333333333333333f..
-            ...fff3333333333333333fff
-            ......f33333333333333333f
-            ......f333fffffff333ffff.
-            ......f333f.....f333f....
-            ......fffff.....fffff....
-            `)
-        story.spriteSayText(Zac, "shut up Biglep you keep yapping about")
-        Zac.setVelocity(-50, 0)
-        Zac.setImage(img`
-            ..ff.fff.................
-            ..f2f22f.................
-            ..ffffbf.................
-            .f7f7ffff................
-            f7777777f................
-            fff77777fffffffffffffff..
-            f777777777777777777777f..
-            ffff777777777777777777f..
-            ...fff7777777777777777fff
-            ......f77777777777777777f
-            ......f777fffffff777ffff.
-            ......f777f.....f777f....
-            ......fffff.....fffff....
-            `)
-        cutscene_phase = 3
-        story.cancelCurrentCutscene()
-    })
+    if (false) {
+        story.startCutscene(function () {
+            Arnold.setImage(img`
+                ..ff.ff..................
+                ..f2f22f.................
+                ..ffffbf.................
+                .f3f3ffff................
+                f3333333f................
+                f3333333fffffffffffff....
+                fff333333333333333333f...
+                f333333333333333333333f..
+                ffff333333333333333333f..
+                ...fff3333333333333333fff
+                ......f33333333333333333f
+                ......f333fffffff333ffff.
+                ......f333f.....f333f....
+                ......fffff.....fffff....
+                `)
+            story.spriteSayText(Zac, "shut up Biglep you keep yapping about")
+            story.spriteSayText(Zac, "\"oh! Piggys going to kill us!\"")
+            story.spriteSayText(Zac, "Im sure the farmer will deal with it.")
+            Arnold.setImage(img`
+                ..................ff.ff..
+                .................f22f2f..
+                .................fbffff..
+                ................ffff3f3f.
+                ................f3333333f
+                ....fffffffffffff3333333f
+                ...f333333333333333333fff
+                ..f333333333333333333333f
+                ..f333333333333333333ffff
+                fff3333333333333333fff...
+                f33333333333333333f......
+                .ffff333fffffff333f......
+                ....f333f.....f333f......
+                ....fffff.....fffff......
+                `)
+            story.spriteSayText(Binglep, "Yeah well hes been here for a week and the ")
+            story.spriteSayText(Binglep, "farmer has done nothing! Im just trying")
+            story.spriteSayText(Binglep, "to keep us safe!")
+            story.spriteSayText(Arnold, "I agree we must do something")
+            story.spriteSayText(Zac, "and what is that? go see why")
+            Arnold.setImage(img`
+                ..ff.ff..................
+                ..f2f22f.................
+                ..ffffbf.................
+                .f3f3ffff................
+                f3333333f................
+                f3333333fffffffffffff....
+                fff333333333333333333f...
+                f333333333333333333333f..
+                ffff333333333333333333f..
+                ...fff3333333333333333fff
+                ......f33333333333333333f
+                ......f333fffffff333ffff.
+                ......f333f.....f333f....
+                ......fffff.....fffff....
+                `)
+            story.spriteSayText(Zac, "the farmer isn't doing anything?")
+            story.spriteSayText(Zac, "we'll be caught the moment we get outta here!")
+            story.spriteSayText(Arnold, "It's worth a shot! com'n lets go!")
+            story.spriteSayText(Binglep, "you do what you want but Im going to hide here!")
+            Arnold.setImage(img`
+                ..................ff.ff..
+                .................f22f2f..
+                .................fbffff..
+                ................ffff3f3f.
+                ................f3333333f
+                ....fffffffffffff3333333f
+                ...f333333333333333333fff
+                ..f333333333333333333333f
+                ..f333333333333333333ffff
+                fff3333333333333333fff...
+                f33333333333333333f......
+                .ffff333fffffff333f......
+                ....f333f.....f333f......
+                ....fffff.....fffff......
+                `)
+            story.spriteSayText(Arnold, "right if you even call standing out in the open hiding...")
+            story.spriteSayText(Binglep, "did you say something?")
+            story.spriteSayText(Arnold, "Nothing!")
+            story.spriteSayText(Arnold, "What about you Zac?")
+            Arnold.setImage(img`
+                ..ff.ff..................
+                ..f2f22f.................
+                ..ffffbf.................
+                .f3f3ffff................
+                f3333333f................
+                f3333333fffffffffffff....
+                fff333333333333333333f...
+                f333333333333333333333f..
+                ffff333333333333333333f..
+                ...fff3333333333333333fff
+                ......f33333333333333333f
+                ......f333fffffff333ffff.
+                ......f333f.....f333f....
+                ......fffff.....fffff....
+                `)
+            story.spriteSayText(Zac, "Nah Im sure the farmer will do something soon enough.")
+            story.spriteSayText(Arnold, "Ok bye you guys!")
+            Zac.setVelocity(-50, 0)
+            Zac.setImage(img`
+                ..ff.fff.................
+                ..f2f22f.................
+                ..ffffbf.................
+                .f7f7ffff................
+                f7777777f................
+                fff77777fffffffffffffff..
+                f777777777777777777777f..
+                ffff777777777777777777f..
+                ...fff7777777777777777fff
+                ......f77777777777777777f
+                ......f777fffffff777ffff.
+                ......f777f.....f777f....
+                ......fffff.....fffff....
+                `)
+            cutscene_phase = 3
+            story.cancelCurrentCutscene()
+        })
+    }
+}
+function area_select () {
+    tiles.setCurrentTilemap(tilemap`level17`)
+    scene.setBackgroundImage(img`
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        ff77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77f7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        777f7777777777777777777777777777777777777777777777777777777777777777777777ff777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        777f777777777777777777777777777777777777777777777777777777777777777777777feef77777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        ffffff777fff777777777777777777777777777777777777777777777777777777777777feeeeff777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        f7f777f7f777f77777777777777777777777777777777777777777777777777777777777feeeeeef77777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7ff7fffff777f7777777777777777777777777777777777777777777777777777777777feeeeeeeef7777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7fff7777ffffff77777777777777777777777777777777777777777777777777777777feeeeeeeeeef777777777777777777777777777777777777777777777777777777777777777777777777777777
+        f77f777777f777f77777777777777777777777777777777777777ffff777777777777feeeeeeeeeeeeff7777777777777777777777777777777777777777777777777777777777777777777777777777
+        f77f777777fffff7777777777777777777777777777777777777feeeef7777777777feeeeffffeeeeeeef777777777777777777777777777777777777777777777777777777777777777777777777777
+        efff77777ffeef7777777777777777777777777777777777777feeeeeeff77777777feeeefbbfeeeeeeeef77777777777777777777777777777777777777777777777777777777777777777777777777
+        efeffffffefeefffffffffff77777777777777777777777777feeeeeeeeef777777feeeeeffffeeeeeeeef77777777777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeeff77f777ff7ff77777777777777777777777feeeffffeeeef7777feeeeeeeeeeeeeeeeeeff7777777777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef77777777777ffffff77777777777777777feeeefbbfeeeef7777feeeeeeeeeeeeeeeeeefef777777777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef77777777777f77777f7777777777777777feeeeffffeeeef7777feeeeeeeeeeeeeeeeeefeef77777777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef777f777f777777777ff777777777777777feeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeefeeeff777777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef777f7777f777777777f777777777777777feeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeefeeeeef77777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef777f7777f777f77777f777777777777777feeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeefeeeeeef7777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef777f777f77777f777ff777777777777777feeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeefeeeeeeef777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef777f777f777777f777f777777777777777feeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeefffffffff777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef77f777ff77f7777777f777777777777777feeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeefeeeeeeef777777777777777777777777777777777777777777777777777777777777777777
+        efefefeefefeef77777f77777ff77777f777777777777777feeeeeeeeeeeefeeeeefffffffeeeeeeeeeeefeeffffef777777777777777777777777777777777777777777777777777777777777777777
+        ffefffeefefeef7777777777777f7777f777777777777777feeeeeeeeeeeefeeeefdddddddfeeeeeeeeeefeefbbfefff7777777777777777777777777777777777777777777777777777777777777777
+        7fef7feefffeefff7777ffffffffff77f777777777777777feeeeeeeeeeeefeeeefdddddddfeeeeeeeeeefeeffffeeef7777777777777777777777777777777777777777777777777777777777777777
+        7fff7feef7feef7f77ffbbbbbbbbbbfff777777777777777feeeeeeeeeeeefeeeefdddddddfeeeeeeeeeefeeeeeeeeef7777777777777777777777777777777777777777777777777777777777777777
+        77777ffff7feef777fbbbbbbbbbbbbbbff77777777777777feeeeeeeeeeeefeeeefdddddddfeeeeeeeeeefeeeeeeeeef7777777777777777777777777777777777777777777777777777777777777777
+        7777777777fffff7fbbbbbbbbbbbbbbbbbff777777777777feeeeeeeeeeeefeeeefdddddddfeeeeeeeeeefeeeeeeeeef7777777777777777777777777777777777777777777777777777777777777777
+        777777777777777ffbbbbbbbbbbbbbbbbbbff77777777777feeeeeeeeeeeefeeeefdddddddfeeeeeeeeeefeeeeeeeeef7777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777fbbbbbbbbbbbbbbbbbbbf77777777777feeeeeeeeeeeefeeeefdddddddfeffffffffffeeeeeeeeef7777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777fbbbbbbbbbbbbbbbbbbbbf7777777777feeeeeeeeeffffffffffffffffff777777777ffffffffff77777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777fbbbbbbbbbbbbbbbbbbbbf7777777777ffffffffff777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777fbbbbbbbbbbbbbbbbbbbbf77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777ffffffffffffffffffffffffffff77
+        7777777777777777fbbbbbbbbbbbbbbbbbbbbbf7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777f77777777777777777777777777f77
+        7777777777777777ffbbbbbbbbbbbbbbbbbbbbf7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777f77777777777777777777777777f77
+        7777777777777777fffbbbbbbbbbbbbbbbbbbbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7777777777777777777777f77777777777777777777777777f77
+        7777777777777777fcfbbbbbbbbbbbbbbbbbbbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f77777777777777777777777777f77
+        7777777777777777fccffbbbbbbbbbbbbbbbbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f77777777777777777777777777f77
+        7777777777777777fcccfffbbbbbbbbbbbbbfffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f77777777777777777777777777f77
+        7777777777777777fccccccfffbbbbbbbfffccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f77777777777777777777777777f77
+        7777777777777777fcccccccccfffffffcccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f77777777777777777777777777f77
+        777777777777777fccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f77777777777777777777777777f77
+        777777777777777fcccccccccccfffffccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f7777777777fffffffffffffffff77
+        777777777777777fccccfffffffbbbbbffccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f7777777777f777777777777777777
+        777777777777777fccffbbbbbbbbbbbbbbffccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f7777777777f777777777777777777
+        777777777777777fcfbbbbbbbbbbbbbbbbbbfcfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f7777777777f777777777777777777
+        777777777777777ffbbbbbbbbbbbbbbbbbbbbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777ffff777777777f7777777777f77fffffffffffffff7
+        777777777777777ffbbbbbbbbbbbbbbbbbbbbbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef77777777fddddf77777777f7777777777f77f7777777777777f7
+        777777777777777fbbbbbbbbbbbbbbbbbbbbbbbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777fdddddffff77777f7777777777f77f7777777777777f7
+        777777777777777fbbbbbbbbbbbbbbbbbbbbbbbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fbbbbbbbbbbbbbbbbbbbbbbbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fbbbbbbbbbbbbbbbbbbbbbbbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fbbbbbbbbbbbbbbbbbbbbbbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fbbbbbbbbbbbbbbbbbbbbbbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddffff77777f7777777777f77f7777777777777f7
+        777777777777777ffbbbbbbbbbbbbbbbbbbbbfcfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfbbf77777f7777777777f77f7777777777777f7
+        777777777777777fffbbbbbbbbbbbbbbbbbbfccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfbbf77777f7777777777f77f7777777777777f7
+        777777777777777fcfffbbbbbbbbbbbbbfffcccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddffff77777f7777777777f77f7777777777777f7
+        777777777777777fccccffbbbbbbbbbfffcccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fccccccfffffffffccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777fddddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777fdddddfeef77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef77777777fdddfffff77777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777fff7777777777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777f7777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef7777777777777777777777ffffffffffff77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777777777777777777777777f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777fffffffffffffffffff77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fcccccccccccccccccccccccfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef777777777777777f77777777777777777f77f7777777777777f7
+        777777777777777fffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffffffeeeeeeeeeeeeeeeef777777777777777fffffffffffffffffff77fffffffffffffff7
+        777777777777777feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefccccccccfeeeeeeeeeeeeeeef7777777777777777777777777777777777777777777777777777
+        777777777777777fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffccccccccccffffffffffffffff7777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777ffccccccccccccf777777777777777777777777777777777777777777777777777777777777777777
+        777777777777777777777777777777777777777777777777777777777777777777777777777777fcccccccccccccccff7777777777777777777777777777777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777777777777777777777777777fccccccccccccccccccf777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777fccccccccccccccccccccf77777777777777777777777777777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777777777777777777777777fffffffffffffffffffffffff7777777777777777777777777777777777777777777777777777777777777
+        777777777777777777777777777777777777777777777777777777777777777777777777777777777feef.feeef777777777777777777777777777777777777777777777777777777777777777777777
+        777777777777777777777777777777777777777777777777777777777777777777777777777777777feefffeeef777777777777777777777777777777777777777777777777777777777777777777777
+        777777777777777777777777777777777777777777777777777777777777777777777777777777777feeeeeeeef777777777777777777777777777777777777777777777777777777777777777777777
+        777777777777777777777777777777777777777777777777777777777777777777777777777777777feeffffeef777777777777777777777777777777777777777777777777777777777777777777777
+        777777777777777777777777777777777777777777777777777777777777777777777777777777777feefddfeef777777777777777777777777777777777777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777fffffffffffffffffffffffffffffeefddfeeffffffffffffffffffffffffffffffffff777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777ffffffffff77777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777777777777777777777777777777777777f777777777777777777777777777777777777
+        77777777777777777777777777777777777777777777777777777fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777ffffffffffffffffffffffffffff77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        777777fccccccccccccccccccccccccccccf7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fccccccccccccccccccccccccccccccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fcccccffffffffffcccfffffffffcccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fcccccf99999999fcccf9999999fcccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fcfffcf99999999fcccf9999999fcccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fcfdfcffffffffffcccfffffffffcccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fcfdfccccccccccccccccccccccccccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777fcfdfccccccccccccccccccccccccccf777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        77777ffffffffffffffffffffffffffffffff777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        `)
+    area_picture_one.setPosition(tilemap_to_pixels(5), tilemap_to_pixels(6))
+    area_picture_two.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(4))
+    area_picture_three.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(4))
+    area_picture_four.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(6) + 10)
+    area_picture_five.setPosition(tilemap_to_pixels(7), tilemap_to_pixels(3))
+    area_picture_six.setPosition(tilemap_to_pixels(0), tilemap_to_pixels(1))
+    cursor.setImage(img`
+        . . . . . . . f f . . . . . . . 
+        . . . . . . f 5 5 f . . . . . . 
+        . . . . . f 5 5 5 5 f . . . . . 
+        . . . . f 5 5 5 5 5 5 f . . . . 
+        . . . f 5 5 5 5 5 5 5 5 f . . . 
+        . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+        . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+        f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+        f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+        . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+        . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+        . . . f 5 5 5 5 5 5 5 5 f . . . 
+        . . . . f 5 5 5 5 5 5 f . . . . 
+        . . . . . f 5 5 5 5 f . . . . . 
+        . . . . . . f 5 5 f . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        `)
+    cursor.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(2))
+    controller.moveSprite(cursor)
+    controller.moveSprite(Arnold, 0, 0)
+    cutscene_phase = 1
 }
 function tilemap_to_pixels (position: number) {
     return position * 16 + 8
@@ -569,13 +866,19 @@ let cutscene_phase = 0
 let game_state = 0
 let facing = 0
 let cursor_is = 0
+let cursor: Sprite = null
+let area_picture_six: Sprite = null
+let area_picture_five: Sprite = null
+let area_picture_four: Sprite = null
+let area_picture_three: Sprite = null
+let area_picture_two: Sprite = null
+let area_picture_one: Sprite = null
 let a_button_signal: Sprite = null
 let Binglep: Sprite = null
 let Zac: Sprite = null
 let Arnold: Sprite = null
 let The_barn: Sprite = null
 let Piggy: Sprite = null
-let cursor: Sprite = null
 let story_iintro: TextSprite = null
 let play: TextSprite = null
 scene.setBackgroundImage(img`
@@ -706,25 +1009,6 @@ play.setPosition(50, 85)
 story_iintro = textsprite.create("story", 5, 2)
 story_iintro.setBorder(1, 8)
 story_iintro.setPosition(53, 100)
-cursor = sprites.create(img`
-    f f . . . . . . . . . . . . . . 
-    f 5 f f . . . . . . . . . . . . 
-    f 5 5 5 f f . . . . . . . . . . 
-    f 5 5 5 5 5 f f . . . . . . . . 
-    f 5 5 5 5 5 5 5 f . . . . . . . 
-    f 5 5 5 5 5 5 5 5 f f . . . . . 
-    f 5 5 5 5 5 5 5 5 5 5 f f . . . 
-    f 5 5 5 5 5 5 5 5 5 5 5 5 f f . 
-    f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-    f 5 5 5 5 5 5 5 5 5 5 5 5 f f . 
-    f 5 5 5 5 5 5 5 5 5 5 f f . . . 
-    f 5 5 5 5 5 5 5 5 f f . . . . . 
-    f 5 5 5 5 5 f f f . . . . . . . 
-    f 5 5 5 f f . . . . . . . . . . 
-    f 5 f f . . . . . . . . . . . . 
-    f f . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
-cursor.setPosition(20, play.y)
 Piggy = sprites.create(img`
     .................fff.ff..
     .................f22f2f..
@@ -931,9 +1215,94 @@ a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     `, SpriteKind.Player)
 a_button_signal.setPosition(-2100, 0)
+area_picture_one = sprites.create(img`
+    . 8 8 8 8 8 8 . 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    . 8 8 8 8 8 8 . 
+    `, SpriteKind.areapicture)
+area_picture_two = sprites.create(img`
+    . 8 8 8 8 8 8 . 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    . 8 8 8 8 8 8 . 
+    `, SpriteKind.areapicture)
+area_picture_three = sprites.create(img`
+    . 8 8 8 8 8 8 . 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    . 8 8 8 8 8 8 . 
+    `, SpriteKind.areapicture)
+area_picture_four = sprites.create(img`
+    . 8 8 8 8 8 8 . 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    . 8 8 8 8 8 8 . 
+    `, SpriteKind.areapicture)
+area_picture_five = sprites.create(img`
+    . 8 8 8 8 8 8 . 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    . 8 8 8 8 8 8 . 
+    `, SpriteKind.areapicture)
+area_picture_six = sprites.create(img`
+    . 8 8 8 8 8 8 . 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    8 8 8 8 8 8 8 8 
+    . 8 8 8 8 8 8 . 
+    `, SpriteKind.areapicture)
+area_picture_one.setPosition(-4000, 0)
+area_picture_two.setPosition(-4000, 0)
+area_picture_three.setPosition(-4000, 0)
+area_picture_four.setPosition(-4000, 0)
+area_picture_five.setPosition(-4000, 0)
+area_picture_six.setPosition(-4000, 0)
+cursor = sprites.create(img`
+    f f . . . . . . . . . . . . . . 
+    f 5 f f . . . . . . . . . . . . 
+    f 5 5 5 f f . . . . . . . . . . 
+    f 5 5 5 5 5 f f . . . . . . . . 
+    f 5 5 5 5 5 5 5 f . . . . . . . 
+    f 5 5 5 5 5 5 5 5 f f . . . . . 
+    f 5 5 5 5 5 5 5 5 5 5 f f . . . 
+    f 5 5 5 5 5 5 5 5 5 5 5 5 f f . 
+    f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+    f 5 5 5 5 5 5 5 5 5 5 5 5 f f . 
+    f 5 5 5 5 5 5 5 5 5 5 f f . . . 
+    f 5 5 5 5 5 5 5 5 f f . . . . . 
+    f 5 5 5 5 5 f f f . . . . . . . 
+    f 5 5 5 f f . . . . . . . . . . 
+    f 5 f f . . . . . . . . . . . . 
+    f f . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
+cursor.setPosition(20, play.y)
 cursor_is = 1
 facing = 1
-game_state = 1
+game_state = 2
 cutscene_phase = 0
 // this is where stuff besides just talking happens in a cutscene
 game.onUpdate(function () {
@@ -950,19 +1319,6 @@ game.onUpdate(function () {
                 Zac.setPosition(-2100, 0)
                 game_state = 2
                 cutscene_phase = 0
-                scene.centerCameraAt(tilemap_to_pixels(11), tilemap_to_pixels(4))
-                story.startCutscene(function () {
-                    tiles.setCurrentTilemap(tilemap`level6`)
-                    story.printText("Hello there! I am your unstucker!", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText("incase if you ever get stuck and dont know what to do", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText("I'll unstuck you! so now I wanted to tell you", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText("something that if I didn't tell you you would probally", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText("be stuckright now: there are different areas across the", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText(" map, each area has an exit, in this area the exit is", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText("the barn because the back door in the barn leads you ", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.printText("to the rest of the areas.", tilemap_to_pixels(11), tilemap_to_pixels(4), 9, 15, story.TextSpeed.Normal)
-                    story.cancelCurrentCutscene()
-                })
             })
         }
     }
@@ -976,6 +1332,21 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
+    if (Arnold.overlapsWith(area_picture_one)) {
+    	
+    } else if (Arnold.overlapsWith(area_picture_two)) {
+    	
+    } else if (Arnold.overlapsWith(area_picture_three)) {
+    	
+    } else if (Arnold.overlapsWith(area_picture_four)) {
+    	
+    } else if (Arnold.overlapsWith(area_picture_five)) {
+    	
+    } else if (Arnold.overlapsWith(area_picture_six)) {
+    	
+    }
+})
+game.onUpdate(function () {
     if (cursor_is == 2) {
         cursor.setPosition(20, story_iintro.y)
     } else if (cursor_is == 1) {
@@ -985,5 +1356,10 @@ game.onUpdate(function () {
         story_intro()
     } else if (cursor_is == 1 && controller.A.isPressed()) {
         start_game()
+    }
+    if (Arnold.overlapsWith(The_barn) && game_state == 2) {
+        if (controller.A.isPressed()) {
+            area_select()
+        }
     }
 })
