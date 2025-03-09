@@ -188,6 +188,9 @@ function Zac_to_Arnold () {
         })
     }
 }
+function animation_for_select_map () {
+	
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0) {
@@ -213,59 +216,6 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
 	
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.areapicture, function (sprite, otherSprite) {
-    animation.runImageAnimation(
-    otherSprite,
-    [img`
-        . 8 8 8 8 8 8 . 
-        8 8 8 8 8 8 8 8 
-        8 8 8 8 8 8 8 8 
-        8 8 8 9 9 8 8 8 
-        8 8 8 9 9 8 8 8 
-        8 8 8 8 8 8 8 8 
-        8 8 8 8 8 8 8 8 
-        . 8 8 8 8 8 8 . 
-        `,img`
-        . 8 8 8 8 8 8 . 
-        8 8 8 8 8 8 8 8 
-        8 8 8 9 9 8 8 8 
-        8 8 9 9 9 9 8 8 
-        8 8 9 9 9 9 8 8 
-        8 8 8 9 9 8 8 8 
-        8 8 8 8 8 8 8 8 
-        . 8 8 8 8 8 8 . 
-        `,img`
-        . 8 8 8 8 8 8 . 
-        8 8 8 9 9 8 8 8 
-        8 8 9 9 9 9 8 8 
-        8 9 9 9 9 9 9 8 
-        8 9 9 9 9 9 9 8 
-        8 8 9 9 9 9 8 8 
-        8 8 8 9 9 8 8 8 
-        . 8 8 8 8 8 8 . 
-        `,img`
-        . 8 8 8 8 8 8 . 
-        8 9 9 9 9 9 9 8 
-        8 9 9 9 9 9 9 8 
-        8 9 9 9 9 9 9 8 
-        8 9 9 9 9 9 9 8 
-        8 9 9 9 9 9 9 8 
-        8 9 9 9 9 9 9 8 
-        . 8 8 8 8 8 8 . 
-        `,img`
-        . 9 9 9 9 9 9 . 
-        9 9 9 9 9 9 9 9 
-        9 9 9 9 9 9 9 9 
-        9 9 9 9 9 9 9 9 
-        9 9 9 9 9 9 9 9 
-        9 9 9 9 9 9 9 9 
-        9 9 9 9 9 9 9 9 
-        . 9 9 9 9 9 9 . 
-        `],
-    200,
-    false
-    )
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (cursor_is > 0) {
@@ -842,6 +792,7 @@ function area_select () {
     cursor.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(2))
     controller.moveSprite(cursor)
     controller.moveSprite(Arnold, 0, 0)
+    game_state = 3
     cutscene_phase = 1
 }
 function tilemap_to_pixels (position: number) {
@@ -860,6 +811,66 @@ function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction:
     } else {
         a_button_signal.setPosition(-1000, 0)
         return
+    }
+}
+function animate_map_select_icons (icon: Sprite, value: number) {
+    if (cursor.overlapsWith(icon)) {
+        if (!(game_state == value)) {
+            game_state = value
+            animation.runImageAnimation(
+            icon,
+            [img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 8 8 8 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 9 9 9 9 8 8 
+                8 8 9 9 9 9 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 8 8 8 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 9 9 8 8 8 
+                8 8 9 9 9 9 8 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 8 9 9 9 9 8 8 
+                8 8 8 9 9 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 9 9 9 9 9 9 . 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                . 9 9 9 9 9 9 . 
+                `],
+            200,
+            false
+            )
+        }
+    } else {
+        animation.stopAnimation(animation.AnimationTypes.All, icon)
     }
 }
 let cutscene_phase = 0
@@ -1321,6 +1332,12 @@ game.onUpdate(function () {
                 cutscene_phase = 0
             })
         }
+        animate_map_select_icons(area_picture_one, 2.1)
+        animate_map_select_icons(area_picture_two, 2.2)
+        animate_map_select_icons(area_picture_three, 2.3)
+        animate_map_select_icons(area_picture_four, 2.4)
+        animate_map_select_icons(area_picture_five, 2.5)
+        animate_map_select_icons(area_picture_six, 2.6)
     }
 })
 // this is where I ask what cutscene has started
@@ -1329,21 +1346,6 @@ game.onUpdate(function () {
         if (game_state == 1 && cutscene_phase == 0) {
             talking_to_someone(Arnold, Binglep, 1, 5)
         }
-    }
-})
-game.onUpdate(function () {
-    if (Arnold.overlapsWith(area_picture_one)) {
-    	
-    } else if (Arnold.overlapsWith(area_picture_two)) {
-    	
-    } else if (Arnold.overlapsWith(area_picture_three)) {
-    	
-    } else if (Arnold.overlapsWith(area_picture_four)) {
-    	
-    } else if (Arnold.overlapsWith(area_picture_five)) {
-    	
-    } else if (Arnold.overlapsWith(area_picture_six)) {
-    	
     }
 })
 game.onUpdate(function () {
