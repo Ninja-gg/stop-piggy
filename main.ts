@@ -868,11 +868,96 @@ function animate_map_select_icons (icon: Sprite, value: number) {
             200,
             false
             )
+            sprites.setDataNumber(icon, "animated timer", 0)
         }
+        if (sprites.readDataNumber(icon, "animated timer") != 20) {
+            sprites.changeDataNumberBy(icon, "animated timer", 1)
+        } else {
+            return 2
+        }
+        return 1
     } else {
+        if (sprites.readDataNumber(icon, "animated timer") == 20) {
+            sprites.setDataNumber(icon, "animated timer", 21)
+            animation.runImageAnimation(
+            icon,
+            [img`
+                . 9 9 9 9 9 9 . 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                9 9 9 9 9 9 9 9 
+                . 9 9 9 9 9 9 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 9 9 8 8 8 
+                8 8 9 9 9 9 8 8 
+                8 9 9 9 9 9 9 8 
+                8 9 9 9 9 9 9 8 
+                8 8 9 9 9 9 8 8 
+                8 8 8 9 9 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 8 8 8 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 9 9 9 9 8 8 
+                8 8 9 9 9 9 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 8 8 8 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 8 9 9 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `,img`
+                . 8 8 8 8 8 8 . 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                8 8 8 8 8 8 8 8 
+                . 8 8 8 8 8 8 . 
+                `],
+            200,
+            false
+            )
+            return 0
+        } else if (sprites.readDataNumber(icon, "animated timer") == 21) {
+            return 0
+        }
         animation.stopAnimation(animation.AnimationTypes.All, icon)
+        icon.setImage(img`
+            . 8 8 8 8 8 8 . 
+            8 8 8 8 8 8 8 8 
+            8 8 8 8 8 8 8 8 
+            8 8 8 8 8 8 8 8 
+            8 8 8 8 8 8 8 8 
+            8 8 8 8 8 8 8 8 
+            8 8 8 8 8 8 8 8 
+            . 8 8 8 8 8 8 . 
+            `)
+        return 0
     }
 }
+let animated = 0
 let cutscene_phase = 0
 let game_state = 0
 let facing = 0
@@ -1292,6 +1377,12 @@ area_picture_three.setPosition(-4000, 0)
 area_picture_four.setPosition(-4000, 0)
 area_picture_five.setPosition(-4000, 0)
 area_picture_six.setPosition(-4000, 0)
+sprites.setDataNumber(area_picture_one, "animated timer", 0)
+sprites.setDataNumber(area_picture_two, "animated timer", 0)
+sprites.setDataNumber(area_picture_three, "animated timer", 0)
+sprites.setDataNumber(area_picture_four, "animated timer", 0)
+sprites.setDataNumber(area_picture_five, "animated timer", 0)
+sprites.setDataNumber(area_picture_six, "animated timer", 0)
 cursor = sprites.create(img`
     f f . . . . . . . . . . . . . . 
     f 5 f f . . . . . . . . . . . . 
@@ -1332,13 +1423,21 @@ game.onUpdate(function () {
                 cutscene_phase = 0
             })
         }
-        animate_map_select_icons(area_picture_one, 2.1)
-        animate_map_select_icons(area_picture_two, 2.2)
-        animate_map_select_icons(area_picture_three, 2.3)
-        animate_map_select_icons(area_picture_four, 2.4)
-        animate_map_select_icons(area_picture_five, 2.5)
-        animate_map_select_icons(area_picture_six, 2.6)
+        animated = 0
+        animated = animated + animate_map_select_icons(area_picture_one, 2.1)
+        animated = animated + animate_map_select_icons(area_picture_two, 2.2)
+        animated = animated + animate_map_select_icons(area_picture_three, 2.3)
+        animated = animated + animate_map_select_icons(area_picture_four, 2.4)
+        animated = animated + animate_map_select_icons(area_picture_five, 2.5)
+        animated = animated + animate_map_select_icons(area_picture_six, 2.6)
+        if (animated == 0) {
+            game_state = 2
+        }
     }
+    if (0 == 0) {
+    	
+    }
+    info.setScore(sprites.readDataNumber(area_picture_six, "animated timer"))
 })
 // this is where I ask what cutscene has started
 game.onUpdate(function () {
