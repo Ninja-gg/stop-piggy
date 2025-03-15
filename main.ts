@@ -5,6 +5,7 @@ namespace SpriteKind {
     export const plug = SpriteKind.create()
     export const generatortop = SpriteKind.create()
     export const areapicture = SpriteKind.create()
+    export const cutterr = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
@@ -160,7 +161,7 @@ function start_area (area_number: number) {
     if (area_number == 3) {
         tiles.setCurrentTilemap(tilemap`level27`)
         scene.cameraFollowSprite(Arnold)
-        Arnold.setPosition(tilemap_to_pixels(18), tilemap_to_pixels(44))
+        Arnold.setPosition(tilemap_to_pixels(27), tilemap_to_pixels(11))
         The_barn.setPosition(tilemap_to_pixels(25), tilemap_to_pixels(2))
         controller.moveSprite(Arnold, 100, 100)
         The_barn.setImage(img`
@@ -321,7 +322,30 @@ function start_area (area_number: number) {
         Arnold.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(47))
         The_barn.setPosition(-2200, 0)
         game_state = 3
-        Arnold.ay = 350
+        controller.moveSprite(Arnold, 100, 0)
+        Arnold.ay = 500
+        for (let value of tiles.getTilesByType(assets.tile`myTile20`)) {
+            cutter = sprites.create(img`
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                b b b b b b b b b b b b b b b b 
+                `, SpriteKind.cutterr)
+            sprites.setDataBoolean(cutter, "moving", false)
+            tiles.placeOnTile(cutter, value)
+        }
     }
     current_area = area_number
     cursor.setFlag(SpriteFlag.StayInScreen, false)
@@ -469,7 +493,7 @@ function start_game () {
     current_area = 1
 }
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
-    if (cursor_is > 0) {
+    if (cursor_is > 0 && current_area != 7) {
         if (cursor_is == 2) {
             cursor_is = 1
         } else {
@@ -479,7 +503,7 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0 && current_area != 7) {
+        if (cutscene_phase == 0) {
             facing = 2
             Arnold.setImage(img`
                 ..ff.ff..................
@@ -551,7 +575,7 @@ function Zac_to_Arnold () {
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0 && current_area != 7) {
+        if (cutscene_phase == 0) {
             facing = 1
             Arnold.setImage(img`
                 ..................ff.ff..
@@ -577,7 +601,7 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
 	
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
-    if (cursor_is > 0) {
+    if (cursor_is > 0 && current_area != 7) {
         if (cursor_is == 1) {
             cursor_is = 2
         } else {
@@ -1654,6 +1678,7 @@ function animate_map_select_icons (icon: Sprite, value: number) {
     }
 }
 let animated = 0
+let cutter: Sprite = null
 let facing = 0
 let current_area = 0
 let cutscene_phase = 0
@@ -2180,7 +2205,7 @@ game.onUpdate(function () {
     }
     if (current_area == 7) {
         if (controller.A.isPressed() && Arnold.vy == 0) {
-            Arnold.vy = -100
+            Arnold.vy = -150
         }
     }
 })
