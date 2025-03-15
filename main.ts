@@ -320,7 +320,8 @@ function start_area (area_number: number) {
         tiles.setCurrentTilemap(tilemap`level31`)
         Arnold.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(47))
         The_barn.setPosition(-2200, 0)
-        game_state = 4
+        game_state = 3
+        Arnold.ay = 350
     }
     current_area = area_number
     cursor.setFlag(SpriteFlag.StayInScreen, false)
@@ -478,7 +479,7 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0) {
+        if (cutscene_phase == 0 && current_area != 7) {
             facing = 2
             Arnold.setImage(img`
                 ..ff.ff..................
@@ -504,6 +505,11 @@ function Zac_to_Arnold () {
     story.startCutscene(function () {
         controller.moveSprite(Arnold, 0, 0)
         story.spriteSayText(Binglep, "you have to be carefull Arnold")
+        story.spriteSayText(Binglep, "Piggy is roaming around killing everyone he can")
+        story.spriteSayText(Binglep, "I heard he killed half of the cows and hes only been here for a week!")
+        story.spriteSayText(Arnold, "I know I am brainstorming ideas to stop him")
+        story.spriteSayText(Binglep, "Isn't what we do obvious? It's to run and hide!")
+        story.spriteSayText(Arnold, "we shoudn't just run and hide, we have to stop piggy!")
         Zac.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(20))
         Zac.setVelocity(50, 0)
         animation.runImageAnimation(
@@ -545,7 +551,7 @@ function Zac_to_Arnold () {
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0) {
+        if (cutscene_phase == 0 && current_area != 7) {
             facing = 1
             Arnold.setImage(img`
                 ..................ff.ff..
@@ -1063,6 +1069,269 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function Arnolds_Animations () {
+    if (facing == 1) {
+        facing = 1.5
+        animation.runImageAnimation(
+        Arnold,
+        [img`
+            ..................ff.ff..
+            .................f22f2f..
+            .................fbffff..
+            ................ffff3f3f.
+            ................f3333333f
+            ....fffffffffffff3333333f
+            ...f333333333333333333fff
+            ..f333333333333333333333f
+            ..f333333333333333333ffff
+            fff3333333333333333fff...
+            f33333333333333333f......
+            .ffff333fffffff333f......
+            ..fff333f...f3fffff......
+            ....f333f...f333f........
+            ....fffff...fffff........
+            `,img`
+            ..................ff.ff..
+            .................f22f2f..
+            .................fbffff..
+            ................ffff3f3f.
+            ................f3333333f
+            ....fffffffffffff3333333f
+            ...f333333333333333333fff
+            ..f333333333333333333333f
+            ..f333333333333333333ffff
+            fff3333333333333333fff...
+            f33333333333333333f......
+            .ffff333fffffff333f......
+            ..f3fffff...fff333f......
+            ..f333f.......f333f......
+            ..fffff.......fffff......
+            `],
+        200,
+        true
+        )
+    } else if (facing == 1.5 && !(controller.right.isPressed())) {
+        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+        Arnold.setImage(img`
+            ..................ff.ff..
+            .................f22f2f..
+            .................fbffff..
+            ................ffff3f3f.
+            ................f3333333f
+            ....fffffffffffff3333333f
+            ...f333333333333333333fff
+            ..f333333333333333333333f
+            ..f333333333333333333ffff
+            fff3333333333333333fff...
+            f33333333333333333f......
+            .ffff333fffffff333f......
+            ....f333f3f.f3f333f......
+            ....f333f3f.f3f333f......
+            ....fffffff.fffffff......
+            `)
+    } else if (facing == 2) {
+        facing = 2.5
+        animation.runImageAnimation(
+        Arnold,
+        [img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......fffff3f...f333fff..
+            ........f333f...f333f....
+            ........fffff...fffff....
+            `,img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......f333fff...fffff3f..
+            ......f333f.......f333f..
+            ......fffff.......fffff..
+            `],
+        200,
+        true
+        )
+    } else if (facing == 2.5 && !(controller.left.isPressed())) {
+        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+        Arnold.setImage(img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......f333f3f.f3f333f....
+            ......f333f3f.f3f333f....
+            ......fffffff.fffffff....
+            `)
+    } else if (facing == 3 && current_area != 7) {
+        facing = 3.5
+        animation.runImageAnimation(
+        Arnold,
+        [img`
+            . . . . f f f . f f f . . . . 
+            . . . . f 2 2 f 2 2 f . . . . 
+            . . . . f f f f f f f . . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . f f f f f f f f f f f f f . 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 f f f f 3 3 3 3 f 
+            f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+            f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 f f f . f 3 f 3 3 3 f 
+            f 3 3 3 f . . . f 3 f f f f f 
+            f 3 3 3 f . . . f 3 3 3 f . . 
+            f 3 3 3 f . . . f 3 3 3 f . . 
+            f f f f f . . . f f f f f . . 
+            `,img`
+            . . . . f f f . f f f . . . . 
+            . . . . f 2 2 f 2 2 f . . . . 
+            . . . . f f f f f f f . . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . f f f f f f f f f f f f f . 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 f f f f 3 3 3 3 f 
+            f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+            f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 f 3 f . f f f 3 3 3 f 
+            f f f f f 3 f . . . f 3 3 3 f 
+            . . f 3 3 3 f . . . f 3 3 3 f 
+            . . f 3 3 3 f . . . f 3 3 3 f 
+            . . f f f f f . . . f f f f f 
+            `],
+        200,
+        true
+        )
+    } else if (facing == 3.5 && (current_area != 7 && !(controller.up.isPressed()))) {
+        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+        Arnold.setImage(img`
+            . . . . f f f . f f f . . . . 
+            . . . . f 2 2 f 2 2 f . . . . 
+            . . . . f f f f f f f . . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . f f f f f f f f f f f f f . 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 f f f f 3 3 3 3 f 
+            f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+            f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f f f f f f f . f f f f f f f 
+            `)
+    } else if (facing == 4 && current_area != 7) {
+        facing = 4.5
+        animation.runImageAnimation(
+        Arnold,
+        [img`
+            . . . . f f f . f f f . . . . 
+            . . . . f 2 2 f 2 2 f . . . . 
+            . . . . f f f f f f f . . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 f 3 3 3 f 3 f . . . 
+            . f f f 3 3 3 3 3 3 3 f f f . 
+            f 3 3 f 3 f f f f f 3 f 3 3 f 
+            f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 f f f . f 3 f 3 3 3 f 
+            f 3 3 3 f . . . f 3 f f f f f 
+            f 3 3 3 f . . . f 3 3 3 f . . 
+            f 3 3 3 f . . . f 3 3 3 f . . 
+            f f f f f . . . f f f f f . . 
+            `,img`
+            . . . . f f f . f f f . . . . 
+            . . . . f 2 2 f 2 2 f . . . . 
+            . . . . f f f f f f f . . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 f 3 3 3 f 3 f . . . 
+            . f f f 3 3 3 3 3 3 3 f f f . 
+            f 3 3 f 3 f f f f f 3 f 3 3 f 
+            f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 f 3 f . f f f 3 3 3 f 
+            f f f f f 3 f . . . f 3 3 3 f 
+            . . f 3 3 3 f . . . f 3 3 3 f 
+            . . f 3 3 3 f . . . f 3 3 3 f 
+            . . f f f f f . . . f f f f f 
+            `],
+        200,
+        false
+        )
+    } else if (facing == 4.5 && (current_area != 7 && !(controller.down.isPressed()))) {
+        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+        Arnold.setImage(img`
+            . . . . f f f . f f f . . . . 
+            . . . . f 2 2 f 2 2 f . . . . 
+            . . . . f f f f f f f . . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 3 3 3 3 3 3 f . . . 
+            . . . f 3 f 3 3 3 f 3 f . . . 
+            . f f f 3 3 3 3 3 3 3 f f f . 
+            f 3 3 f 3 f f f f f 3 f 3 3 f 
+            f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+            f 3 3 3 f f f f f f f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+            f f f f f f f . f f f f f f f 
+            `)
+    }
+}
 function area_select () {
     scene.setBackgroundImage(img`
         7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -1188,7 +1457,7 @@ function area_select () {
         `)
     tiles.setCurrentTilemap(tilemap`level25`)
     The_barn.setPosition(-1000, 0)
-    Arnold.setPosition(-1000, 0)
+    Arnold.setPosition(-2000, 0)
     Binglep.setPosition(-1000, 0)
     Zac.setPosition(-1000, 0)
     area_picture_one.setPosition(tilemap_to_pixels(5), tilemap_to_pixels(6))
@@ -1242,8 +1511,8 @@ function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction:
 }
 function animate_map_select_icons (icon: Sprite, value: number) {
     if (cursor.overlapsWith(icon)) {
-        if (!(game_state == value)) {
-            game_state = value
+        if (!(animated == value)) {
+            animated = value
             animation.runImageAnimation(
             icon,
             [img`
@@ -1300,9 +1569,9 @@ function animate_map_select_icons (icon: Sprite, value: number) {
         if (sprites.readDataNumber(icon, "animated timer") != 20) {
             sprites.changeDataNumberBy(icon, "animated timer", 1)
         } else {
-            return 2
+            return animated
         }
-        return 1
+        return animated
     } else {
         if (sprites.readDataNumber(icon, "animated timer") == 20) {
             sprites.setDataNumber(icon, "animated timer", 21)
@@ -1368,7 +1637,7 @@ function animate_map_select_icons (icon: Sprite, value: number) {
             )
             return 0
         } else if (sprites.readDataNumber(icon, "animated timer") == 21) {
-            return 0
+            return animated
         }
         animation.stopAnimation(animation.AnimationTypes.All, icon)
         icon.setImage(img`
@@ -1381,7 +1650,7 @@ function animate_map_select_icons (icon: Sprite, value: number) {
             8 8 8 8 8 8 8 8 
             . 8 8 8 8 8 8 . 
             `)
-        return 0
+        return animated
     }
 }
 let animated = 0
@@ -1832,7 +2101,7 @@ cursor = sprites.create(img`
     `, SpriteKind.Player)
 cursor.setPosition(20, play.y)
 cursor_is = 1
-game_state = 1
+game_state = 2
 cutscene_phase = 0
 current_area = 0
 facing = 1
@@ -1872,14 +2141,6 @@ game.onUpdate(function () {
         }
     }
 })
-// this is where I ask what cutscene has started
-game.onUpdate(function () {
-    if (cursor_is < 0) {
-        if (game_state == 1 && cutscene_phase == 0) {
-            talking_to_someone(Arnold, Binglep, 1, 5)
-        }
-    }
-})
 game.onUpdate(function () {
     if (cursor_is == 2) {
         cursor.setPosition(20, story_iintro.y)
@@ -1905,278 +2166,29 @@ game.onUpdate(function () {
         cursor_overlaped(area_picture_four, 4)
         cursor_overlaped(area_picture_five, 5)
         cursor_overlaped(area_picture_six, 6)
+        Arnolds_Animations()
     }
-    if (game_state == 2) {
-        animated = 0
-        animated = animated + animate_map_select_icons(area_picture_one, 2.1)
-        animated = animated + animate_map_select_icons(area_picture_two, 2.2)
-        animated = animated + animate_map_select_icons(area_picture_three, 2.3)
-        animated = animated + animate_map_select_icons(area_picture_four, 2.4)
-        animated = animated + animate_map_select_icons(area_picture_five, 2.5)
-        animated = animated + animate_map_select_icons(area_picture_six, 2.6)
-        if (animated == 0) {
-            game_state = 2
+    if (game_state >= 2) {
+        animated = animate_map_select_icons(area_picture_one, 2.1)
+        animated = animate_map_select_icons(area_picture_two, 2.2)
+        animated = animate_map_select_icons(area_picture_three, 2.3)
+        animated = animate_map_select_icons(area_picture_four, 2.4)
+        animated = animate_map_select_icons(area_picture_five, 2.5)
+        animated = animate_map_select_icons(area_picture_six, 2.6)
+    } else if (false) {
+    	
+    }
+    if (current_area == 7) {
+        if (controller.A.isPressed() && Arnold.vy == 0) {
+            Arnold.vy = -100
         }
     }
-    if (facing == 1) {
-        facing = 1.5
-        animation.runImageAnimation(
-        Arnold,
-        [img`
-            ..................ff.ff..
-            .................f22f2f..
-            .................fbffff..
-            ................ffff3f3f.
-            ................f3333333f
-            ....fffffffffffff3333333f
-            ...f333333333333333333fff
-            ..f333333333333333333333f
-            ..f333333333333333333ffff
-            fff3333333333333333fff...
-            f33333333333333333f......
-            .ffff333fffffff333f......
-            ..fff333f...f3fffff......
-            ....f333f...f333f........
-            ....fffff...fffff........
-            `,img`
-            ..................ff.ff..
-            .................f22f2f..
-            .................fbffff..
-            ................ffff3f3f.
-            ................f3333333f
-            ....fffffffffffff3333333f
-            ...f333333333333333333fff
-            ..f333333333333333333333f
-            ..f333333333333333333ffff
-            fff3333333333333333fff...
-            f33333333333333333f......
-            .ffff333fffffff333f......
-            ..f3fffff...fff333f......
-            ..f333f.......f333f......
-            ..fffff.......fffff......
-            `],
-        200,
-        true
-        )
-    } else if (facing == 1.5 && !(controller.right.isPressed())) {
-        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-        Arnold.setImage(img`
-            ..................ff.ff..
-            .................f22f2f..
-            .................fbffff..
-            ................ffff3f3f.
-            ................f3333333f
-            ....fffffffffffff3333333f
-            ...f333333333333333333fff
-            ..f333333333333333333333f
-            ..f333333333333333333ffff
-            fff3333333333333333fff...
-            f33333333333333333f......
-            .ffff333fffffff333f......
-            ....f333f3f.f3f333f......
-            ....f333f3f.f3f333f......
-            ....fffffff.fffffff......
-            `)
-    } else if (facing == 2) {
-        facing = 2.5
-        animation.runImageAnimation(
-        Arnold,
-        [img`
-            ..ff.ff..................
-            ..f2f22f.................
-            ..ffffbf.................
-            .f3f3ffff................
-            f3333333f................
-            f3333333fffffffffffff....
-            fff333333333333333333f...
-            f333333333333333333333f..
-            ffff333333333333333333f..
-            ...fff3333333333333333fff
-            ......f33333333333333333f
-            ......f333fffffff333ffff.
-            ......fffff3f...f333fff..
-            ........f333f...f333f....
-            ........fffff...fffff....
-            `,img`
-            ..ff.ff..................
-            ..f2f22f.................
-            ..ffffbf.................
-            .f3f3ffff................
-            f3333333f................
-            f3333333fffffffffffff....
-            fff333333333333333333f...
-            f333333333333333333333f..
-            ffff333333333333333333f..
-            ...fff3333333333333333fff
-            ......f33333333333333333f
-            ......f333fffffff333ffff.
-            ......f333fff...fffff3f..
-            ......f333f.......f333f..
-            ......fffff.......fffff..
-            `],
-        200,
-        true
-        )
-    } else if (facing == 2.5 && !(controller.left.isPressed())) {
-        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-        Arnold.setImage(img`
-            ..ff.ff..................
-            ..f2f22f.................
-            ..ffffbf.................
-            .f3f3ffff................
-            f3333333f................
-            f3333333fffffffffffff....
-            fff333333333333333333f...
-            f333333333333333333333f..
-            ffff333333333333333333f..
-            ...fff3333333333333333fff
-            ......f33333333333333333f
-            ......f333fffffff333ffff.
-            ......f333f3f.f3f333f....
-            ......f333f3f.f3f333f....
-            ......fffffff.fffffff....
-            `)
-    } else if (facing == 3) {
-        facing = 3.5
-        animation.runImageAnimation(
-        Arnold,
-        [img`
-            . . . . f f f . f f f . . . . 
-            . . . . f 2 2 f 2 2 f . . . . 
-            . . . . f f f f f f f . . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . f f f f f f f f f f f f f . 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 f f f f 3 3 3 3 f 
-            f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-            f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 f f f . f 3 f 3 3 3 f 
-            f 3 3 3 f . . . f 3 f f f f f 
-            f 3 3 3 f . . . f 3 3 3 f . . 
-            f 3 3 3 f . . . f 3 3 3 f . . 
-            f f f f f . . . f f f f f . . 
-            `,img`
-            . . . . f f f . f f f . . . . 
-            . . . . f 2 2 f 2 2 f . . . . 
-            . . . . f f f f f f f . . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . f f f f f f f f f f f f f . 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 f f f f 3 3 3 3 f 
-            f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-            f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 f 3 f . f f f 3 3 3 f 
-            f f f f f 3 f . . . f 3 3 3 f 
-            . . f 3 3 3 f . . . f 3 3 3 f 
-            . . f 3 3 3 f . . . f 3 3 3 f 
-            . . f f f f f . . . f f f f f 
-            `],
-        200,
-        true
-        )
-    } else if (facing == 3.5 && !(controller.up.isPressed())) {
-        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-        Arnold.setImage(img`
-            . . . . f f f . f f f . . . . 
-            . . . . f 2 2 f 2 2 f . . . . 
-            . . . . f f f f f f f . . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . f f f f f f f f f f f f f . 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 f f f f 3 3 3 3 f 
-            f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-            f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f f f f f f f . f f f f f f f 
-            `)
-    } else if (facing == 4) {
-        facing = 4.5
-        animation.runImageAnimation(
-        Arnold,
-        [img`
-            . . . . f f f . f f f . . . . 
-            . . . . f 2 2 f 2 2 f . . . . 
-            . . . . f f f f f f f . . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 f 3 3 3 f 3 f . . . 
-            . f f f 3 3 3 3 3 3 3 f f f . 
-            f 3 3 f 3 f f f f f 3 f 3 3 f 
-            f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 f f f . f 3 f 3 3 3 f 
-            f 3 3 3 f . . . f 3 f f f f f 
-            f 3 3 3 f . . . f 3 3 3 f . . 
-            f 3 3 3 f . . . f 3 3 3 f . . 
-            f f f f f . . . f f f f f . . 
-            `,img`
-            . . . . f f f . f f f . . . . 
-            . . . . f 2 2 f 2 2 f . . . . 
-            . . . . f f f f f f f . . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 f 3 3 3 f 3 f . . . 
-            . f f f 3 3 3 3 3 3 3 f f f . 
-            f 3 3 f 3 f f f f f 3 f 3 3 f 
-            f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 f 3 f . f f f 3 3 3 f 
-            f f f f f 3 f . . . f 3 3 3 f 
-            . . f 3 3 3 f . . . f 3 3 3 f 
-            . . f 3 3 3 f . . . f 3 3 3 f 
-            . . f f f f f . . . f f f f f 
-            `],
-        200,
-        false
-        )
-    } else if (facing == 4.5 && !(controller.down.isPressed())) {
-        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-        Arnold.setImage(img`
-            . . . . f f f . f f f . . . . 
-            . . . . f 2 2 f 2 2 f . . . . 
-            . . . . f f f f f f f . . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 3 3 3 3 3 3 f . . . 
-            . . . f 3 f 3 3 3 f 3 f . . . 
-            . f f f 3 3 3 3 3 3 3 f f f . 
-            f 3 3 f 3 f f f f f 3 f 3 3 f 
-            f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-            f 3 3 3 f f f f f f f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-            f f f f f f f . f f f f f f f 
-            `)
+})
+// this is where I ask what cutscene has started
+game.onUpdate(function () {
+    if (cursor_is < 0) {
+        if (game_state == 1 && cutscene_phase == 0) {
+            talking_to_someone(Arnold, Binglep, 1, 5)
+        }
     }
 })
