@@ -9,7 +9,7 @@ namespace SpriteKind {
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0) {
+        if (cutscene_phase == 0 && current_area != 7) {
             facing = 3
             Arnold.setImage(img`
                 . . . . f f f . f f f . . . . 
@@ -33,6 +33,15 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
                 f f f f f f f . f f f f f f f 
                 `)
         }
+    }
+})
+scene.onOverlapTile(SpriteKind.cutterr, assets.tile`myTile16`, function (sprite, location) {
+    if (sprites.readDataBoolean(sprite, "left")) {
+        sprite.setVelocity(50, 0)
+        sprites.setDataBoolean(sprite, "left", false)
+    } else if (sprites.readDataBoolean(sprite, "left") == false) {
+        sprite.setVelocity(-50, 0)
+        sprites.setDataBoolean(sprite, "left", true)
     }
 })
 function start_area (area_number: number) {
@@ -162,9 +171,9 @@ function start_area (area_number: number) {
         tiles.setCurrentTilemap(tilemap`level27`)
         scene.cameraFollowSprite(Arnold)
         Arnold.setPosition(tilemap_to_pixels(27), tilemap_to_pixels(11))
-        The_barn.setPosition(tilemap_to_pixels(25), tilemap_to_pixels(2))
+        Area_entrance.setPosition(tilemap_to_pixels(25), tilemap_to_pixels(2))
         controller.moveSprite(Arnold, 100, 100)
-        The_barn.setImage(img`
+        Area_entrance.setImage(img`
             fdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddf
             fdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddf
             fdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddf
@@ -317,33 +326,114 @@ function start_area (area_number: number) {
             ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
             `)
         cutscene_phase = 0
+        facing = 1
+        Arnold.setImage(img`
+            ..................ff.ff..
+            .................f22f2f..
+            .................fbffff..
+            ................ffff3f3f.
+            ................f3333333f
+            ....fffffffffffff3333333f
+            ...f333333333333333333fff
+            ..f333333333333333333333f
+            ..f333333333333333333ffff
+            fff3333333333333333fff...
+            f33333333333333333f......
+            .ffff333fffffff333f......
+            ....f333f3f.f3f333f......
+            ....f333f3f.f3f333f......
+            ....fffffff.fffffff......
+            `)
+        Arnold.ay = 0
+        if (game_state == 3) {
+            game_state = 2
+            Arnold.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(6))
+        }
     } else if (area_number == 7) {
         tiles.setCurrentTilemap(tilemap`level31`)
         Arnold.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(47))
-        The_barn.setPosition(-2200, 0)
-        game_state = 3
+        Area_entrance.setPosition(-2200, 0)
         controller.moveSprite(Arnold, 100, 0)
         Arnold.ay = 500
+        Area_exit.setImage(img`
+            fffffffffffffffffffffffff
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeefffffffffef
+            feeeeeeeeeeeeefdddddddfef
+            feeeeeeeeeeeeeeffffffffef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            fffffffffffffffffffffffff
+            `)
+        Area_exit.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(47) - 5.5)
+        game_state = 3
+        facing = 1
+        Arnold.setImage(img`
+            ..................ff.ff..
+            .................f22f2f..
+            .................fbffff..
+            ................ffff3f3f.
+            ................f3333333f
+            ....fffffffffffff3333333f
+            ...f333333333333333333fff
+            ..f333333333333333333333f
+            ..f333333333333333333ffff
+            fff3333333333333333fff...
+            f33333333333333333f......
+            .ffff333fffffff333f......
+            ....f333f3f.f3f333f......
+            ....f333f3f.f3f333f......
+            ....fffffff.fffffff......
+            `)
         for (let value of tiles.getTilesByType(assets.tile`myTile20`)) {
             cutter = sprites.create(img`
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
-                b b b b b b b b b b b b b b b b 
+                . . . . . f . . f . . f . . . . . 
+                . . . f f c f f c f f c f f . . . 
+                . . f c b b b b b b b b b c f . . 
+                . f c b b b b b b b b b b b c f . 
+                . f b b b b b b b b b b b b b f . 
+                f c b b b b b b b b b b b b b c f 
+                . f b b b b b b b b b b b b b f . 
+                . f b b b b b b b b b b b b b f . 
+                f c b b b b b b b b b b b b b c f 
+                . f b b b b b b b b b b b b b f . 
+                . f b b b b b b b b b b b b b f . 
+                f c b b b b b b b b b b b b b c f 
+                . f b b b b b b b b b b b b b f . 
+                . f c b b b b b b b b b b b c f . 
+                . . f c b b b b b b b b b c f . . 
+                . . . f f c f f c f f c f f . . . 
+                . . . . . f . . f . . f . . . . . 
                 `, SpriteKind.cutterr)
-            sprites.setDataBoolean(cutter, "moving", false)
+            sprites.setDataBoolean(cutter, "left", true)
+            cutter.setVelocity(-50, 0)
             tiles.placeOnTile(cutter, value)
         }
     }
@@ -357,6 +447,22 @@ function start_area (area_number: number) {
     area_picture_five.setPosition(-4000, 0)
     area_picture_six.setPosition(-4000, 0)
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (current_area == 3) {
+        if (Arnold.overlapsWith(Area_entrance) && game_state == 2) {
+            cursor_overlaped(area_picture_one, 7, true)
+        }
+    } else if (current_area == 1) {
+        if (Arnold.overlapsWith(Area_entrance) && game_state == 2) {
+            area_select()
+        }
+    } else if (current_area == 7) {
+        if (Arnold.overlapsWith(Area_exit) && game_state == 3 && A_buttonoud == false) {
+            cursor_overlaped(area_picture_one, 3, true)
+        }
+    }
+    A_buttonoud = true
+})
 function start_game () {
     cursor_is = -1
     play.setPosition(-1000, 0)
@@ -487,7 +593,7 @@ function start_game () {
     tiles.setCurrentTilemap(tilemap`level6`)
     controller.moveSprite(Arnold)
     Arnold.setPosition(tilemap_to_pixels(3), tilemap_to_pixels(21))
-    The_barn.setPosition(tilemap_to_pixels(10), tilemap_to_pixels(13))
+    Area_entrance.setPosition(tilemap_to_pixels(10), tilemap_to_pixels(13))
     Binglep.setPosition(tilemap_to_pixels(21), tilemap_to_pixels(21))
     scene.cameraFollowSprite(Arnold)
     current_area = 1
@@ -598,10 +704,10 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
-	
+    A_buttonoud = false
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
-    if (cursor_is > 0 && current_area != 7) {
+    if (cursor_is > 0) {
         if (cursor_is == 1) {
             cursor_is = 2
         } else {
@@ -609,12 +715,17 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
         }
     }
 })
-function cursor_overlaped (area: Sprite, val: number) {
+function cursor_overlaped (area: Sprite, val: number, mapselectno: boolean) {
     if (controller.A.isPressed()) {
         if (area.overlapsWith(cursor)) {
             start_area(val)
-        } else if (val == 7) {
-            start_area(val)
+        } else if (mapselectno) {
+            if (val == 7) {
+                start_area(val)
+            }
+            if (val == 3) {
+                start_area(val)
+            }
         }
     }
 }
@@ -1067,7 +1178,7 @@ function Zac_to_Arnold_pt2 () {
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
-        if (cutscene_phase == 0) {
+        if (cutscene_phase == 0 && current_area != 7) {
             facing = 4
             Arnold.setImage(img`
                 . . . . f f f . f f f . . . . 
@@ -1480,7 +1591,7 @@ function area_select () {
         7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
         `)
     tiles.setCurrentTilemap(tilemap`level25`)
-    The_barn.setPosition(-1000, 0)
+    Area_entrance.setPosition(-1000, 0)
     Arnold.setPosition(-2000, 0)
     Binglep.setPosition(-1000, 0)
     Zac.setPosition(-1000, 0)
@@ -1679,6 +1790,7 @@ function animate_map_select_icons (icon: Sprite, value: number) {
 }
 let animated = 0
 let cutter: Sprite = null
+let A_buttonoud = false
 let facing = 0
 let current_area = 0
 let cutscene_phase = 0
@@ -1695,7 +1807,8 @@ let a_button_signal: Sprite = null
 let Binglep: Sprite = null
 let Zac: Sprite = null
 let Arnold: Sprite = null
-let The_barn: Sprite = null
+let Area_exit: Sprite = null
+let Area_entrance: Sprite = null
 let Piggy: Sprite = null
 let story_iintro: TextSprite = null
 let play: TextSprite = null
@@ -1843,7 +1956,7 @@ Piggy = sprites.create(img`
     ....fffff.....fffff......
     `, SpriteKind.Player)
 Piggy.setPosition(-2000, 0)
-The_barn = sprites.create(img`
+Area_entrance = sprites.create(img`
     .....................................fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff..........................
     ....................................feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.........................
     ..................................ffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef........................
@@ -1973,7 +2086,26 @@ The_barn = sprites.create(img`
     .....feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefddddddddddddddddddddddddddddddddddddddddddddddddddddfeeeeeeeeeeeef.......
     .....ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.......
     `, SpriteKind.Player)
-The_barn.setPosition(-2200, 0)
+Area_entrance.setPosition(-2200, 0)
+Area_exit = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
+Area_exit.setPosition(-1000, 0)
 Arnold = sprites.create(img`
     ..................ff.ff..
     .................f22f2f..
@@ -2130,6 +2262,7 @@ game_state = 2
 cutscene_phase = 0
 current_area = 0
 facing = 1
+A_buttonoud = false
 // this is where stuff besides just talking happens in a cutscene
 game.onUpdate(function () {
     if (cursor_is < 0) {
@@ -2177,20 +2310,13 @@ game.onUpdate(function () {
     } else if (cursor_is == 1 && controller.A.isPressed()) {
         start_game()
     }
-    if (controller.A.isPressed()) {
-        if (Arnold.overlapsWith(The_barn) && (game_state == 2 && current_area == 3)) {
-            cursor_overlaped(area_picture_one, 7)
-        } else if (Arnold.overlapsWith(The_barn) && game_state == 2) {
-            area_select()
-        }
-    }
     if (cursor_is < 0) {
-        cursor_overlaped(area_picture_one, 1)
-        cursor_overlaped(area_picture_two, 2)
-        cursor_overlaped(area_picture_three, 3)
-        cursor_overlaped(area_picture_four, 4)
-        cursor_overlaped(area_picture_five, 5)
-        cursor_overlaped(area_picture_six, 6)
+        cursor_overlaped(area_picture_one, 1, false)
+        cursor_overlaped(area_picture_two, 2, false)
+        cursor_overlaped(area_picture_three, 3, false)
+        cursor_overlaped(area_picture_four, 4, false)
+        cursor_overlaped(area_picture_five, 5, false)
+        cursor_overlaped(area_picture_six, 6, false)
         Arnolds_Animations()
     }
     if (game_state >= 2) {
@@ -2200,8 +2326,6 @@ game.onUpdate(function () {
         animated = animate_map_select_icons(area_picture_four, 2.4)
         animated = animate_map_select_icons(area_picture_five, 2.5)
         animated = animate_map_select_icons(area_picture_six, 2.6)
-    } else if (false) {
-    	
     }
     if (current_area == 7) {
         if (controller.A.isPressed() && Arnold.vy == 0) {
