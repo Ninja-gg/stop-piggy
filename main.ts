@@ -7,6 +7,15 @@ namespace SpriteKind {
     export const areapicture = SpriteKind.create()
     export const cutterr = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.cutterr, myTiles.tile18, function (sprite, location) {
+    if (sprites.readDataBoolean(sprite, "left")) {
+        sprite.setVelocity(50, 0)
+        sprites.setDataBoolean(sprite, "left", false)
+    } else if (sprites.readDataBoolean(sprite, "left") == false) {
+        sprite.setVelocity(-50, 0)
+        sprites.setDataBoolean(sprite, "left", true)
+    }
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0 && current_area != 7) {
@@ -33,15 +42,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
                 f f f f f f f . f f f f f f f 
                 `)
         }
-    }
-})
-scene.onOverlapTile(SpriteKind.cutterr, assets.tile`myTile16`, function (sprite, location) {
-    if (sprites.readDataBoolean(sprite, "left")) {
-        sprite.setVelocity(50, 0)
-        sprites.setDataBoolean(sprite, "left", false)
-    } else if (sprites.readDataBoolean(sprite, "left") == false) {
-        sprite.setVelocity(-50, 0)
-        sprites.setDataBoolean(sprite, "left", true)
     }
 })
 function start_area (area_number: number) {
@@ -345,6 +345,7 @@ function start_area (area_number: number) {
             ....fffffff.fffffff......
             `)
         Arnold.ay = 0
+        sprites.destroyAllSpritesOfKind(SpriteKind.cutterr)
         if (game_state == 3) {
             game_state = 2
             Arnold.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(6))
@@ -355,7 +356,7 @@ function start_area (area_number: number) {
         Area_entrance.setPosition(-2200, 0)
         controller.moveSprite(Arnold, 100, 0)
         Arnold.ay = 500
-        Area_exit.setImage(img`
+        Area_entrance.setImage(img`
             fffffffffffffffffffffffff
             feeeeeeeeeeeeeeeeeeeeeeef
             feeeeeeeeeeeeeeeeeeeeeeef
@@ -392,7 +393,45 @@ function start_area (area_number: number) {
             feeeeeeeeeeeeeeeeeeeeeeef
             fffffffffffffffffffffffff
             `)
-        Area_exit.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(47) - 5.5)
+        Area_entrance.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(47) - 5.5)
+        Area_anything_else.setImage(img`
+            fffffffffffffffffffffffff
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeefffffffffef
+            feeeeeeeeeeeeefdddddddfef
+            feeeeeeeeeeeeeeffffffffef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            feeeeeeeeeeeeeeeeeeeeeeef
+            fffffffffffffffffffffffff
+            `)
+        Area_anything_else.setPosition(tilemap_to_pixels(16), tilemap_to_pixels(45) - 5.5)
         game_state = 3
         facing = 1
         Arnold.setImage(img`
@@ -412,7 +451,7 @@ function start_area (area_number: number) {
             ....f333f3f.f3f333f......
             ....fffffff.fffffff......
             `)
-        for (let value of tiles.getTilesByType(assets.tile`myTile20`)) {
+        for (let value of tiles.getTilesByType(myTiles.tile22)) {
             cutter = sprites.create(img`
                 . . . . . f . . f . . f . . . . . 
                 . . . f f c f f c f f c f f . . . 
@@ -457,7 +496,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             area_select()
         }
     } else if (current_area == 7) {
-        if (Arnold.overlapsWith(Area_exit) && game_state == 3 && A_buttonoud == false) {
+        if (Arnold.overlapsWith(Area_entrance) && game_state == 3 && A_buttonoud == false) {
             cursor_overlaped(area_picture_one, 3, true)
         }
     }
@@ -1440,7 +1479,7 @@ function Arnolds_Animations () {
             . . f f f f f . . . f f f f f 
             `],
         200,
-        false
+        true
         )
     } else if (facing == 4.5 && (current_area != 7 && !(controller.down.isPressed()))) {
         animation.stopAnimation(animation.AnimationTypes.All, Arnold)
@@ -1807,7 +1846,7 @@ let a_button_signal: Sprite = null
 let Binglep: Sprite = null
 let Zac: Sprite = null
 let Arnold: Sprite = null
-let Area_exit: Sprite = null
+let Area_anything_else: Sprite = null
 let Area_entrance: Sprite = null
 let Piggy: Sprite = null
 let story_iintro: TextSprite = null
@@ -2087,7 +2126,7 @@ Area_entrance = sprites.create(img`
     .....ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.......
     `, SpriteKind.Player)
 Area_entrance.setPosition(-2200, 0)
-Area_exit = sprites.create(img`
+Area_anything_else = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -2105,7 +2144,7 @@ Area_exit = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
-Area_exit.setPosition(-1000, 0)
+Area_anything_else.setPosition(-1000, 0)
 Arnold = sprites.create(img`
     ..................ff.ff..
     .................f22f2f..
@@ -2299,6 +2338,14 @@ game.onUpdate(function () {
         }
     }
 })
+// this is where I ask what cutscene has started
+game.onUpdate(function () {
+    if (cursor_is < 0) {
+        if (game_state == 1 && cutscene_phase == 0) {
+            talking_to_someone(Arnold, Binglep, 1, 5)
+        }
+    }
+})
 game.onUpdate(function () {
     if (cursor_is == 2) {
         cursor.setPosition(20, story_iintro.y)
@@ -2330,14 +2377,6 @@ game.onUpdate(function () {
     if (current_area == 7) {
         if (controller.A.isPressed() && Arnold.vy == 0) {
             Arnold.vy = -150
-        }
-    }
-})
-// this is where I ask what cutscene has started
-game.onUpdate(function () {
-    if (cursor_is < 0) {
-        if (game_state == 1 && cutscene_phase == 0) {
-            talking_to_someone(Arnold, Binglep, 1, 5)
         }
     }
 })
