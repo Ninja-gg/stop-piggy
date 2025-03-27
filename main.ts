@@ -11,42 +11,24 @@ namespace SpriteKind {
 function Arnold_too_camander () {
 	
 }
-scene.onOverlapTile(SpriteKind.cutterr, myTiles.tile18, function (sprite, location) {
-    if (sprites.readDataBoolean(sprite, "left")) {
-        sprite.setVelocity(50, 0)
-        sprites.setDataBoolean(sprite, "left", false)
-    } else if (sprites.readDataBoolean(sprite, "left") == false) {
-        sprite.setVelocity(-50, 0)
-        sprites.setDataBoolean(sprite, "left", true)
-    }
-})
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (cursor_is < 0) {
-        if (cutscene_phase == 0 && current_area != 7) {
-            facing = 3
-            Arnold.setImage(img`
-                . . . . f f f . f f f . . . . 
-                . . . . f 2 2 f 2 2 f . . . . 
-                . . . . f f f f f f f . . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . f f f f f f f f f f f f f . 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 f f f f 3 3 3 3 f 
-                f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-                f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 f f f f f f f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f f f f f f f . f f f f f f f 
-                `)
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (current_area == 3) {
+        if (Arnold.overlapsWith(Area_entrance) && game_state == 2) {
+            cursor_overlaped(area_picture_one, 7, true)
+        }
+    } else if (current_area == 1) {
+        if (Arnold.overlapsWith(Area_entrance) && game_state == 2) {
+            area_select()
+        }
+    } else if (current_area == 7) {
+        if (Arnold.overlapsWith(Area_entrance) && game_state == 3 && A_buttonoud == false) {
+            cursor_overlaped(area_picture_one, 3, true)
+        } else if (Arnold.overlapsWith(Area_anything_else) && game_state == 3 && A_buttonoud == false) {
+        	
         }
     }
+    a_button_signal.setPosition(-2100, 0)
+    A_buttonoud = true
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cutterr, function (sprite, otherSprite) {
     game.gameOver(false)
@@ -352,10 +334,11 @@ function start_area (area_number: number) {
             ....fffffff.fffffff......
             `)
         Arnold.ay = 0
+        Arnold.vy = 0
         sprites.destroyAllSpritesOfKind(SpriteKind.cutterr)
         if (game_state == 3) {
             game_state = 2
-            Arnold.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(6))
+            Arnold.setPosition(tilemap_to_pixels(30), tilemap_to_pixels(7))
         }
     } else if (area_number == 7) {
         tiles.setCurrentTilemap(tilemap`level31`)
@@ -493,24 +476,6 @@ function start_area (area_number: number) {
     area_picture_five.setPosition(-4000, 0)
     area_picture_six.setPosition(-4000, 0)
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (current_area == 3) {
-        if (Arnold.overlapsWith(Area_entrance) && game_state == 2) {
-            cursor_overlaped(area_picture_one, 7, true)
-        }
-    } else if (current_area == 1) {
-        if (Arnold.overlapsWith(Area_entrance) && game_state == 2) {
-            area_select()
-        }
-    } else if (current_area == 7) {
-        if (Arnold.overlapsWith(Area_entrance) && game_state == 3 && A_buttonoud == false) {
-            cursor_overlaped(area_picture_one, 3, true)
-        } else if (Arnold.overlapsWith(Area_anything_else) && game_state == 3 && A_buttonoud == false) {
-        	
-        }
-    }
-    A_buttonoud = true
-})
 function start_game () {
     cursor_is = -1
     play.setPosition(-1000, 0)
@@ -646,38 +611,8 @@ function start_game () {
     scene.cameraFollowSprite(Arnold)
     current_area = 1
 }
-controller.down.onEvent(ControllerButtonEvent.Released, function () {
-    if (cursor_is > 0 && current_area != 7) {
-        if (cursor_is == 2) {
-            cursor_is = 1
-        } else {
-            cursor_is += 1
-        }
-    }
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (cursor_is < 0) {
-        if (cutscene_phase == 0) {
-            facing = 2
-            Arnold.setImage(img`
-                ..ff.ff..................
-                ..f2f22f.................
-                ..ffffbf.................
-                .f3f3ffff................
-                f3333333f................
-                f3333333fffffffffffff....
-                fff333333333333333333f...
-                f333333333333333333333f..
-                ffff333333333333333333f..
-                ...fff3333333333333333fff
-                ......f33333333333333333f
-                ......f333fffffff333ffff.
-                ......f333f3f.f3f333f....
-                ......f333f3f.f3f333f....
-                ......fffffff.fffffff....
-                `)
-        }
-    }
+controller.A.onEvent(ControllerButtonEvent.Released, function () {
+    A_buttonoud = false
 })
 function Zac_to_Arnold () {
     if (cutscene_phase == 1) {
@@ -882,39 +817,27 @@ function Zac_to_Arnold () {
         })
     }
 }
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0) {
-            facing = 1
+            facing = 2
             Arnold.setImage(img`
-                ..................ff.ff..
-                .................f22f2f..
-                .................fbffff..
-                ................ffff3f3f.
-                ................f3333333f
-                ....fffffffffffff3333333f
-                ...f333333333333333333fff
-                ..f333333333333333333333f
-                ..f333333333333333333ffff
-                fff3333333333333333fff...
-                f33333333333333333f......
-                .ffff333fffffff333f......
-                ....f333f3f.f3f333f......
-                ....f333f3f.f3f333f......
-                ....fffffff.fffffff......
+                ..ff.ff..................
+                ..f2f22f.................
+                ..ffffbf.................
+                .f3f3ffff................
+                f3333333f................
+                f3333333fffffffffffff....
+                fff333333333333333333f...
+                f333333333333333333333f..
+                ffff333333333333333333f..
+                ...fff3333333333333333fff
+                ......f33333333333333333f
+                ......f333fffffff333ffff.
+                ......f333f3f.f3f333f....
+                ......f333f3f.f3f333f....
+                ......fffffff.fffffff....
                 `)
-        }
-    }
-})
-controller.A.onEvent(ControllerButtonEvent.Released, function () {
-    A_buttonoud = false
-})
-controller.up.onEvent(ControllerButtonEvent.Released, function () {
-    if (cursor_is > 0) {
-        if (cursor_is == 1) {
-            cursor_is = 2
-        } else {
-            cursor_is += -1
         }
     }
 })
@@ -1225,34 +1148,6 @@ function story_intro () {
         })
     })
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (cursor_is < 0) {
-        if (cutscene_phase == 0 && current_area != 7) {
-            facing = 4
-            Arnold.setImage(img`
-                . . . . f f f . f f f . . . . 
-                . . . . f 2 2 f 2 2 f . . . . 
-                . . . . f f f f f f f . . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . . . f 3 f 3 3 3 f 3 f . . . 
-                . f f f 3 3 3 3 3 3 3 f f f . 
-                f 3 3 f 3 f f f f f 3 f 3 3 f 
-                f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-                f 3 3 3 f f f f f f f 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 f f f f f f f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f f f f f f f . f f f f f f f 
-                `)
-        }
-    }
-})
 function Arnolds_Animations () {
     if (facing == 1) {
         facing = 1.5
@@ -1516,6 +1411,67 @@ function Arnolds_Animations () {
             `)
     }
 }
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (cursor_is < 0) {
+        if (cutscene_phase == 0) {
+            facing = 1
+            Arnold.setImage(img`
+                ..................ff.ff..
+                .................f22f2f..
+                .................fbffff..
+                ................ffff3f3f.
+                ................f3333333f
+                ....fffffffffffff3333333f
+                ...f333333333333333333fff
+                ..f333333333333333333333f
+                ..f333333333333333333ffff
+                fff3333333333333333fff...
+                f33333333333333333f......
+                .ffff333fffffff333f......
+                ....f333f3f.f3f333f......
+                ....f333f3f.f3f333f......
+                ....fffffff.fffffff......
+                `)
+        }
+    }
+})
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (cursor_is < 0) {
+        if (cutscene_phase == 0 && current_area != 7) {
+            facing = 3
+            Arnold.setImage(img`
+                . . . . f f f . f f f . . . . 
+                . . . . f 2 2 f 2 2 f . . . . 
+                . . . . f f f f f f f . . . . 
+                . . . f 3 3 3 3 3 3 3 f . . . 
+                . . . f 3 3 3 3 3 3 3 f . . . 
+                . . . f 3 3 3 3 3 3 3 f . . . 
+                . f f f f f f f f f f f f f . 
+                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                f 3 3 3 3 3 f f f f 3 3 3 3 f 
+                f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+                f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                f 3 3 3 f f f f f f f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f f f f f f f . f f f f f f f 
+                `)
+        }
+    }
+})
+controller.up.onEvent(ControllerButtonEvent.Released, function () {
+    if (cursor_is > 0) {
+        if (cursor_is == 1) {
+            cursor_is = 2
+        } else {
+            cursor_is += -1
+        }
+    }
+})
 function area_select () {
     scene.setBackgroundImage(img`
         7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -1640,6 +1596,7 @@ function area_select () {
         7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
         `)
     tiles.setCurrentTilemap(tilemap`level25`)
+    a_button_signal.setPosition(-2100, 0)
     Area_entrance.setPosition(-1000, 0)
     Arnold.setPosition(-2000, 0)
     Binglep.setPosition(-1000, 0)
@@ -1678,9 +1635,28 @@ function area_select () {
 function tilemap_to_pixels (position: number) {
     return position * 16 + 8
 }
+scene.onOverlapTile(SpriteKind.cutterr, myTiles.tile18, function (sprite, location) {
+    if (sprites.readDataBoolean(sprite, "left")) {
+        sprite.setVelocity(50, 0)
+        sprites.setDataBoolean(sprite, "left", false)
+    } else if (sprites.readDataBoolean(sprite, "left") == false) {
+        sprite.setVelocity(-50, 0)
+        sprites.setDataBoolean(sprite, "left", true)
+    }
+})
 function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction: number, A_amount: number, val: number) {
     if (Math.sqrt((guytalkingto.x - player2.x) ** 2 + (guytalkingto.y - player2.y) ** 2) < 50) {
         a_button_signal.setPosition(guytalkingto.x - A_direction * A_amount, guytalkingto.y)
+        a_button_signal.setImage(img`
+            . 1 1 1 1 1 1 . 
+            1 2 2 2 2 2 2 1 
+            1 2 1 1 1 1 2 1 
+            1 2 1 1 1 1 2 1 
+            1 2 2 2 2 2 2 1 
+            1 2 1 1 1 1 2 1 
+            1 2 1 1 1 1 2 1 
+            . 1 1 1 1 1 1 . 
+            `)
         if (controller.A.isPressed()) {
             cutscene_phase = 1
             a_button_signal.setPosition(-1000, 0)
@@ -1695,6 +1671,34 @@ function talking_to_someone (player2: Sprite, guytalkingto: Sprite, A_direction:
         return
     }
 }
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (cursor_is < 0) {
+        if (cutscene_phase == 0 && current_area != 7) {
+            facing = 4
+            Arnold.setImage(img`
+                . . . . f f f . f f f . . . . 
+                . . . . f 2 2 f 2 2 f . . . . 
+                . . . . f f f f f f f . . . . 
+                . . . f 3 3 3 3 3 3 3 f . . . 
+                . . . f 3 3 3 3 3 3 3 f . . . 
+                . . . f 3 f 3 3 3 f 3 f . . . 
+                . f f f 3 3 3 3 3 3 3 f f f . 
+                f 3 3 f 3 f f f f f 3 f 3 3 f 
+                f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
+                f 3 3 3 f f f f f f f 3 3 3 f 
+                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                f 3 3 3 f f f f f f f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                f f f f f f f . f f f f f f f 
+                `)
+        }
+    }
+})
 function animate_map_select_icons (icon: Sprite, value: number) {
     if (cursor.overlapsWith(icon)) {
         if (!(animated == value)) {
@@ -1839,6 +1843,15 @@ function animate_map_select_icons (icon: Sprite, value: number) {
         return animated
     }
 }
+controller.down.onEvent(ControllerButtonEvent.Released, function () {
+    if (cursor_is > 0 && current_area != 7) {
+        if (cursor_is == 2) {
+            cursor_is = 1
+        } else {
+            cursor_is += 1
+        }
+    }
+})
 let animated = 0
 let cutter: Sprite = null
 let A_buttonoud = false
@@ -1854,13 +1867,13 @@ let area_picture_four: Sprite = null
 let area_picture_three: Sprite = null
 let area_picture_two: Sprite = null
 let area_picture_one: Sprite = null
-let a_button_signal: Sprite = null
 let Binglep: Sprite = null
 let Zac: Sprite = null
 let Arnold: Sprite = null
+let Piggy: Sprite = null
+let a_button_signal: Sprite = null
 let Area_anything_else: Sprite = null
 let Area_entrance: Sprite = null
-let Piggy: Sprite = null
 let story_iintro: TextSprite = null
 let play: TextSprite = null
 scene.setBackgroundImage(img`
@@ -1991,22 +2004,6 @@ play.setPosition(50, 85)
 story_iintro = textsprite.create("story", 5, 2)
 story_iintro.setBorder(1, 8)
 story_iintro.setPosition(53, 100)
-Piggy = sprites.create(img`
-    .................fff.ff..
-    .................f22f2f..
-    .................fbffff..
-    ................ffff2f2f.
-    ................f2222222f
-    ..fffffffffffffff22222fff
-    ..f222222222222222222222f
-    ..f222222222222222222ffff
-    fff2222222222222222fff...
-    f22222222222222222f......
-    .ffff222fffffff222f......
-    ....f222f.....f222f......
-    ....fffff.....fffff......
-    `, SpriteKind.Player)
-Piggy.setPosition(-2000, 0)
 Area_entrance = sprites.create(img`
     ........fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.......
     ........feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.......
@@ -2135,6 +2132,33 @@ Area_anything_else = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.areaexit)
 Area_anything_else.setPosition(-1000, 0)
+a_button_signal = sprites.create(img`
+    . 1 1 1 1 1 1 . 
+    1 2 2 2 2 2 2 1 
+    1 2 1 1 1 1 2 1 
+    1 2 1 1 1 1 2 1 
+    1 2 2 2 2 2 2 1 
+    1 2 1 1 1 1 2 1 
+    1 2 1 1 1 1 2 1 
+    . 1 1 1 1 1 1 . 
+    `, SpriteKind.Player)
+a_button_signal.setPosition(-2100, 0)
+Piggy = sprites.create(img`
+    .................fff.ff..
+    .................f22f2f..
+    .................fbffff..
+    ................ffff2f2f.
+    ................f2222222f
+    ..fffffffffffffff22222fff
+    ..f222222222222222222222f
+    ..f222222222222222222ffff
+    fff2222222222222222fff...
+    f22222222222222222f......
+    .ffff222fffffff222f......
+    ....f222f.....f222f......
+    ....fffff.....fffff......
+    `, SpriteKind.Player)
+Piggy.setPosition(-2000, 0)
 Arnold = sprites.create(img`
     ..................ff.ff..
     .................f22f2f..
@@ -2184,17 +2208,6 @@ Binglep = sprites.create(img`
     . . . . . . f f f . f f f . f f f f f . . . . 
     `, SpriteKind.Player)
 Binglep.setPosition(-2100, 0)
-a_button_signal = sprites.create(img`
-    . 1 1 1 1 1 1 . 
-    1 2 2 2 2 2 2 1 
-    1 2 1 1 1 1 2 1 
-    1 2 1 1 1 1 2 1 
-    1 2 2 2 2 2 2 1 
-    1 2 1 1 1 1 2 1 
-    1 2 1 1 1 1 2 1 
-    . 1 1 1 1 1 1 . 
-    `, SpriteKind.Player)
-a_button_signal.setPosition(-2100, 0)
 area_picture_one = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
@@ -2325,16 +2338,101 @@ game.onUpdate(function () {
             Arnold.vy = -150
         }
     }
-    if (Arnold.overlapsWith(Area_entrance)) {
-        a_button_signal.setPosition(Area_entrance.x, Area_entrance.y)
-        a_button_signal.sy = Area_entrance.height / 22
-        a_button_signal.sx = Area_entrance.width / 25
-    } else if (Arnold.overlapsWith(Area_anything_else)) {
+    if (Arnold.overlapsWith(Area_anything_else)) {
         a_button_signal.setPosition(Area_anything_else.x, Area_anything_else.y)
-        a_button_signal.sy = Area_anything_else.height / 22
-        a_button_signal.sx = Area_anything_else.width / 25
+        a_button_signal.setImage(img`
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+            `)
+    } else if (Arnold.overlapsWith(Area_entrance)) {
+        if (current_area != 3) {
+            a_button_signal.setPosition(Area_entrance.x, Area_entrance.y)
+            a_button_signal.setImage(img`
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                `)
+        } else {
+            a_button_signal.setPosition(Area_entrance.x, Area_entrance.y + 15)
+            a_button_signal.setImage(img`
+                .......11111111111111111111111111111111.......
+                ......1111111111111111111111111111111111......
+                .....111111111111111111111111111111111111.....
+                ....11111111111111111111111111111111111111....
+                ...1111111111111111111111111111111111111111...
+                ..111111222222222222222222222222222222111111..
+                .11111112222222222222222222222222222221111111.
+                1111111122222222222222222222222222222211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122222222222222222222222222222211111111
+                1111111122222222222222222222222222222211111111
+                1111111122222222222222222222222222222211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                1111111122211111111111111111111111122211111111
+                .11111111111111111111111111111111111111111111.
+                ..111111111111111111111111111111111111111111..
+                ...1111111111111111111111111111111111111111...
+                ....11111111111111111111111111111111111111....
+                .....111111111111111111111111111111111111.....
+                ......1111111111111111111111111111111111......
+                .......11111111111111111111111111111111.......
+                `)
+        }
     } else {
-        a_button_signal.setPosition(-1000, 0)
+        a_button_signal.setPosition(-2100, 0)
     }
 })
 // this is where stuff besides just talking happens in a cutscene
