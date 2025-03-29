@@ -56,6 +56,39 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+// RETURNS A NUMBER BASED ON THE DIRECTION IT IS HEADING:
+// 
+//   0 - Not moving
+// 
+//        3 (UP)
+//        |
+//    1 --+--  2 (RIGHT)
+// (LEFT) |
+//        4 (DOWN)
+function Get_Direction_From_Velocity (Vx: number, Vy: number) {
+    let absVy = 0
+    absVx = Math.abs(Vx)
+    absVx = Math.abs(Vy)
+    // IS IT NOT MOVING AT ALL?
+    if (absVx < 0.001 && absVy < 0.001) {
+        return 0
+    }
+    // IS IT MOVING SIDEWAYS?
+    if (absVx > absVy) {
+        if (Vx < 0) {
+            // MOVING LEFT
+            return 1
+        }
+        // MOVING RIGHT
+        return 2
+    }
+    if (Vy < 0) {
+        // MOVING UPWARDS
+        return 3
+    }
+    // MOVING DOWNWARDS
+    return 4
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cutterr, function (sprite, otherSprite) {
     game.gameOver(false)
 })
@@ -691,6 +724,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+function Get_Direction_From_Sprite (Guy: Sprite) {
+    return Get_Direction_From_Velocity(Guy.vx, Guy.vx)
+}
 function talking_to_someone2 (player2: Sprite, guytalkingto: Sprite, A_direction: number, A_amount: number, val: number) {
     if (Math.sqrt((guytalkingto.x - player2.x) ** 2 + (guytalkingto.y - player2.y) ** 2) < 50) {
         a_button_signal.setPosition(guytalkingto.x - A_direction * A_amount, guytalkingto.y)
@@ -1886,9 +1922,11 @@ function animate_map_select_icons (icon: Sprite, value: number) {
         return animated
     }
 }
+let Arnolds_Direction = 0
 let animated = 0
 let talking_to_who = 0
 let cutter: Sprite = null
+let absVx = 0
 let cutscene_now = false
 let A_buttonoud = false
 let facing = 0
@@ -2389,12 +2427,14 @@ cursor = sprites.create(img`
     `, SpriteKind.Player)
 cursor.setPosition(20, play.y)
 cursor_is = 1
-game_state = 1
+game_state = 2
 cutscene_phase = 0
 current_area = 0
 facing = 1
 A_buttonoud = false
 cutscene_now = false
+// on game update we determine Arnold's direction from his velocity.  (Up, down, left, right).  If his direction changed, we alter his image / animation.  This variable is what it was the last time we checked.
+let Arnolds_Last_Direction = -1
 // this is where stuff besides just talking happens in a cutscene
 game.onUpdate(function () {
     if (talking_to_who == 1) {
@@ -2541,4 +2581,7 @@ game.onUpdate(function () {
     } else if (cutscene_now == false) {
         a_button_signal.setPosition(-2100, 0)
     }
+})
+game.onUpdate(function () {
+    Arnolds_Direction = 0
 })
