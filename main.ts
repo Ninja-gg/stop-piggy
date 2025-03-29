@@ -2435,9 +2435,6 @@ A_buttonoud = false
 cutscene_now = false
 // on game update we determine Arnold's direction from his velocity.  (Up, down, left, right).  If his direction changed, we alter his image / animation.  This variable is what it was the last time we checked.
 let Arnolds_Last_Direction = -1
-game.onUpdate(function () {
-    Arnolds_Direction = 0
-})
 // this is where stuff besides just talking happens in a cutscene
 game.onUpdate(function () {
     if (talking_to_who == 1) {
@@ -2584,4 +2581,11 @@ game.onUpdate(function () {
     } else if (cutscene_now == false) {
         a_button_signal.setPosition(-2100, 0)
     }
+})
+game.onUpdate(function () {
+    if (0 == 0) {
+    	
+    }
+    Arnolds_Last_Direction = Arnolds_Direction
+    Arnolds_Direction = Get_Direction_From_Sprite(Arnold)
 })
