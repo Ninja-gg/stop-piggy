@@ -1328,13 +1328,59 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
 })
 function Arnold_too_camander () {
     if (cutscene_phase == 0) {
+        controller.moveSprite(Arnold, 0, 0)
         Arnold.setPosition(tilemap_to_pixels(15), tilemap_to_pixels(28))
         Cammander.setPosition(tilemap_to_pixels(7), tilemap_to_pixels(26) + 6.5)
         temporary_sprite_1.setPosition(tilemap_to_pixels(8), tilemap_to_pixels(27) + 15.5)
         Arnold.setVelocity(-50, 0)
+        animation.runImageAnimation(
+        Arnold,
+        [img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......fffff3f...f333fff..
+            ........f333f...f333f....
+            ........fffff...fffff....
+            `,img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......f333fff...fffff3f..
+            ......f333f.......f333f..
+            ......fffff.......fffff..
+            `],
+        200,
+        true
+        )
         cutscene_phase = 1
-    } else if (false) {
-    	
+    } else if (cutscene_phase == 1 && Arnold.x < tilemap_to_pixels(12)) {
+        cutscene_phase = 2
+        Arnold.vy = -200
+        timer.after(625, function () {
+            cutscene_phase = 3
+        })
+    } else if (cutscene_phase == 3) {
+        Arnold.ay = 0
+        Arnold.vy = 0
     }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -1669,12 +1715,13 @@ function Zac_to_Arnold () {
         cutscene_phase = 2
         story.startCutscene(function () {
             controller.moveSprite(Arnold, 0, 0)
-            story.spriteSayText(Binglep, "you have to be carefull Arnold")
-            story.spriteSayText(Binglep, "Piggy is roaming around killing everyone he can")
-            story.spriteSayText(Binglep, "I heard he killed half of the cows and hes only been here for a week!")
-            story.spriteSayText(Arnold, "I know I am brainstorming ideas to stop him")
-            story.spriteSayText(Binglep, "Isn't what we do obvious? It's to run and hide!")
-            story.spriteSayText(Arnold, "we shoudn't just run and hide, we have to stop piggy!")
+            story.printCharacterText("hello Binglep", "Arnold/you")
+            story.printCharacterText("Im really worried Arnold!", "Binglep")
+            story.printCharacterText("Piggy is roaming around killing everyone!", "Binglep")
+            story.printCharacterText("I heard he killed half the cows and hes nly been here for a week!", "Binglep")
+            story.printCharacterText("I know I am brainstorming ideas to stop him.", "Arnold")
+            story.printCharacterText("Isnt what we should do obvious? We need to hide!", "Binglep")
+            story.printCharacterText("A life of running and hiding? that sounds to painfull! We need to stop Piggy!", "Arnold")
             Zac.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(20))
             Zac.setVelocity(50, 0)
             animation.runImageAnimation(
@@ -1752,9 +1799,9 @@ function Zac_to_Arnold () {
                 ......f333f.....f333f....
                 ......fffff.....fffff....
                 `)
-            story.spriteSayText(Zac, "shut up Biglep you keep yapping about")
-            story.spriteSayText(Zac, "\"oh! Piggys going to kill us!\"")
-            story.spriteSayText(Zac, "Im sure the farmer will deal with it.")
+            story.printCharacterText("Shut uo Binglep, you keep yapping about", "Zac")
+            story.printCharacterText("\"Piggys going to kill us!\"", "Zac")
+            story.printCharacterText("Im sure the farmer will deal with it.", "Zac")
             Arnold.setImage(img`
                 ..................ff.ff..
                 .................f22f2f..
@@ -1771,11 +1818,9 @@ function Zac_to_Arnold () {
                 ....f333f.....f333f......
                 ....fffff.....fffff......
                 `)
-            story.spriteSayText(Binglep, "Yeah well hes been here for a week and the ")
-            story.spriteSayText(Binglep, "farmer has done nothing! Im just trying")
-            story.spriteSayText(Binglep, "to keep us safe!")
-            story.spriteSayText(Arnold, "I agree we must do something")
-            story.spriteSayText(Zac, "and what is that? go see why")
+            story.printCharacterText("yeah well hes been here for a week and the famer has done nothing!", "Binglep")
+            story.printCharacterText("Im just trying to keep us safe!", "Binglep")
+            story.printCharacterText("I agree we must do something!", "Arnold")
             Arnold.setImage(img`
                 ..ff.ff..................
                 ..f2f22f.................
@@ -1792,10 +1837,8 @@ function Zac_to_Arnold () {
                 ......f333f.....f333f....
                 ......fffff.....fffff....
                 `)
-            story.spriteSayText(Zac, "the farmer isn't doing anything?")
-            story.spriteSayText(Zac, "we'll be caught the moment we get outta here!")
-            story.spriteSayText(Arnold, "It's worth a shot! com'n lets go!")
-            story.spriteSayText(Binglep, "you do what you want but Im going to hide here!")
+            story.printCharacterText("and what is that? go see why the farmers not helping us? we'll be caught th moment we get out of here!", "Zac")
+            story.printCharacterText("it's worth a try! com'n lets go!", "Arnold")
             Arnold.setImage(img`
                 ..................ff.ff..
                 .................f22f2f..
@@ -1812,10 +1855,11 @@ function Zac_to_Arnold () {
                 ....f333f.....f333f......
                 ....fffff.....fffff......
                 `)
-            story.spriteSayText(Arnold, "right if you even call standing out in the open hiding...")
-            story.spriteSayText(Binglep, "did you say something?")
-            story.spriteSayText(Arnold, "Nothing!")
-            story.spriteSayText(Arnold, "What about you Zac?")
+            story.printCharacterText("you do what you want Im hiding here!", "Binglep")
+            story.printCharacterText("right if you even call standing out in the open hiding...", "Arnold")
+            story.printCharacterText("Did you say something?", "Binglep")
+            story.printCharacterText("Nothing!", "Arnold")
+            story.printCharacterText("What about you Zac?", "Arnold")
             Arnold.setImage(img`
                 ..ff.ff..................
                 ..f2f22f.................
@@ -1832,8 +1876,8 @@ function Zac_to_Arnold () {
                 ......f333f.....f333f....
                 ......fffff.....fffff....
                 `)
-            story.spriteSayText(Zac, "Nah Im sure the farmer will do something soon enough.")
-            story.spriteSayText(Arnold, "Ok bye you guys!")
+            story.printCharacterText("nah Im sure the farmer will deal with it eveauntally.", "Zac")
+            story.printCharacterText("Ok bye you guys!", "Arnold")
             Zac.setVelocity(-50, 0)
             Zac.setImage(img`
                 ..ff.fff.................
@@ -1884,8 +1928,11 @@ function Zac_to_Arnold () {
             300,
             true
             )
-            cutscene_phase = 0
-            story.cancelCurrentCutscene()
+            timer.after(2000, function () {
+                cutscene_phase = 0
+                controller.moveSprite(Arnold, 100, 100)
+                story.cancelCurrentCutscene()
+            })
         })
     }
 }
@@ -2297,31 +2344,31 @@ Cammander = sprites.create(img`
     `, SpriteKind.Player)
 Cammander.setPosition(-2100, 0)
 temporary_sprite_1 = sprites.create(img`
-    .ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.
-    fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
-    fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
-    f1111111111111111111111111111111111111111111111111111111111f
-    fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
-    f1111111111111111111111111111111111111111111111111111111111f
-    .ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
-    ..................f1111111111111111111111f..................
+    .ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.
+    fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
+    fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
+    f111111111111111111111111111111111111111111111111111111111111111111111111111111f
+    fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
+    f111111111111111111111111111111111111111111111111111111111111111111111111111111f
+    .ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
+    ..............................f1111111111111111111111f..........................
     `, SpriteKind.Player)
 temporary_sprite_1.setPosition(-2100, 0)
 a_button_signal = sprites.create(img`
@@ -2480,11 +2527,6 @@ game.onUpdate(function () {
         animated = animate_map_select_icons(area_picture_five, 2.5)
         animated = animate_map_select_icons(area_picture_six, 2.6)
     }
-    if (current_area == 7) {
-        if (controller.A.isPressed() && Arnold.vy == 0) {
-            Arnold.vy = -150
-        }
-    }
     if (Arnold.overlapsWith(Area_anything_else)) {
         a_button_signal.setPosition(Area_anything_else.x, Area_anything_else.y)
         a_button_signal.setImage(img`
@@ -2580,6 +2622,11 @@ game.onUpdate(function () {
         }
     } else if (cutscene_now == false) {
         a_button_signal.setPosition(-2100, 0)
+    }
+    if (current_area == 7 && cutscene_phase == 0) {
+        if (controller.A.isPressed() && Arnold.vy == 0) {
+            Arnold.vy = -150
+        }
     }
 })
 game.onUpdate(function () {
