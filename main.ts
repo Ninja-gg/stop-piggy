@@ -1329,9 +1329,10 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
 function Arnold_too_camander () {
     if (cutscene_phase == 0) {
         controller.moveSprite(Arnold, 0, 0)
-        Arnold.setPosition(tilemap_to_pixels(15), tilemap_to_pixels(28))
-        Cammander.setPosition(tilemap_to_pixels(7), tilemap_to_pixels(26) + 6.5)
-        temporary_sprite_1.setPosition(tilemap_to_pixels(8), tilemap_to_pixels(27) + 15.5)
+        Arnold.setPosition(tilemap_to_pixels(19), tilemap_to_pixels(28))
+        Cammander.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(24) + 5)
+        temporaryspriteone.setPosition(tilemap_to_pixels(14), tilemap_to_pixels(27) + 15.5)
+        temporaryspritetwo.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(26) + 12)
         Arnold.setVelocity(-50, 0)
         animation.runImageAnimation(
         Arnold,
@@ -1372,15 +1373,50 @@ function Arnold_too_camander () {
         true
         )
         cutscene_phase = 1
-    } else if (cutscene_phase == 1 && Arnold.x < tilemap_to_pixels(12)) {
+    } else if (cutscene_phase == 1 && Arnold.x < tilemap_to_pixels(16)) {
         cutscene_phase = 2
         Arnold.vy = -200
         timer.after(625, function () {
             cutscene_phase = 3
         })
     } else if (cutscene_phase == 3) {
+        cutscene_phase = 4
         Arnold.ay = 0
         Arnold.vy = 0
+    } else if (cutscene_phase == 4 && Arnold.x < tilemap_to_pixels(13)) {
+        cutscene_phase = 5
+        Arnold.vx = 0
+        Arnold.setImage(img`
+            ..ff.ff..................
+            ..f2f22f.................
+            ..ffffbf.................
+            .f3f3ffff................
+            f3333333f................
+            f3333333fffffffffffff....
+            fff333333333333333333f...
+            f333333333333333333333f..
+            ffff333333333333333333f..
+            ...fff3333333333333333fff
+            ......f33333333333333333f
+            ......f333fffffff333ffff.
+            ......f333f3f.f3f333f....
+            ......f333f3f.f3f333f....
+            ......fffffff.fffffff....
+            `)
+        animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+        timer.after(500, function () {
+            story.startCutscene(function () {
+                story.printCharacterText("Camander? is that you?", "Arnold")
+                cutscene_phase = 6
+                story.cancelCurrentCutscene()
+            })
+        })
+    } else if (cutscene_phase == 6) {
+        screenscrolling += 2
+        scene.centerCameraAt(Arnold.x - screenscrolling, Arnold.y)
+        timer.after(2000, function () {
+        	
+        })
     }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -1974,6 +2010,7 @@ let absVx = 0
 let animated = 0
 let talking_to_who = 0
 let cutter: Sprite = null
+let screenscrolling = 0
 let cutscene_now = false
 let A_buttonoud = false
 let facing = 0
@@ -1989,7 +2026,8 @@ let area_picture_three: Sprite = null
 let area_picture_two: Sprite = null
 let area_picture_one: Sprite = null
 let a_button_signal: Sprite = null
-let temporary_sprite_1: Sprite = null
+let temporaryspritetwo: Sprite = null
+let temporaryspriteone: Sprite = null
 let Cammander: Sprite = null
 let Binglep: Sprite = null
 let Zac: Sprite = null
@@ -2343,7 +2381,7 @@ Cammander = sprites.create(img`
     ....fffffff.fffffff........
     `, SpriteKind.Player)
 Cammander.setPosition(-2100, 0)
-temporary_sprite_1 = sprites.create(img`
+temporaryspriteone = sprites.create(img`
     .ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.
     fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
     fbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf
@@ -2370,7 +2408,67 @@ temporary_sprite_1 = sprites.create(img`
     ..............................f1111111111111111111111f..........................
     ..............................f1111111111111111111111f..........................
     `, SpriteKind.Player)
-temporary_sprite_1.setPosition(-2100, 0)
+temporaryspriteone.setPosition(-2100, 0)
+temporaryspritetwo = sprites.create(img`
+    .......fffffffffffffffffffffffffffffff.......
+    ......f1111111111111111111111111111111f......
+    .....f111111111111111111111111111111111f.....
+    ....f11111111111111111111111111111111111f....
+    ...f1111111111111111111111111111111111111f...
+    ..f111111111111111111111111111111111111111f..
+    .f11111111111111111111111111111111111111111f.
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f11111111111111111111111111111111ffffffffffff
+    f11111111111111111111111111111111fddddddddddf
+    f11111111111111111111111111111111fddddddddddf
+    f111111111111111111111111111111111fdddddddddf
+    f1111111111111111111111111111111111ffffffffff
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    fffffffffffffffffffffffffffffffffffffffffffff
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111fffffffffffff
+    f1111111111111111111111111111111fdddddddddddf
+    f1111111111111111111111111111111fdddddddddddf
+    f11111111111111111111111111111111fddddddddddf
+    f111111111111111111111111111111111fffffffffff
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    f1111111111111111111111111111111111111111111f
+    `, SpriteKind.Player)
+temporaryspritetwo.setPosition(-2100, 0)
 a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     1 2 2 2 2 2 2 1 
@@ -2482,6 +2580,7 @@ A_buttonoud = false
 cutscene_now = false
 // on game update we determine Arnold's direction from his velocity.  (Up, down, left, right).  If his direction changed, we alter his image / animation.  This variable is what it was the last time we checked.
 let Arnolds_Last_Direction = -1
+screenscrolling = 0
 // this is where stuff besides just talking happens in a cutscene
 game.onUpdate(function () {
     if (talking_to_who == 1) {
