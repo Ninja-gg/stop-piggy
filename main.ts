@@ -8,15 +8,6 @@ namespace SpriteKind {
     export const cutterr = SpriteKind.create()
     export const areaexit = SpriteKind.create()
 }
-scene.onOverlapTile(SpriteKind.cutterr, myTiles.tile18, function (sprite, location) {
-    if (sprites.readDataBoolean(sprite, "left")) {
-        sprite.setVelocity(50, 0)
-        sprites.setDataBoolean(sprite, "left", false)
-    } else if (sprites.readDataBoolean(sprite, "left") == false) {
-        sprite.setVelocity(-50, 0)
-        sprites.setDataBoolean(sprite, "left", true)
-    }
-})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0 && current_area != 7) {
@@ -312,6 +303,15 @@ function Arnolds_Animations () {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cutterr, function (sprite, otherSprite) {
     game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.cutterr, assets.tile`myTile16`, function (sprite, location) {
+    if (sprites.readDataBoolean(sprite, "left")) {
+        sprite.setVelocity(50, 0)
+        sprites.setDataBoolean(sprite, "left", false)
+    } else if (sprites.readDataBoolean(sprite, "left") == false) {
+        sprite.setVelocity(-50, 0)
+        sprites.setDataBoolean(sprite, "left", true)
+    }
 })
 function start_area (area_number: number) {
     scene.setBackgroundImage(img`
@@ -721,7 +721,7 @@ function start_area (area_number: number) {
             ....f333f3f.f3f333f......
             ....fffffff.fffffff......
             `)
-        for (let value of tiles.getTilesByType(myTiles.tile22)) {
+        for (let value of tiles.getTilesByType(assets.tile`myTile20`)) {
             cutter = sprites.create(img`
                 . . . . . f . . f . . f . . . . . 
                 . . . f f c f f c f f c f f . . . 
@@ -1330,7 +1330,7 @@ function Arnold_too_camander () {
     if (cutscene_phase == 0) {
         controller.moveSprite(Arnold, 0, 0)
         Arnold.setPosition(tilemap_to_pixels(19), tilemap_to_pixels(28))
-        Cammander.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(24) + 5)
+        Cammander.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(27) + 13)
         temporaryspriteone.setPosition(tilemap_to_pixels(14), tilemap_to_pixels(27) + 15.5)
         temporaryspritetwo.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(26) + 12)
         Arnold.setVelocity(-50, 0)
@@ -1374,15 +1374,13 @@ function Arnold_too_camander () {
         )
         cutscene_phase = 1
     } else if (cutscene_phase == 1 && Arnold.x < tilemap_to_pixels(18)) {
-        cutscene_phase = 2
+        cutscene_phase = 3
         Arnold.vy = -200
-        timer.after(625, function () {
-            cutscene_phase = 3
+        timer.after(650, function () {
+            Arnold.ay = 0
+            Arnold.vy = 0
+            cutscene_phase = 4
         })
-    } else if (cutscene_phase == 3) {
-        cutscene_phase = 4
-        Arnold.ay = 0
-        Arnold.vy = 0
     } else if (cutscene_phase == 4 && Arnold.x < tilemap_to_pixels(15)) {
         cutscene_phase = 5
         Arnold.vx = 0
@@ -1412,155 +1410,154 @@ function Arnold_too_camander () {
             })
         })
     } else if (cutscene_phase == 6) {
-        scene.centerCameraAt(scene.cameraProperty(CameraProperty.X) - 2, scene.cameraProperty(CameraProperty.Y))
-        timer.after(2500, function () {
+        if (scene.cameraProperty(CameraProperty.X) <= tilemap_to_pixels(9)) {
             if (cutscene_phase == 6) {
                 cutscene_phase = 7
-                Cammander.vx = 50
+                Cammander.vx = -25
                 animation.runImageAnimation(
                 Cammander,
                 [img`
-                    ................ffffffff...
-                    ...............f11222111f..
-                    ..............f1112111111f.
-                    .............f111122211111f
-                    .............fff11111111fff
-                    ...............ffffffffff..
-                    ...............ff3333333f..
-                    ...............f33333333f..
-                    ...............f33333f3ff..
-                    ...............f33333333f..
-                    ....ffffffffffff33333333f..
-                    ...f333333333333333333fff..
+                    ...ffffffff................
+                    ..f11122211f...............
+                    .f1111112111f..............
+                    f111112221111f.............
+                    fff11111111fff.............
+                    ..ffffffffff...............
+                    ..f3333333ff...............
+                    ..f33333333f...............
+                    ..ff3f33333f...............
+                    ..f33333333f...............
+                    ..f33333333ffffffffffff....
+                    ..fff333333333333333333f...
                     ..f333333333333333333333f..
-                    ..f333333333333333333ffff..
-                    fff3333333333333333fff.....
-                    f33333333333333333f........
-                    .ffff333fffffff333f........
-                    ....f333fff.f3fffff........
-                    ....f333f...f333f..........
-                    ....fffff...fffff..........
+                    ..ffff333333333333333333f..
+                    .....fff3333333333333333fff
+                    ........f33333333333333333f
+                    ........f333fffffff333ffff.
+                    ........fffff3f.fff333f....
+                    ..........f333f...f333f....
+                    ..........fffff...fffff....
                     `,img`
-                    ................ffffffff...
-                    ...............f11222111f..
-                    ..............f1112111111f.
-                    .............f111122211111f
-                    .............fff11111111fff
-                    ...............ffffffffff..
-                    ...............ff3333333f..
-                    ...............f33333333f..
-                    ...............f33333f3ff..
-                    ...............f33333333f..
-                    ....ffffffffffff33333333f..
-                    ...f333333333333333333fff..
+                    ...ffffffff................
+                    ..f11122211f...............
+                    .f1111112111f..............
+                    f111112221111f.............
+                    fff11111111fff.............
+                    ..ffffffffff...............
+                    ..f3333333ff...............
+                    ..f33333333f...............
+                    ..ff3f33333f...............
+                    ..f33333333f...............
+                    ..f33333333ffffffffffff....
+                    ..fff333333333333333333f...
                     ..f333333333333333333333f..
-                    ..f333333333333333333ffff..
-                    fff3333333333333333fff.....
-                    f33333333333333333f........
-                    .ffff333fffffff333f........
-                    ....fffff3f.fff333f........
-                    ......f333f...f333f........
-                    ......fffff...fffff........
+                    ..ffff333333333333333333f..
+                    .....fff3333333333333333fff
+                    ........f33333333333333333f
+                    ........f333fffffff333ffff.
+                    ........f333fff.f3fffff....
+                    ........f333f...f333f......
+                    ........fffff...fffff......
                     `],
                 200,
                 true
                 )
+                timer.after(500, function () {
+                    cutscene_phase = 8
+                    Cammander.vx = 50
+                    animation.runImageAnimation(
+                    Cammander,
+                    [img`
+                        ................ffffffff...
+                        ...............f11222111f..
+                        ..............f1112111111f.
+                        .............f111122211111f
+                        .............fff11111111fff
+                        ...............ffffffffff..
+                        ...............ff3333333f..
+                        ...............f33333333f..
+                        ...............f33333f3ff..
+                        ...............f33333333f..
+                        ....ffffffffffff33333333f..
+                        ...f333333333333333333fff..
+                        ..f333333333333333333333f..
+                        ..f333333333333333333ffff..
+                        fff3333333333333333fff.....
+                        f33333333333333333f........
+                        .ffff333fffffff333f........
+                        ....f333fff.f3fffff........
+                        ....f333f...f333f..........
+                        ....fffff...fffff..........
+                        `,img`
+                        ................ffffffff...
+                        ...............f11222111f..
+                        ..............f1112111111f.
+                        .............f111122211111f
+                        .............fff11111111fff
+                        ...............ffffffffff..
+                        ...............ff3333333f..
+                        ...............f33333333f..
+                        ...............f33333f3ff..
+                        ...............f33333333f..
+                        ....ffffffffffff33333333f..
+                        ...f333333333333333333fff..
+                        ..f333333333333333333333f..
+                        ..f333333333333333333ffff..
+                        fff3333333333333333fff.....
+                        f33333333333333333f........
+                        .ffff333fffffff333f........
+                        ....fffff3f.fff333f........
+                        ......f333f...f333f........
+                        ......fffff...fffff........
+                        `],
+                    200,
+                    true
+                    )
+                })
             }
-        })
-    } else if (cutscene_phase == 7 && Cammander.x > tilemap_to_pixels(4)) {
-        animation.stopAnimation(animation.AnimationTypes.All, Cammander)
-        Cammander.setImage(img`
-            ................ffffffff...
-            ...............f11222111f..
-            ..............f1112111111f.
-            .............f111122211111f
-            .............fff11111111fff
-            ...............ffffffffff..
-            ...............ff3333333f..
-            ...............f33333333f..
-            ...............f33333f3ff..
-            ...............f33333333f..
-            ....ffffffffffff33333333f..
-            ...f333333333333333333fff..
-            ..f333333333333333333333f..
-            ..f333333333333333333ffff..
-            fff3333333333333333fff.....
-            f33333333333333333f........
-            .ffff333fffffff333f........
-            ....f333f3f.f3f333f........
-            ....f333f3f.f3f333f........
-            ....fffffff.fffffff........
-            `)
-        Cammander.vy = 150
-        Cammander.ay = 500
-        cutscene_phase = 8
-        timer.after(500, function () {
-            if (cutscene_phase == 8) {
-                cutscene_phase = 9
-                animation.runImageAnimation(
-                Cammander,
-                [img`
-                    ................ffffffff...
-                    ...............f11222111f..
-                    ..............f1112111111f.
-                    .............f111122211111f
-                    .............fff11111111fff
-                    ...............ffffffffff..
-                    ...............ff3333333f..
-                    ...............f33333333f..
-                    ...............f33333f3ff..
-                    ...............f33333333f..
-                    ....ffffffffffff33333333f..
-                    ...f333333333333333333fff..
-                    ..f333333333333333333333f..
-                    ..f333333333333333333ffff..
-                    fff3333333333333333fff.....
-                    f33333333333333333f........
-                    .ffff333fffffff333f........
-                    ....f333fff.f3fffff........
-                    ....f333f...f333f..........
-                    ....fffff...fffff..........
-                    `,img`
-                    ................ffffffff...
-                    ...............f11222111f..
-                    ..............f1112111111f.
-                    .............f111122211111f
-                    .............fff11111111fff
-                    ...............ffffffffff..
-                    ...............ff3333333f..
-                    ...............f33333333f..
-                    ...............f33333f3ff..
-                    ...............f33333333f..
-                    ....ffffffffffff33333333f..
-                    ...f333333333333333333fff..
-                    ..f333333333333333333333f..
-                    ..f333333333333333333ffff..
-                    fff3333333333333333fff.....
-                    f33333333333333333f........
-                    .ffff333fffffff333f........
-                    ....fffff3f.fff333f........
-                    ......f333f...f333f........
-                    ......fffff...fffff........
-                    `],
-                200,
-                true
-                )
-            }
-        })
+        }
+    } else if (cutscene_phase == 8) {
+        if (scene.cameraProperty(CameraProperty.X) < tilemap_to_pixels(7)) {
+            cutscene_phase = 9
+        }
     } else if (cutscene_phase == 9) {
-        scene.centerCameraAt(scene.cameraProperty(CameraProperty.X) + 2, scene.cameraProperty(CameraProperty.Y))
-        if (Cammander.x > tilemap_to_pixels(11)) {
+        scene.centerCameraAt(scene.cameraProperty(CameraProperty.X) + 1, scene.cameraProperty(CameraProperty.Y))
+        if (Cammander.x > tilemap_to_pixels(10)) {
             cutscene_phase = 10
             Cammander.vy = -200
+            Cammander.ay = 500
             scene.centerCameraAt(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
-            timer.after(650, function () {
-                cutscene_phase = 11
-                animation.stopAnimation(animation.AnimationTypes.All, Cammander)
-                Cammander.vy = 0
-                Cammander.vx = 0
-                Cammander.ay = 0
-            })
         }
+    } else if (cutscene_phase == 10) {
+        cutscene_phase = 11
+        timer.after(635, function () {
+            animation.stopAnimation(animation.AnimationTypes.All, Cammander)
+            Cammander.setImage(img`
+                ................ffffffff...
+                ...............f11222111f..
+                ..............f1112111111f.
+                .............f111122211111f
+                .............fff11111111fff
+                ...............ffffffffff..
+                ...............ff3333333f..
+                ...............f33333333f..
+                ...............f33333f3ff..
+                ...............f33333333f..
+                ....ffffffffffff33333333f..
+                ...f333333333333333333fff..
+                ..f333333333333333333333f..
+                ..f333333333333333333ffff..
+                fff3333333333333333fff.....
+                f33333333333333333f........
+                .ffff333fffffff333f........
+                ....f333f3f.f3f333f........
+                ....f333f3f.f3f333f........
+                ....fffffff.fffffff........
+                `)
+            Cammander.vy = 0
+            Cammander.vx = 0
+            Cammander.ay = 0
+        })
     } else if (cutscene_phase == 11) {
         story.startCutscene(function () {
             cutscene_phase = 12
@@ -1577,8 +1574,6 @@ function Arnold_too_camander () {
             story.cancelCurrentCutscene()
         })
     } else if (cutscene_phase == 13) {
-        cutscene_phase = 14
-        temporaryspritetwo.setPosition(tilemap_to_pixels(7), tilemap_to_pixels(24))
         animation.runImageAnimation(
         temporaryspritetwo,
         [img`
@@ -1907,18 +1902,22 @@ function Arnold_too_camander () {
         1000,
         true
         )
-    } else if (cutscene_phase == 14) {
+        temporaryspritetwo.setPosition(tilemap_to_pixels(8) - 6, tilemap_to_pixels(24))
+        cutscene_phase = 14
         story.startCutscene(function () {
-            cutscene_phase = 15
-            story.printCharacterText("dang it! why did you go downstairs?", "Cammander")
-            story.printCharacterText("is their something wrong about going dowwnstairs?", "Arnold")
+            story.printCharacterText("dang it! why did you come up from below?", "Cammander")
+            story.printCharacterText("is their something wrong aboutup from below?", "Arnold")
             story.printCharacterText("Yes! you might have gotten past most of the security metheds they had!", "Cammander")
             story.printCharacterText("but they can still see you with there security cams!", "Cammander")
             story.printCharacterText("oh...", "Arnold")
             story.printCharacterText("but if the farmers not here then who is?", "Arnold")
             story.printCharacterText("I dont know but I dont wanna find out!", "Cammander")
+            story.printCharacterText("Lets escape!", "Cammander")
             story.cancelCurrentCutscene()
         })
+    }
+    if (cutscene_phase >= 6 && cutscene_phase <= 8) {
+        scene.centerCameraAt(scene.cameraProperty(CameraProperty.X) - 2, scene.cameraProperty(CameraProperty.Y))
     }
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -2859,26 +2858,26 @@ Binglep = sprites.create(img`
     `, SpriteKind.Player)
 Binglep.setPosition(-2100, 0)
 Cammander = sprites.create(img`
-    ................ffffffff...
-    ...............f11222111f..
-    ..............f1112111111f.
-    .............f111122211111f
-    .............fff11111111fff
-    ...............ffffffffff..
-    ...............ff3333333f..
-    ...............f33333333f..
-    ...............f33333f3ff..
-    ...............f33333333f..
-    ....ffffffffffff33333333f..
-    ...f333333333333333333fff..
+    ...ffffffff................
+    ..f11122211f...............
+    .f1111112111f..............
+    f111112221111f.............
+    fff11111111fff.............
+    ..ffffffffff...............
+    ..f3333333ff...............
+    ..f33333333f...............
+    ..ff3f33333f...............
+    ..f33333333f...............
+    ..f33333333ffffffffffff....
+    ..fff333333333333333333f...
     ..f333333333333333333333f..
-    ..f333333333333333333ffff..
-    fff3333333333333333fff.....
-    f33333333333333333f........
-    .ffff333fffffff333f........
-    ....f333f3f.f3f333f........
-    ....f333f3f.f3f333f........
-    ....fffffff.fffffff........
+    ..ffff333333333333333333f..
+    .....fff3333333333333333fff
+    ........f33333333333333333f
+    ........f333fffffff333ffff.
+    ........f333f3f.f3f333f....
+    ........f333f3f.f3f333f....
+    ........fffffff.fffffff....
     `, SpriteKind.Player)
 Cammander.setPosition(-2100, 0)
 temporaryspriteone = sprites.create(img`
