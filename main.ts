@@ -1161,12 +1161,7 @@ function cursor_overlaped (area: Sprite, val: number, mapselectno: boolean) {
         if (area.overlapsWith(cursor)) {
             start_area(val)
         } else if (mapselectno) {
-            if (val == 7) {
-                start_area(val)
-            }
-            if (val == 3) {
-                start_area(val)
-            }
+            start_area(val)
         }
     }
 }
@@ -1333,6 +1328,7 @@ function Arnold_too_camander () {
         Cammander.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(27) + 13)
         temporaryspriteone.setPosition(tilemap_to_pixels(14), tilemap_to_pixels(27) + 15.5)
         temporaryspritetwo.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(26) + 12)
+        temporaryspritethree.setPosition(tilemap_to_pixels(20), tilemap_to_pixels(28) - 5.5)
         Arnold.setVelocity(-50, 0)
         animation.runImageAnimation(
         Arnold,
@@ -1566,9 +1562,8 @@ function Arnold_too_camander () {
                 story.printCharacterText("I came to see why the farmer hasn't killed Piggy yet.", "Cammander")
                 story.printCharacterText("Same reason as me, any luck?", "Arnold")
                 story.printCharacterText("No, I cant find the farmer at all.", "Cammander")
-                story.printCharacterText("I was just about to check the fridge when you came", "Cammander")
-                story.printCharacterText("you seriousely think the farmer would be in the fridge?", "Arnold")
-                story.printCharacterText("I dont know humans do weird thhings sometimes", "Cammander")
+                story.printCharacterText("I saw someone else, I think it's the farmers daughter, Gloria", "Cammander")
+                story.printCharacterText("I just found her when you came", "Cammander")
             }
             cutscene_phase = 13
             story.cancelCurrentCutscene()
@@ -1906,13 +1901,11 @@ function Arnold_too_camander () {
         cutscene_phase = 14
         story.startCutscene(function () {
             story.printCharacterText("dang it! why did you come up from below?", "Cammander")
-            story.printCharacterText("is their something wrong aboutup from below?", "Arnold")
+            story.printCharacterText("is their something wrong about coming up from below?", "Arnold")
             story.printCharacterText("Yes! you might have gotten past most of the security metheds they had!", "Cammander")
             story.printCharacterText("but they can still see you with there security cams!", "Cammander")
             story.printCharacterText("oh...", "Arnold")
-            story.printCharacterText("but if the farmers not here then who is?", "Arnold")
-            story.printCharacterText("I dont know but I dont wanna find out!", "Cammander")
-            story.printCharacterText("Lets escape!", "Cammander")
+            story.printCharacterText("Lets get out quickly! before she gets here!", "Cammander")
             story.cancelCurrentCutscene()
         })
     }
@@ -2532,6 +2525,7 @@ let area_picture_three: Sprite = null
 let area_picture_two: Sprite = null
 let area_picture_one: Sprite = null
 let a_button_signal: Sprite = null
+let temporaryspritethree: Sprite = null
 let temporaryspritetwo: Sprite = null
 let temporaryspriteone: Sprite = null
 let Cammander: Sprite = null
@@ -2975,6 +2969,44 @@ temporaryspritetwo = sprites.create(img`
     f1111111111111111111111111111111111111111111f
     `, SpriteKind.Player)
 temporaryspritetwo.setPosition(-2100, 0)
+temporaryspritethree = sprites.create(img`
+    fffffffffffffffffffffffff
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeefffffffffef
+    feeeeeeeeeeeeefdddddddfef
+    feeeeeeeeeeeeeeffffffffef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    fffffffffffffffffffffffff
+    `, SpriteKind.Player)
+temporaryspritethree.setPosition(-2100, 0)
 a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     1 2 2 2 2 2 2 1 
@@ -3078,7 +3110,7 @@ cursor = sprites.create(img`
     `, SpriteKind.Player)
 cursor.setPosition(20, play.y)
 cursor_is = 1
-game_state = 1
+game_state = 2
 cutscene_phase = 0
 current_area = 0
 facing = 1
