@@ -1329,6 +1329,7 @@ function Arnold_too_camander () {
         temporaryspriteone.setPosition(tilemap_to_pixels(14), tilemap_to_pixels(27) + 15.5)
         temporaryspritetwo.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(26) + 12)
         temporaryspritethree.setPosition(tilemap_to_pixels(20), tilemap_to_pixels(28) - 5.5)
+        temporaryspritefour.setPosition(tilemap_to_pixels(24), tilemap_to_pixels(28) - 5.5)
         Arnold.setVelocity(-50, 0)
         animation.runImageAnimation(
         Arnold,
@@ -1523,37 +1524,36 @@ function Arnold_too_camander () {
             Cammander.vy = -200
             Cammander.ay = 500
             scene.centerCameraAt(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
+            timer.after(660, function () {
+                cutscene_phase = 11
+                animation.stopAnimation(animation.AnimationTypes.All, Cammander)
+                Cammander.setImage(img`
+                    ................ffffffff...
+                    ...............f11222111f..
+                    ..............f1112111111f.
+                    .............f111122211111f
+                    .............fff11111111fff
+                    ...............ffffffffff..
+                    ...............ff3333333f..
+                    ...............f33333333f..
+                    ...............f33333f3ff..
+                    ...............f33333333f..
+                    ....ffffffffffff33333333f..
+                    ...f333333333333333333fff..
+                    ..f333333333333333333333f..
+                    ..f333333333333333333ffff..
+                    fff3333333333333333fff.....
+                    f33333333333333333f........
+                    .ffff333fffffff333f........
+                    ....f333f3f.f3f333f........
+                    ....f333f3f.f3f333f........
+                    ....fffffff.fffffff........
+                    `)
+                Cammander.vy = 0
+                Cammander.vx = 0
+                Cammander.ay = 0
+            })
         }
-    } else if (cutscene_phase == 10) {
-        cutscene_phase = 11
-        timer.after(635, function () {
-            animation.stopAnimation(animation.AnimationTypes.All, Cammander)
-            Cammander.setImage(img`
-                ................ffffffff...
-                ...............f11222111f..
-                ..............f1112111111f.
-                .............f111122211111f
-                .............fff11111111fff
-                ...............ffffffffff..
-                ...............ff3333333f..
-                ...............f33333333f..
-                ...............f33333f3ff..
-                ...............f33333333f..
-                ....ffffffffffff33333333f..
-                ...f333333333333333333fff..
-                ..f333333333333333333333f..
-                ..f333333333333333333ffff..
-                fff3333333333333333fff.....
-                f33333333333333333f........
-                .ffff333fffffff333f........
-                ....f333f3f.f3f333f........
-                ....f333f3f.f3f333f........
-                ....fffffff.fffffff........
-                `)
-            Cammander.vy = 0
-            Cammander.vx = 0
-            Cammander.ay = 0
-        })
     } else if (cutscene_phase == 11) {
         story.startCutscene(function () {
             cutscene_phase = 12
@@ -2525,6 +2525,7 @@ let area_picture_three: Sprite = null
 let area_picture_two: Sprite = null
 let area_picture_one: Sprite = null
 let a_button_signal: Sprite = null
+let temporaryspritefour: Sprite = null
 let temporaryspritethree: Sprite = null
 let temporaryspritetwo: Sprite = null
 let temporaryspriteone: Sprite = null
@@ -3007,6 +3008,44 @@ temporaryspritethree = sprites.create(img`
     fffffffffffffffffffffffff
     `, SpriteKind.Player)
 temporaryspritethree.setPosition(-2100, 0)
+temporaryspritefour = sprites.create(img`
+    fffffffffffffffffffffffff
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeefffffffffef
+    feeeeeeeeeeeeefdddddddfef
+    feeeeeeeeeeeeeeffffffffef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeef
+    fffffffffffffffffffffffff
+    `, SpriteKind.Player)
+temporaryspritefour.setPosition(-2100, 0)
 a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     1 2 2 2 2 2 2 1 
@@ -3163,29 +3202,9 @@ game.onUpdate(function () {
         animated = animate_map_select_icons(area_picture_five, 2.5)
         animated = animate_map_select_icons(area_picture_six, 2.6)
     }
-    if (Arnold.overlapsWith(Area_anything_else)) {
-        a_button_signal.setPosition(Area_anything_else.x, Area_anything_else.y)
-        a_button_signal.setImage(img`
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-            1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-            . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-            . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-            `)
-    } else if (Arnold.overlapsWith(Area_entrance)) {
-        if (current_area != 3) {
-            a_button_signal.setPosition(Area_entrance.x, Area_entrance.y)
+    if (game_state >= 2) {
+        if (Arnold.overlapsWith(Area_anything_else)) {
+            a_button_signal.setPosition(Area_anything_else.x, Area_anything_else.y)
             a_button_signal.setImage(img`
                 . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
                 . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
@@ -3204,64 +3223,86 @@ game.onUpdate(function () {
                 . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
                 . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
                 `)
-        } else {
-            a_button_signal.setPosition(Area_entrance.x, Area_entrance.y + 15)
-            a_button_signal.setImage(img`
-                .......11111111111111111111111111111111.......
-                ......1111111111111111111111111111111111......
-                .....111111111111111111111111111111111111.....
-                ....11111111111111111111111111111111111111....
-                ...1111111111111111111111111111111111111111...
-                ..111111222222222222222222222222222222111111..
-                .11111112222222222222222222222222222221111111.
-                1111111122222222222222222222222222222211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122222222222222222222222222222211111111
-                1111111122222222222222222222222222222211111111
-                1111111122222222222222222222222222222211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                1111111122211111111111111111111111122211111111
-                .11111111111111111111111111111111111111111111.
-                ..111111111111111111111111111111111111111111..
-                ...1111111111111111111111111111111111111111...
-                ....11111111111111111111111111111111111111....
-                .....111111111111111111111111111111111111.....
-                ......1111111111111111111111111111111111......
-                .......11111111111111111111111111111111.......
-                `)
+        } else if (Arnold.overlapsWith(Area_entrance)) {
+            if (current_area != 3) {
+                a_button_signal.setPosition(Area_entrance.x, Area_entrance.y)
+                a_button_signal.setImage(img`
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                    1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                    1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                    . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                    . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                    `)
+            } else {
+                a_button_signal.setPosition(Area_entrance.x, Area_entrance.y + 15)
+                a_button_signal.setImage(img`
+                    .......11111111111111111111111111111111.......
+                    ......1111111111111111111111111111111111......
+                    .....111111111111111111111111111111111111.....
+                    ....11111111111111111111111111111111111111....
+                    ...1111111111111111111111111111111111111111...
+                    ..111111222222222222222222222222222222111111..
+                    .11111112222222222222222222222222222221111111.
+                    1111111122222222222222222222222222222211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122222222222222222222222222222211111111
+                    1111111122222222222222222222222222222211111111
+                    1111111122222222222222222222222222222211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    1111111122211111111111111111111111122211111111
+                    .11111111111111111111111111111111111111111111.
+                    ..111111111111111111111111111111111111111111..
+                    ...1111111111111111111111111111111111111111...
+                    ....11111111111111111111111111111111111111....
+                    .....111111111111111111111111111111111111.....
+                    ......1111111111111111111111111111111111......
+                    .......11111111111111111111111111111111.......
+                    `)
+            }
+        } else if (cutscene_now == false) {
+            a_button_signal.setPosition(-2100, 0)
         }
-    } else if (cutscene_now == false) {
-        a_button_signal.setPosition(-2100, 0)
-    }
-    if (current_area == 7 && cutscene_phase == 0) {
-        if (controller.A.isPressed() && Arnold.vy == 0) {
-            Arnold.vy = -150
+        if (current_area == 7 && cutscene_phase == 0) {
+            if (controller.A.isPressed() && Arnold.vy == 0) {
+                Arnold.vy = -150
+            }
         }
     }
 })
