@@ -436,7 +436,27 @@ function start_area (area_number: number) {
         ................................................................................................................................................................
         ................................................................................................................................................................
         `)
-    if (area_number == 3) {
+    if (area_number == 1) {
+        // this is to continue the Arnold to Cammander cutscene
+        if (game_state == 4 && cutscene_phase == 14) {
+            Arnold.setPosition(tilemap_to_pixels(17), tilemap_to_pixels(20))
+            Cammander.setPosition(tilemap_to_pixels(19), tilemap_to_pixels(20))
+            Binglep.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(21))
+            temporaryspriteone.setPosition(-2100, 0)
+            temporaryspritetwo.setPosition(-2100, 0)
+            temporaryspritethree.setPosition(-2100, 0)
+            temporaryspritefour.setPosition(-2100, 0)
+            cutscene_phase = 15
+        } else {
+            controller.moveSprite(Arnold)
+            Arnold.setPosition(tilemap_to_pixels(15), tilemap_to_pixels(21))
+            Area_entrance.setPosition(tilemap_to_pixels(23), tilemap_to_pixels(15))
+            Binglep.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(21))
+            scene.cameraFollowSprite(Arnold)
+            current_area = 1
+        }
+        tiles.setCurrentTilemap(tilemap`level6`)
+    } else if (area_number == 3) {
         tiles.setCurrentTilemap(tilemap`level27`)
         scene.cameraFollowSprite(Arnold)
         Arnold.setPosition(tilemap_to_pixels(27), tilemap_to_pixels(11))
@@ -1124,13 +1144,7 @@ function start_game () {
         ................................................................................................................................................................
         ................................................................................................................................................................
         `)
-    tiles.setCurrentTilemap(tilemap`level6`)
-    controller.moveSprite(Arnold)
-    Arnold.setPosition(tilemap_to_pixels(3), tilemap_to_pixels(21))
-    Area_entrance.setPosition(tilemap_to_pixels(10), tilemap_to_pixels(15))
-    Binglep.setPosition(tilemap_to_pixels(21), tilemap_to_pixels(21))
-    scene.cameraFollowSprite(Arnold)
-    current_area = 1
+    cursor_overlaped(area_picture_one, 1, true)
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
@@ -1322,8 +1336,11 @@ controller.up.onEvent(ControllerButtonEvent.Released, function () {
     }
 })
 function level_complete () {
+    if (game_state == 4) {
+        cursor_overlaped(area_picture_one, 1, true)
+    }
+    Level_complete_sign.setPosition(-5000, 0)
     tiles.setCurrentTilemap(tilemap`level1`)
-    Level_complete_sign.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
 }
 function Arnold_too_camander () {
     if (cutscene_phase == 0) {
@@ -1378,11 +1395,12 @@ function Arnold_too_camander () {
     } else if (cutscene_phase == 1 && Arnold.x < tilemap_to_pixels(18)) {
         cutscene_phase = 3
         Arnold.vy = -200
-        timer.after(650, function () {
+    } else if (cutscene_phase == 3) {
+        if (Arnold.x <= tilemap_to_pixels(17) && Arnold.y >= tilemap_to_pixels(26) + 8) {
             Arnold.ay = 0
             Arnold.vy = 0
             cutscene_phase = 4
-        })
+        }
     } else if (cutscene_phase == 4 && Arnold.x < tilemap_to_pixels(15)) {
         cutscene_phase = 5
         Arnold.vx = 0
@@ -1519,45 +1537,45 @@ function Arnold_too_camander () {
             }
         }
     } else if (cutscene_phase == 8) {
-        if (scene.cameraProperty(CameraProperty.X) < tilemap_to_pixels(7)) {
+        if (scene.cameraProperty(CameraProperty.X) < tilemap_to_pixels(5)) {
             cutscene_phase = 9
         }
     } else if (cutscene_phase == 9) {
-        scene.centerCameraAt(scene.cameraProperty(CameraProperty.X) + 1, scene.cameraProperty(CameraProperty.Y))
+        scene.centerCameraAt(scene.cameraProperty(CameraProperty.X) + 2, scene.cameraProperty(CameraProperty.Y))
         if (Cammander.x > tilemap_to_pixels(10)) {
             cutscene_phase = 10
             Cammander.vy = -200
             scene.centerCameraAt(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
-            timer.after(650, function () {
-                cutscene_phase = 11
-                animation.stopAnimation(animation.AnimationTypes.All, Cammander)
-                Cammander.y = temporaryspriteone.y - 21.5
-                Cammander.setImage(img`
-                    ................ffffffff...
-                    ...............f11222111f..
-                    ..............f1112111111f.
-                    .............f111122211111f
-                    .............fff11111111fff
-                    ...............ffffffffff..
-                    ...............ff3333333f..
-                    ...............f33333333f..
-                    ...............f33333f3ff..
-                    ...............f33333333f..
-                    ....ffffffffffff33333333f..
-                    ...f333333333333333333fff..
-                    ..f333333333333333333333f..
-                    ..f333333333333333333ffff..
-                    fff3333333333333333fff.....
-                    f33333333333333333f........
-                    .ffff333fffffff333f........
-                    ....f333f3f.f3f333f........
-                    ....f333f3f.f3f333f........
-                    ....fffffff.fffffff........
-                    `)
-                Cammander.vy = 0
-                Cammander.vx = 0
-                Cammander.ay = 0
-            })
+        }
+    } else if (cutscene_phase == 10) {
+        if (Cammander.x >= tilemap_to_pixels(11) && Cammander.y >= tilemap_to_pixels(26) + 4) {
+            cutscene_phase = 11
+            animation.stopAnimation(animation.AnimationTypes.All, Cammander)
+            Cammander.setImage(img`
+                ................ffffffff...
+                ...............f11222111f..
+                ..............f1112111111f.
+                .............f111122211111f
+                .............fff11111111fff
+                ...............ffffffffff..
+                ...............ff3333333f..
+                ...............f33333333f..
+                ...............f33333f3ff..
+                ...............f33333333f..
+                ....ffffffffffff33333333f..
+                ...f333333333333333333fff..
+                ..f333333333333333333333f..
+                ..f333333333333333333ffff..
+                fff3333333333333333fff.....
+                f33333333333333333f........
+                .ffff333fffffff333f........
+                ....f333f3f.f3f333f........
+                ....f333f3f.f3f333f........
+                ....fffffff.fffffff........
+                `)
+            Cammander.vy = 0
+            Cammander.vx = 0
+            Cammander.ay = 0
         }
     } else if (cutscene_phase == 11) {
         story.startCutscene(function () {
@@ -1573,8 +1591,7 @@ function Arnold_too_camander () {
             cutscene_phase = 13
             story.cancelCurrentCutscene()
         })
-    }
-    if (cutscene_phase == 13) {
+    } else if (cutscene_phase == 13) {
         animation.runImageAnimation(
         temporaryspritetwo,
         [img`
@@ -1907,13 +1924,31 @@ function Arnold_too_camander () {
         cutscene_phase = 14
         story.startCutscene(function () {
             story.printCharacterText("dang it! why did you come up from below?", "Cammander")
-            story.printCharacterText("is their something wrong about coming up from below?", "Arnold")
-            story.printCharacterText("Yes! you might have gotten past most of the security metheds they had!", "Cammander")
-            story.printCharacterText("but they can still see you with there security cams!", "Cammander")
-            story.printCharacterText("oh...", "Arnold")
-            story.printCharacterText("com'n we gotta get out quickly! before she gets here!", "Cammander")
+            if (false) {
+                story.printCharacterText("is their something wrong about coming up from below?", "Arnold")
+                story.printCharacterText("Yes! you might have gotten past most of the security metheds they had!", "Cammander")
+                story.printCharacterText("but they can still see you with there security cams!", "Cammander")
+                story.printCharacterText("oh...", "Arnold")
+                story.printCharacterText("com'n we gotta get out quickly! before she gets here!", "Cammander")
+            }
             level_complete()
             story.cancelCurrentCutscene()
+        })
+    } else if (cutscene_phase == 15) {
+        scene.cameraFollowSprite(Arnold)
+        story.startCutscene(function () {
+            cutscene_phase = 16
+            story.printCharacterText("Alright Arnold, our first plan to stop Piggy failed.", "Cammander")
+            if (false) {
+                story.printCharacterText("Luckily though, we have another one.", "Cammander")
+                story.printCharacterText("The farmers daughter has just harvested a bunch of berries.", "Cammander")
+                story.printCharacterText("luckily for us she took a break before taking them all in.", "Cammander")
+                story.printCharacterText("she left a basket of them in Big Barn, Rooster Hen, and the forest.", "Cammander")
+                story.printCharacterText("Your job is to collect them all and bring them here since this is where the attack will happen.", "Cammander")
+                story.printCharacterText("Alright sir!", "Arnold")
+                story.printCharacterText("the attack will happen in a few hours so please join us back here when your done.", "Cammander")
+                story.printCharacterText("Ok! you got it!", "Arnold")
+            }
         })
     }
     if (cutscene_phase >= 6 && cutscene_phase <= 8) {
@@ -2263,7 +2298,7 @@ function Zac_to_Arnold () {
                 story.printCharacterText("Isnt what we should do obvious? We need to hide!", "Binglep")
                 story.printCharacterText("A life of running and hiding? that sounds to painfull! We need to stop Piggy!", "Arnold")
             }
-            Zac.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(20))
+            Zac.setPosition(tilemap_to_pixels(25), tilemap_to_pixels(20))
             Zac.setVelocity(50, 0)
             animation.runImageAnimation(
             Zac,
@@ -2302,7 +2337,7 @@ function Zac_to_Arnold () {
             cutscene_phase = 3
             story.cancelCurrentCutscene()
         })
-    } else if (cutscene_phase == 3 && Zac.x > tilemap_to_pixels(16)) {
+    } else if (cutscene_phase == 3 && Zac.x > tilemap_to_pixels(31)) {
         animation.stopAnimation(animation.AnimationTypes.All, Zac)
         Zac.setVelocity(0, 0)
         Zac.setImage(img`
@@ -3280,7 +3315,7 @@ Level_complete_sign = sprites.create(img`
     `, SpriteKind.Player)
 Level_complete_sign.setPosition(-5000, 0)
 cursor_is = 1
-game_state = 2
+game_state = 4
 cutscene_phase = 0
 current_area = 0
 facing = 1
@@ -3443,4 +3478,7 @@ game.onUpdate(function () {
     }
     Arnolds_Last_Direction = Arnolds_Direction
     Arnolds_Direction = Get_Direction_From_Sprite(Arnold)
+})
+game.onUpdate(function () {
+    level_complete()
 })
