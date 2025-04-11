@@ -312,9 +312,9 @@ function Arnolds_Animations () {
                     .................fbffff..
                     ................ffff3f3f.
                     ................f3333333f
-                    ....fffffffffffff3333333f
-                    ...f333333333333333333fff
-                    ..f333333333333333333333f
+                    ....fffffffffffff3333f222
+                    ...f3333333333333333f1222
+                    ..f33333333333333333ff222
                     ..f333333333333333333ffff
                     fff3333333333333333fff...
                     f33333333333333333f......
@@ -328,9 +328,9 @@ function Arnolds_Animations () {
                     .................fbffff..
                     ................ffff3f3f.
                     ................f3333333f
-                    ....fffffffffffff3333333f
-                    ...f333333333333333333fff
-                    ..f333333333333333333333f
+                    ....fffffffffffff3333f222
+                    ...f3333333333333333f1222
+                    ..f33333333333333333ff222
                     ..f333333333333333333ffff
                     fff3333333333333333fff...
                     f33333333333333333f......
@@ -350,9 +350,9 @@ function Arnolds_Animations () {
                     .................fbffff..
                     ................ffff3f3f.
                     ................f3333333f
-                    ....fffffffffffff3333333f
-                    ...f333333333333333333fff
-                    ..f333333333333333333333f
+                    ....fffffffffffff3333f222
+                    ...f3333333333333333f1222
+                    ..f33333333333333333ff222
                     ..f333333333333333333ffff
                     fff3333333333333333fff...
                     f33333333333333333f......
@@ -371,9 +371,9 @@ function Arnolds_Animations () {
                     ..ffffbf.................
                     .f3f3ffff................
                     f3333333f................
-                    f3333333fffffffffffff....
-                    fff333333333333333333f...
-                    f333333333333333333333f..
+                    222f3333fffffffffffff....
+                    2221f3333333333333333f...
+                    222ff33333333333333333f..
                     ffff333333333333333333f..
                     ...fff3333333333333333fff
                     ......f33333333333333333f
@@ -387,9 +387,9 @@ function Arnolds_Animations () {
                     ..ffffbf.................
                     .f3f3ffff................
                     f3333333f................
-                    f3333333fffffffffffff....
-                    fff333333333333333333f...
-                    f333333333333333333333f..
+                    222f3333fffffffffffff....
+                    2221f3333333333333333f...
+                    222ff33333333333333333f..
                     ffff333333333333333333f..
                     ...fff3333333333333333fff
                     ......f33333333333333333f
@@ -409,9 +409,9 @@ function Arnolds_Animations () {
                     ..ffffbf.................
                     .f3f3ffff................
                     f3333333f................
-                    f3333333fffffffffffff....
-                    fff333333333333333333f...
-                    f333333333333333333333f..
+                    222f3333fffffffffffff....
+                    2221f3333333333333333f...
+                    222ff33333333333333333f..
                     ffff333333333333333333f..
                     ...fff3333333333333333fff
                     ......f33333333333333333f
@@ -503,270 +503,8 @@ function Arnolds_Animations () {
                     . . . f 3 3 3 3 3 3 3 f . . . 
                     . . . f 3 f 3 3 3 f 3 f . . . 
                     . f f f 3 3 3 3 3 3 3 f f f . 
-                    f 3 3 f 3 f f f f f 3 f 3 3 f 
-                    f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 f f f . f 3 f 3 3 3 f 
-                    f 3 3 3 f . . . f 3 f f f f f 
-                    f 3 3 3 f . . . f 3 3 3 f . . 
-                    f 3 3 3 f . . . f 3 3 3 f . . 
-                    f f f f f . . . f f f f f . . 
-                    `,img`
-                    . . . . f f f . f f f . . . . 
-                    . . . . f 2 2 f 2 2 f . . . . 
-                    . . . . f f f f f f f . . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 f 3 3 3 f 3 f . . . 
-                    . f f f 3 3 3 3 3 3 3 f f f . 
-                    f 3 3 f 3 f f f f f 3 f 3 3 f 
-                    f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 f 3 f . f f f 3 3 3 f 
-                    f f f f f 3 f . . . f 3 3 3 f 
-                    . . f 3 3 3 f . . . f 3 3 3 f 
-                    . . f 3 3 3 f . . . f 3 3 3 f 
-                    . . f f f f f . . . f f f f f 
-                    `],
-                200,
-                true
-                )
-            } else if (facing == 4.5 && (current_area != 7 && !(controller.down.isPressed()))) {
-                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-                Arnold.setImage(img`
-                    . . . . f f f . f f f . . . . 
-                    . . . . f 2 2 f 2 2 f . . . . 
-                    . . . . f f f f f f f . . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 f 3 3 3 f 3 f . . . 
-                    . f f f 3 3 3 3 3 3 3 f f f . 
-                    f 3 3 f 3 f f f f f 3 f 3 3 f 
-                    f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f f f f f f f . f f f f f f f 
-                    `)
-            }
-        } else if (ArnoldAnimationType == 2) {
-            if (facing == 1) {
-                facing = 1.5
-                animation.runImageAnimation(
-                Arnold,
-                [img`
-                    ..................ff.ff..
-                    .................f22f2f..
-                    .................fbffff..
-                    ................ffff3f3f.
-                    ................f33322222
-                    ....fffffffffffff33322222
-                    ...f333333333333333322222
-                    ..f3333333333333333322222
-                    ..f3333333333333333322222
-                    fff3333333333333333fff...
-                    f33333333333333333f......
-                    .ffff333fffffff333f......
-                    ..fff333f...f3fffff......
-                    ....f333f...f333f........
-                    ....fffff...fffff........
-                    `,img`
-                    ..................ff.ff..
-                    .................f22f2f..
-                    .................fbffff..
-                    ................ffff3f3f.
-                    ................f33322222
-                    ....fffffffffffff33322222
-                    ...f333333333333333322222
-                    ..f3333333333333333322222
-                    ..f3333333333333333322222
-                    fff3333333333333333fff...
-                    f33333333333333333f......
-                    .ffff333fffffff333f......
-                    ..f3fffff...fff333f......
-                    ..f333f.......f333f......
-                    ..fffff.......fffff......
-                    `],
-                200,
-                false
-                )
-            } else if (facing == 1.5 && !(controller.right.isPressed())) {
-                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-                Arnold.setImage(img`
-                    ..................ff.ff..
-                    .................f22f2f..
-                    .................fbffff..
-                    ................ffff3f3f.
-                    ................f3333333f
-                    ....fffffffffffff3333333f
-                    ...f333333333333333333fff
-                    ..f333333333333333333333f
-                    ..f333333333333333333ffff
-                    fff3333333333333333fff...
-                    f33333333333333333f......
-                    .ffff333fffffff333f......
-                    ....f333f3f.f3f333f......
-                    ....f333f3f.f3f333f......
-                    ....fffffff.fffffff......
-                    `)
-            } else if (facing == 2) {
-                facing = 2.5
-                animation.runImageAnimation(
-                Arnold,
-                [img`
-                    ..ff.ff..................
-                    ..f2f22f.................
-                    ..ffffbf.................
-                    .f3f3ffff................
-                    22222333f................
-                    22222333fffffffffffff....
-                    222223333333333333333f...
-                    2222233333333333333333f..
-                    2222233333333333333333f..
-                    ...fff3333333333333333fff
-                    ......f33333333333333333f
-                    ......f333fffffff333ffff.
-                    ......fffff3f...f333fff..
-                    ........f333f...f333f....
-                    ........fffff...fffff....
-                    `,img`
-                    ..ff.ff..................
-                    ..f2f22f.................
-                    ..ffffbf.................
-                    .f3f3ffff................
-                    22222333f................
-                    22222333fffffffffffff....
-                    222223333333333333333f...
-                    2222233333333333333333f..
-                    2222233333333333333333f..
-                    ...fff3333333333333333fff
-                    ......f33333333333333333f
-                    ......f333fffffff333ffff.
-                    ......f333fff...fffff3f..
-                    ......f333f.......f333f..
-                    ......fffff.......fffff..
-                    `],
-                200,
-                true
-                )
-            } else if (facing == 2.5 && !(controller.left.isPressed())) {
-                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-                Arnold.setImage(img`
-                    ..ff.ff..................
-                    ..f2f22f.................
-                    ..ffffbf.................
-                    .f3f3ffff................
-                    f3333333f................
-                    f3333333fffffffffffff....
-                    fff333333333333333333f...
-                    f333333333333333333333f..
-                    ffff333333333333333333f..
-                    ...fff3333333333333333fff
-                    ......f33333333333333333f
-                    ......f333fffffff333ffff.
-                    ......f333f3f.f3f333f....
-                    ......f333f3f.f3f333f....
-                    ......fffffff.fffffff....
-                    `)
-            } else if (facing == 3 && current_area != 7) {
-                facing = 3.5
-                animation.runImageAnimation(
-                Arnold,
-                [img`
-                    . . . . f f f . f f f . . . . 
-                    . . . . f 2 2 f 2 2 f . . . . 
-                    . . . . f f f f f f f . . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . f f f f f f f f f f f f f . 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 f f f f 3 3 3 3 f 
-                    f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-                    f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 f f f . f 3 f 3 3 3 f 
-                    f 3 3 3 f . . . f 3 f f f f f 
-                    f 3 3 3 f . . . f 3 3 3 f . . 
-                    f 3 3 3 f . . . f 3 3 3 f . . 
-                    f f f f f . . . f f f f f . . 
-                    `,img`
-                    . . . . f f f . f f f . . . . 
-                    . . . . f 2 2 f 2 2 f . . . . 
-                    . . . . f f f f f f f . . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . f f f f f f f f f f f f f . 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 f f f f 3 3 3 3 f 
-                    f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-                    f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 f 3 f . f f f 3 3 3 f 
-                    f f f f f 3 f . . . f 3 3 3 f 
-                    . . f 3 3 3 f . . . f 3 3 3 f 
-                    . . f 3 3 3 f . . . f 3 3 3 f 
-                    . . f f f f f . . . f f f f f 
-                    `],
-                200,
-                true
-                )
-            } else if (facing == 3.5 && (current_area != 7 && !(controller.up.isPressed()))) {
-                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
-                Arnold.setImage(img`
-                    . . . . f f f . f f f . . . . 
-                    . . . . f 2 2 f 2 2 f . . . . 
-                    . . . . f f f f f f f . . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . f f f f f f f f f f f f f . 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 3 3 f f f f 3 3 3 3 f 
-                    f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
-                    f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
-                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                    f f f f f f f . f f f f f f f 
-                    `)
-            } else if (facing == 4 && current_area != 7) {
-                facing = 4.5
-                animation.runImageAnimation(
-                Arnold,
-                [img`
-                    . . . . f f f . f f f . . . . 
-                    . . . . f 2 2 f 2 2 f . . . . 
-                    . . . . f f f f f f f . . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 3 3 3 3 3 3 f . . . 
-                    . . . f 3 f 3 3 3 f 3 f . . . 
-                    . f f f 3 2 2 2 2 2 3 f f f . 
-                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
-                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
+                    f 3 3 f f 2 2 2 2 2 f f 3 3 f 
+                    f 3 3 f 1 2 2 2 2 2 1 f 3 3 f 
                     f 3 3 3 f 2 2 2 2 2 f 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
@@ -785,9 +523,9 @@ function Arnolds_Animations () {
                     . . . f 3 3 3 3 3 3 3 f . . . 
                     . . . f 3 f 3 3 3 f 3 f . . . 
                     . f f f 3 3 3 3 3 3 3 f f f . 
-                    f 3 3 f 3 f f f f f 3 f 3 3 f 
-                    f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 f f 2 2 2 2 2 f f 3 3 f 
+                    f 3 3 f 1 2 2 2 2 2 1 f 3 3 f 
+                    f 3 3 3 f 2 2 2 2 2 f 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
@@ -810,9 +548,9 @@ function Arnolds_Animations () {
                     . . . f 3 3 3 3 3 3 3 f . . . 
                     . . . f 3 3 3 3 3 3 3 f . . . 
                     . . . f 3 f 3 3 3 f 3 f . . . 
-                    . f f f 3 2 2 2 2 2 3 f f f . 
-                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
-                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
+                    . f f f 3 3 3 3 3 3 3 f f f . 
+                    f 3 3 f f 2 2 2 2 2 f f 3 3 f 
+                    f 3 3 f 1 2 2 2 2 2 1 f 3 3 f 
                     f 3 3 3 f 2 2 2 2 2 f 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
                     f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
@@ -1021,6 +759,7 @@ function start_area (area_number: number) {
         Binglep.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(21))
         Area_entrance.setPosition(tilemap_to_pixels(23), tilemap_to_pixels(15))
         Berry_basket.setPosition(tilemap_to_pixels(10), 21)
+        Berry_basket.setPosition(tilemap_to_pixels(22), tilemap_to_pixels(20))
         tiles.setCurrentTilemap(tilemap`level6`)
     } else if (area_number == 3) {
         tiles.setCurrentTilemap(tilemap`level27`)
@@ -1360,12 +1099,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             }
         }
         if (Arnold.overlapsWith(Berry_basket)) {
-            if (true) {
-            	
-            } else if (false) {
-            	
-            } else if (false) {
-            	
+            ArnoldAnimationType = 2
+            if (current_area == 2) {
+                bb_one_amount = -1
+            } else if (current_area == 4) {
+                bb_two_amount = -1
+            } else if (current_area == 6) {
+                bb_three_amount = -1
             }
         }
     }
@@ -1419,24 +1159,44 @@ function talking_to_someone2 (player2: Sprite, guytalkingto: Sprite, A_direction
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0) {
+            if (ArnoldAnimationType == 1) {
+                Arnold.setImage(img`
+                    ..ff.ff..................
+                    ..f2f22f.................
+                    ..ffffbf.................
+                    .f3f3ffff................
+                    f3333333f................
+                    f3333333fffffffffffff....
+                    fff333333333333333333f...
+                    f333333333333333333333f..
+                    ffff333333333333333333f..
+                    ...fff3333333333333333fff
+                    ......f33333333333333333f
+                    ......f333fffffff333ffff.
+                    ......f333f3f.f3f333f....
+                    ......f333f3f.f3f333f....
+                    ......fffffff.fffffff....
+                    `)
+            } else {
+                Arnold.setImage(img`
+                    ..ff.ff..................
+                    ..f2f22f.................
+                    ..ffffbf.................
+                    .f3f3ffff................
+                    f3333333f................
+                    222f3333fffffffffffff....
+                    2221f3333333333333333f...
+                    222ff33333333333333333f..
+                    ffff333333333333333333f..
+                    ...fff3333333333333333fff
+                    ......f33333333333333333f
+                    ......f333fffffff333ffff.
+                    ......f333f3f.f3f333f....
+                    ......f333f3f.f3f333f....
+                    ......fffffff.fffffff....
+                    `)
+            }
             facing = 2
-            Arnold.setImage(img`
-                ..ff.ff..................
-                ..f2f22f.................
-                ..ffffbf.................
-                .f3f3ffff................
-                f3333333f................
-                f3333333fffffffffffff....
-                fff333333333333333333f...
-                f333333333333333333333f..
-                ffff333333333333333333f..
-                ...fff3333333333333333fff
-                ......f33333333333333333f
-                ......f333fffffff333ffff.
-                ......f333f3f.f3f333f....
-                ......f333f3f.f3f333f....
-                ......fffffff.fffffff....
-                `)
         }
     }
 })
@@ -1569,7 +1329,6 @@ function area_select () {
     Arnold.setPosition(-2000, 0)
     Binglep.setPosition(-1000, 0)
     Zac.setPosition(-1000, 0)
-    Berry_basket.setPosition(-1000, 0)
     area_picture_one.setPosition(tilemap_to_pixels(5), tilemap_to_pixels(6))
     area_picture_two.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(4))
     area_picture_three.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(4))
@@ -1733,24 +1492,45 @@ function start_game () {
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0) {
+            if (ArnoldAnimationType == 1) {
+                facing = 1
+                Arnold.setImage(img`
+                    ..................ff.ff..
+                    .................f22f2f..
+                    .................fbffff..
+                    ................ffff3f3f.
+                    ................f3333333f
+                    ....fffffffffffff3333333f
+                    ...f333333333333333333fff
+                    ..f333333333333333333333f
+                    ..f333333333333333333ffff
+                    fff3333333333333333fff...
+                    f33333333333333333f......
+                    .ffff333fffffff333f......
+                    ....f333f3f.f3f333f......
+                    ....f333f3f.f3f333f......
+                    ....fffffff.fffffff......
+                    `)
+            } else {
+                Arnold.setImage(img`
+                    ..................ff.ff..
+                    .................f22f2f..
+                    .................fbffff..
+                    ................ffff3f3f.
+                    ................f3333333f
+                    ....fffffffffffff3333f222
+                    ...f3333333333333333f1222
+                    ..f33333333333333333ff222
+                    ..f333333333333333333ffff
+                    fff3333333333333333fff...
+                    f33333333333333333f......
+                    .ffff333fffffff333f......
+                    ....f333f3f.f3f333f......
+                    ....f333f3f.f3f333f......
+                    ....fffffff.fffffff......
+                    `)
+            }
             facing = 1
-            Arnold.setImage(img`
-                ..................ff.ff..
-                .................f22f2f..
-                .................fbffff..
-                ................ffff3f3f.
-                ................f3333333f
-                ....fffffffffffff3333333f
-                ...f333333333333333333fff
-                ..f333333333333333333333f
-                ..f333333333333333333ffff
-                fff3333333333333333fff...
-                f33333333333333333f......
-                .ffff333fffffff333f......
-                ....f333f3f.f3f333f......
-                ....f333f3f.f3f333f......
-                ....fffffff.fffffff......
-                `)
         }
     }
 })
@@ -2604,28 +2384,52 @@ function Arnold_too_camander () {
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (cursor_is < 0) {
         if (cutscene_phase == 0 && current_area != 7) {
+            if (ArnoldAnimationType == 1) {
+                Arnold.setImage(img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 f 3 3 3 f 3 f . . . 
+                    . f f f 3 3 3 3 3 3 3 f f f . 
+                    f 3 3 f 3 f f f f f 3 f 3 3 f 
+                    f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f f f f f f f . f f f f f f f 
+                    `)
+            } else {
+                Arnold.setImage(img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 f 3 3 3 f 3 f . . . 
+                    . f f f 3 3 3 3 3 3 3 f f f . 
+                    f 3 3 f f 2 2 2 2 2 f f 3 3 f 
+                    f 3 3 f 1 2 2 2 2 2 1 f 3 3 f 
+                    f 3 3 3 f 2 2 2 2 2 f 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f f f f f f f . f f f f f f f 
+                    `)
+            }
             facing = 4
-            Arnold.setImage(img`
-                . . . . f f f . f f f . . . . 
-                . . . . f 2 2 f 2 2 f . . . . 
-                . . . . f f f f f f f . . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . . . f 3 3 3 3 3 3 3 f . . . 
-                . . . f 3 f 3 3 3 f 3 f . . . 
-                . f f f 3 3 3 3 3 3 3 f f f . 
-                f 3 3 f 3 f f f f f 3 f 3 3 f 
-                f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
-                f 3 3 3 f f f f f f f 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
-                f 3 3 3 f f f f f f f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f 3 3 3 f 3 f . f 3 f 3 3 3 f 
-                f f f f f f f . f f f f f f f 
-                `)
         }
     }
 })
@@ -3215,7 +3019,9 @@ let area_picture_three: Sprite = null
 let area_picture_two: Sprite = null
 let area_picture_one: Sprite = null
 let a_button_signal: Sprite = null
-let Berry_basket: Sprite = null
+let bb_three_amount = 0
+let bb_two_amount = 0
+let bb_one_amount = 0
 let temporaryspritetwo: Sprite = null
 let temporaryspritefour: Sprite = null
 let temporaryspritethree: Sprite = null
@@ -3224,6 +3030,7 @@ let Cammander: Sprite = null
 let Binglep: Sprite = null
 let Zac: Sprite = null
 let Arnold: Sprite = null
+let Berry_basket: Sprite = null
 let Piggy: Sprite = null
 let Area_anything_else: Sprite = null
 let Area_entrance: Sprite = null
@@ -3501,6 +3308,34 @@ Piggy = sprites.create(img`
     ....fffff.....fffff......
     `, SpriteKind.Player)
 Piggy.setPosition(-2000, 0)
+Berry_basket = sprites.create(img`
+    ..........ffffffffffffffffffff...........
+    ........fffeeeeeeeeeeeeeeeeeeefffff......
+    ....fffffeeeeeeeffffffffffffeeeeeefff....
+    ...ffeeeeeffffffeeeeeeeeeeeffeeeeeeefff..
+    ...feeefffeeeeeeeeeeeeeeeeeeeffeeeeeeeeff
+    ..ffeffeeeeeeeeeeeeeeeeeeeeeeeeffeeeeeeef
+    ffeefeeeeeeeeeffffffffffffeeeeeeffeeeeeef
+    feefeeeeeeffffddddddddfffdffeeeeeffeeeeef
+    fefeeeffffdddffffdddfff2fffdffeeeeffffeef
+    ffeeeefddddfff22ffdff22222fffdffeeeeefeef
+    ffeeffffffff22222fffff222222fdddfeeeeefff
+    feeff2222ff2222fff222ff22222ffdddfeeeeeff
+    feff222222ffff2f22222ff22ffffffddffffeeef
+    ffeffff22fff2fff222fff2fff222fffff22ffeef
+    feef222fff22222f22f222222ff2f2222f22fffef
+    feef2222ff222222fff2222222ff222222fff2fef
+    feef2222f2222222ff22222222ff222222ff22fef
+    feeffffffffffffffffffffffffffffffffffffef
+    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
+    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
+    .feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.
+    ..feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef..
+    ...feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef...
+    ....fffffffffffffffffffffffffffffffff....
+    `, SpriteKind.berrybasket)
+Berry_basket.setPosition(-3000, 0)
 Arnold = sprites.create(img`
     ..................ff.ff..
     .................f22f2f..
@@ -3737,37 +3572,9 @@ temporaryspritetwo = sprites.create(img`
     f1111111111111111111111111111111111111111111f
     `, SpriteKind.Player)
 temporaryspritetwo.setPosition(-2100, 0)
-Berry_basket = sprites.create(img`
-    ..........ffffffffffffffffffff...........
-    ........fffeeeeeeeeeeeeeeeeeeefffff......
-    ....fffffeeeeeeeffffffffffffeeeeeefff....
-    ...ffeeeeeffffffeeeeeeeeeeeffeeeeeeefff..
-    ...feeefffeeeeeeeeeeeeeeeeeeeffeeeeeeeeff
-    ..ffeffeeeeeeeeeeeeeeeeeeeeeeeeffeeeeeeef
-    ffeefeeeeeeeeeffffffffffffeeeeeeffeeeeeef
-    feefeeeeeeffffddddddddfffdffeeeeeffeeeeef
-    fefeeeffffdddffffdddfff2fffdffeeeeffffeef
-    ffeeeefddddfff22ffdff22222fffdffeeeeefeef
-    ffeeffffffff22222fffff222222fdddfeeeeefff
-    feeff2222ff2222fff222ff22222ffdddfeeeeeff
-    feff222222ffff2f22222ff22ffffffddffffeeef
-    ffeffff22fff2fff222fff2fff222fffff22ffeef
-    feef222fff22222f22f222222ff2f2222f22fffef
-    feef2222ff222222fff2222222ff222222fff2fef
-    feef2222f2222222ff22222222ff222222ff22fef
-    feeffffffffffffffffffffffffffffffffffffef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    .feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.
-    ..feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef..
-    ...feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef...
-    ....fffffffffffffffffffffffffffffffff....
-    `, SpriteKind.berrybasket)
-Berry_basket.setPosition(-3000, 0)
-let bb_one_amount = 20
-let bb_two_amount = 20
-let bb_three_amount = 20
+bb_one_amount = 20
+bb_two_amount = 20
+bb_three_amount = 20
 a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     1 2 2 2 2 2 2 1 
@@ -3790,6 +3597,7 @@ area_picture_one = sprites.create(img`
     8 8 8 8 8 8 8 8 
     . 8 8 8 8 8 8 . 
     `, SpriteKind.areapicture)
+// big barn
 area_picture_two = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
@@ -3800,6 +3608,7 @@ area_picture_two = sprites.create(img`
     8 8 8 8 8 8 8 8 
     . 8 8 8 8 8 8 . 
     `, SpriteKind.areapicture)
+// Plant Land
 area_picture_three = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
@@ -3810,6 +3619,7 @@ area_picture_three = sprites.create(img`
     8 8 8 8 8 8 8 8 
     . 8 8 8 8 8 8 . 
     `, SpriteKind.areapicture)
+// Chicken Hen
 area_picture_four = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
@@ -4142,6 +3952,26 @@ game.onUpdate(function () {
                     .......11111111111111111111111111111111.......
                     `)
             }
+        } else if (Arnold.overlapsWith(Berry_basket) && ArnoldAnimationType == 1) {
+            a_button_signal.setPosition(Berry_basket.x, Berry_basket.y)
+            a_button_signal.setImage(img`
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
+                . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
+                . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
+                `)
         } else if (cutceneready == false) {
             a_button_signal.setPosition(-2100, 0)
         }
