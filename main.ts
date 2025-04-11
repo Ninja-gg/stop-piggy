@@ -563,6 +563,268 @@ function Arnolds_Animations () {
                     f f f f f f f . f f f f f f f 
                     `)
             }
+        } else if (ArnoldAnimationType == 2) {
+            if (facing == 1) {
+                facing = 1.5
+                animation.runImageAnimation(
+                Arnold,
+                [img`
+                    ..................ff.ff..
+                    .................f22f2f..
+                    .................fbffff..
+                    ................ffff3f3f.
+                    ................f33322222
+                    ....fffffffffffff33322222
+                    ...f333333333333333322222
+                    ..f3333333333333333322222
+                    ..f3333333333333333322222
+                    fff3333333333333333fff...
+                    f33333333333333333f......
+                    .ffff333fffffff333f......
+                    ..fff333f...f3fffff......
+                    ....f333f...f333f........
+                    ....fffff...fffff........
+                    `,img`
+                    ..................ff.ff..
+                    .................f22f2f..
+                    .................fbffff..
+                    ................ffff3f3f.
+                    ................f33322222
+                    ....fffffffffffff33322222
+                    ...f333333333333333322222
+                    ..f3333333333333333322222
+                    ..f3333333333333333322222
+                    fff3333333333333333fff...
+                    f33333333333333333f......
+                    .ffff333fffffff333f......
+                    ..f3fffff...fff333f......
+                    ..f333f.......f333f......
+                    ..fffff.......fffff......
+                    `],
+                200,
+                false
+                )
+            } else if (facing == 1.5 && !(controller.right.isPressed())) {
+                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+                Arnold.setImage(img`
+                    ..................ff.ff..
+                    .................f22f2f..
+                    .................fbffff..
+                    ................ffff3f3f.
+                    ................f3333333f
+                    ....fffffffffffff3333333f
+                    ...f333333333333333333fff
+                    ..f333333333333333333333f
+                    ..f333333333333333333ffff
+                    fff3333333333333333fff...
+                    f33333333333333333f......
+                    .ffff333fffffff333f......
+                    ....f333f3f.f3f333f......
+                    ....f333f3f.f3f333f......
+                    ....fffffff.fffffff......
+                    `)
+            } else if (facing == 2) {
+                facing = 2.5
+                animation.runImageAnimation(
+                Arnold,
+                [img`
+                    ..ff.ff..................
+                    ..f2f22f.................
+                    ..ffffbf.................
+                    .f3f3ffff................
+                    22222333f................
+                    22222333fffffffffffff....
+                    222223333333333333333f...
+                    2222233333333333333333f..
+                    2222233333333333333333f..
+                    ...fff3333333333333333fff
+                    ......f33333333333333333f
+                    ......f333fffffff333ffff.
+                    ......fffff3f...f333fff..
+                    ........f333f...f333f....
+                    ........fffff...fffff....
+                    `,img`
+                    ..ff.ff..................
+                    ..f2f22f.................
+                    ..ffffbf.................
+                    .f3f3ffff................
+                    22222333f................
+                    22222333fffffffffffff....
+                    222223333333333333333f...
+                    2222233333333333333333f..
+                    2222233333333333333333f..
+                    ...fff3333333333333333fff
+                    ......f33333333333333333f
+                    ......f333fffffff333ffff.
+                    ......f333fff...fffff3f..
+                    ......f333f.......f333f..
+                    ......fffff.......fffff..
+                    `],
+                200,
+                true
+                )
+            } else if (facing == 2.5 && !(controller.left.isPressed())) {
+                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+                Arnold.setImage(img`
+                    ..ff.ff..................
+                    ..f2f22f.................
+                    ..ffffbf.................
+                    .f3f3ffff................
+                    f3333333f................
+                    f3333333fffffffffffff....
+                    fff333333333333333333f...
+                    f333333333333333333333f..
+                    ffff333333333333333333f..
+                    ...fff3333333333333333fff
+                    ......f33333333333333333f
+                    ......f333fffffff333ffff.
+                    ......f333f3f.f3f333f....
+                    ......f333f3f.f3f333f....
+                    ......fffffff.fffffff....
+                    `)
+            } else if (facing == 3 && current_area != 7) {
+                facing = 3.5
+                animation.runImageAnimation(
+                Arnold,
+                [img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . f f f f f f f f f f f f f . 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 f f f f 3 3 3 3 f 
+                    f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+                    f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f f f . f 3 f 3 3 3 f 
+                    f 3 3 3 f . . . f 3 f f f f f 
+                    f 3 3 3 f . . . f 3 3 3 f . . 
+                    f 3 3 3 f . . . f 3 3 3 f . . 
+                    f f f f f . . . f f f f f . . 
+                    `,img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . f f f f f f f f f f f f f . 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 f f f f 3 3 3 3 f 
+                    f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+                    f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f 3 f . f f f 3 3 3 f 
+                    f f f f f 3 f . . . f 3 3 3 f 
+                    . . f 3 3 3 f . . . f 3 3 3 f 
+                    . . f 3 3 3 f . . . f 3 3 3 f 
+                    . . f f f f f . . . f f f f f 
+                    `],
+                200,
+                true
+                )
+            } else if (facing == 3.5 && (current_area != 7 && !(controller.up.isPressed()))) {
+                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+                Arnold.setImage(img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . f f f f f f f f f f f f f . 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 f f f f 3 3 3 3 f 
+                    f 3 3 3 3 3 f 3 3 f 3 3 3 3 f 
+                    f 3 3 3 3 f 3 3 f f 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f f f f f f f . f f f f f f f 
+                    `)
+            } else if (facing == 4 && current_area != 7) {
+                facing = 4.5
+                animation.runImageAnimation(
+                Arnold,
+                [img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 f 3 3 3 f 3 f . . . 
+                    . f f f 3 2 2 2 2 2 3 f f f . 
+                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
+                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
+                    f 3 3 3 f 2 2 2 2 2 f 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f f f . f 3 f 3 3 3 f 
+                    f 3 3 3 f . . . f 3 f f f f f 
+                    f 3 3 3 f . . . f 3 3 3 f . . 
+                    f 3 3 3 f . . . f 3 3 3 f . . 
+                    f f f f f . . . f f f f f . . 
+                    `,img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 f 3 3 3 f 3 f . . . 
+                    . f f f 3 3 3 3 3 3 3 f f f . 
+                    f 3 3 f 3 f f f f f 3 f 3 3 f 
+                    f 3 3 f 3 3 3 3 3 3 3 f 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f 3 f . f f f 3 3 3 f 
+                    f f f f f 3 f . . . f 3 3 3 f 
+                    . . f 3 3 3 f . . . f 3 3 3 f 
+                    . . f 3 3 3 f . . . f 3 3 3 f 
+                    . . f f f f f . . . f f f f f 
+                    `],
+                200,
+                true
+                )
+            } else if (facing == 4.5 && (current_area != 7 && !(controller.down.isPressed()))) {
+                animation.stopAnimation(animation.AnimationTypes.All, Arnold)
+                Arnold.setImage(img`
+                    . . . . f f f . f f f . . . . 
+                    . . . . f 2 2 f 2 2 f . . . . 
+                    . . . . f f f f f f f . . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 3 3 3 3 3 3 f . . . 
+                    . . . f 3 f 3 3 3 f 3 f . . . 
+                    . f f f 3 2 2 2 2 2 3 f f f . 
+                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
+                    f 3 3 f 3 2 2 2 2 2 3 f 3 3 f 
+                    f 3 3 3 f 2 2 2 2 2 f 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 3 3 3 3 3 3 3 3 3 3 f 
+                    f 3 3 3 f f f f f f f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f 3 3 3 f 3 f . f 3 f 3 3 3 f 
+                    f f f f f f f . f f f f f f f 
+                    `)
+            }
         }
     }
 }
@@ -758,7 +1020,7 @@ function start_area (area_number: number) {
         }
         Binglep.setPosition(tilemap_to_pixels(35), tilemap_to_pixels(21))
         Area_entrance.setPosition(tilemap_to_pixels(23), tilemap_to_pixels(15))
-        BerryBasketOne.setPosition(tilemap_to_pixels(10), 21)
+        Berry_basket.setPosition(tilemap_to_pixels(10), 21)
         tiles.setCurrentTilemap(tilemap`level6`)
     } else if (area_number == 3) {
         tiles.setCurrentTilemap(tilemap`level27`)
@@ -1080,33 +1342,6 @@ function start_area (area_number: number) {
     area_picture_five.setPosition(-4000, 0)
     area_picture_six.setPosition(-4000, 0)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.berrybasket, function (sprite, otherSprite) {
-    a_button_signal.setImage(img`
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-        1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-        1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-        1 1 1 2 2 2 2 2 2 2 2 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        1 1 1 2 2 1 1 1 1 1 1 2 2 1 1 1 
-        . 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . 
-        . . 1 1 1 1 1 1 1 1 1 1 1 1 . . 
-        `)
-    a_button_signal.setPosition(otherSprite.x, otherSprite.x)
-    if (controller.A.isPressed() && sprites.readDataNumber(otherSprite, "BerryBasketAmount") != 0) {
-        sprites.changeDataNumberBy(otherSprite, "BerryBasketAmount", -1)
-        // 1=normal
-        // 2=has berry in mouth
-        ArnoldAnimationType = 2
-    }
-})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (A_buttonoud == false) {
         if (current_area == 3) {
@@ -1122,6 +1357,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 cursor_overlaped(area_picture_one, 3, true)
             } else if (Arnold.overlapsWith(Area_anything_else) && game_state == 3) {
                 game_state = 4
+            }
+        }
+        if (Arnold.overlapsWith(Berry_basket)) {
+            if (true) {
+            	
+            } else if (false) {
+            	
+            } else if (false) {
+            	
             }
         }
     }
@@ -1205,29 +1449,29 @@ function area_select () {
         77f7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
         777f7777777777777777777777777777777777777777777777777777777777777777777777ff777777777777777777777777777777777777777777777777777777777777777777777777777777777777
         777f777777777777777777777777777777777777777777777777777777777777777777777fddf77777777777777777777777777777777777777777777777777777777777777777777777777777777777
-        ffffff777fff777777777777777777777777777777777777777777777777777777777777fddddff777777777777777777777777777777777777777777777777777777777777777777777777777777777
-        f7f777f7f777f77777777777777777777777777777777777777777777777777777777777fddddddf77777777777777777777777777777777777777777777777777777777777777777777777777777777
-        7ff7fffff777f7777777777777777777777777777777777777777777777777777777777fddddddddf7777777777777777777777777777777777777777777777777777777777777777777777777777777
-        7fff7777ffffff77777777777777777777777777777777777777777777777777777777fddddddddddf777777777777777777777777777777777777777777777777777777777777777777777777777777
-        f77f777777f777f77777777777777777777777777777777777777ffff777777777777fddddddddddddff7777777777777777777777777777777777777777777777777777777777777777777777777777
-        f77f777777fffff7777777777777777777777777777777777777fddddf7777777777fddddffffdddddddf777777777777777777777777777777777777777777777777777777777777777777777777777
-        efff77777ffeef7777777777777777777777777777777777777fddddddff77777777fddddfbbfddddddddf77777777777777777777777777777777777777777777777777777777777777777777777777
-        efeffffffefeefffffffffff77777777777777777777777777fdddddddddf777777fdddddffffddddddddf77777777777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeeff77f777ff7ff77777777777777777777777fdddffffddddf7777fddddddddddddddddddff7777777777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef77777777777ffffff77777777777777777fddddfbbfddddf7777fddddddddddddddddddfdf777777777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef77777777777f77777f7777777777777777fddddffffddddf7777fddddddddddddddddddfddf77777777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef777f777f777777777ff777777777777777fddddddddddddfffffdddddddddddddddddddfdddff777777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef777f7777f777777777f777777777777777fddddddddddddfdddddddddddddddddddddddfdddddf77777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef777f7777f777f77777f777777777777777fddddddddddddfdddddddddddddddddddddddfddddddf7777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef777f777f77777f777ff777777777777777fddddddddddddfdddddddddddddddddddddddfdddddddf777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef777f777f777777f777f777777777777777fddddddddddddfdddddddddddddddddddddddfffffffff777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef77f777ff77f7777777f777777777777777fddddddddddddfdddddddddddddddddddddddfdddddddf777777777777777777777777777777777777777777777777777777777777777777
-        efefefeefefeef77777f77777ff77777f777777777777777fddddddddddddfdddddfffffffdddddddddddfddffffdf777777777777777777777777777777777777777777777777777777777777777777
-        ffefffeefefeef7777777777777f7777f777777777777777fddddddddddddfddddfeeeeeeefddddddddddfddfbbfdfff7777777777777777777777777777777777777777777777777777777777777777
-        7fef7feefffeefff7777ffffffffff77f777777777777777fddddddddddddfddddfeeeeeeefddddddddddfddffffdddf7777777777777777777777777777777777777777777777777777777777777777
-        7fff7feef7feef7f77ffbbbbbbbbbbfff777777777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf7777777777777777777777777777777777777777777777777777777777777777
-        77777ffff7feef777fbbbbbbbbbbbbbbff77777777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf7777777777777777777777777777777777777777777777777777777777777777
-        7777777777fffff7fbbbbbbbbbbbbbbbbbff777777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf7777777777777777777777777777777777777777777777777777777777777777
+        ffffff777fff777777777777777777777777777777777777777777777777777777777777fddddff7777777777777777777777777777777777777777777777777ffffffff777777777777777777777777
+        f7f777f7f777f77777777777777777777777777777777777777777777777777777777777fddddddf777777777777777777777777777777777777777777777777f555555ff77777777777777777777777
+        7ff7fffff777f7777777777777777777777777777777777777777777777777777777777fddddddddf77777777777777777777777777777777777777777777777f55555555f7777777777777777777777
+        7fff7777ffffff77777777777777777777777777777777777777777777777777777777fddddddddddf7777777777777777777777777777777777777777777777f55555555f7777777777777777777777
+        f77f777777f777f77777777777777777777777777777777777777ffff777777777777fddddddddddddff7777777777777777777777777777777777777777777f555555555f7777777777777777777777
+        f77f777777fffff7777777777777777777777777777777777777fddddf7777777777fddddffffdddddddf7777777777777777777777777777777777ffffffffffff555555f7777777777777777777777
+        efff77777ffeef7777777777777777777777777777777777777fddddddff77777777fddddfbbfddddddddf77777777777777777777777777777777ff55555555555ffffffffff7777777777777777777
+        efeffffffefeefffffffffff77777777777777777777777777fdddddddddf777777fdddddffffddddddddf77777777777777777777777777777777f55555555555555f555555f7777777777777777777
+        efefefeefefeeff77f777ff7ff77777777777777777777777fdddffffddddf7777fddddddddddddddddddff7777777777777777777777777777777f55555555555555f555555f7777777777777777777
+        efefefeefefeef77777777777ffffff77777777777777777fddddfbbfddddf7777fddddddddddddddddddfdf777777777777777777777777777777f5555555555555ff555555f7777777777777777777
+        efefefeefefeef77777777777f77777f7777777777777777fddddffffddddf7777fddddddddddddddddddfddf77777777777777777777777777777f5555555555555f5555555f7777777777777777777
+        efefefeefefeef777f777f777777777ff777777777777777fddddddddddddfffffdddddddddddddddddddfdddff7777777777777777777777ffffff5555555555555f5555555f7777777777777777777
+        efefefeefefeef777f7777f777777777f777777777777777fddddddddddddfdddddddddddddddddddddddfdddddf77777777777777777777ff5555fffffffffff555f55555ffffffffffffff77777777
+        efefefeefefeef777f7777f777f77777f777777777777777fddddddddddddfdddddddddddddddddddddddfddddddf7777777777777777777f55555555555f5555fffffffff5555f555555555f7777777
+        efefefeefefeef777f777f77777f777ff777777777777777fddddddddddddfdddddddddddddddddddddddfdddddddf777777777777777777f5555555555f55555555555555555ff555555555f7777777
+        efefefeefefeef777f777f777777f777f777777777777777fddddddddddddfdddddddddddddddddddddddfffffffff777777777777777777f5555555555f55555555555555555f5555555555f7777777
+        efefefeefefeef77f777ff77f7777777f777777777777777fddddddddddddfdddddddddddddddddddddddfdddddddf777777777777777777f5555555555f55555555555555555f55555555555f777777
+        efefefeefefeef77777f77777ff77777f777777777777777fddddddddddddfdddddfffffffdddddddddddfddffffdf777777777777777777f555555555f555555555555555555f55555555555f777777
+        ffefffeefefeef7777777777777f7777f777777777777777fddddddddddddfddddfeeeeeeefddddddddddfddfbbfdfff7777777777777777f555555555f555555555555555555f55555555555f777777
+        7fef7feefffeefff7777ffffffffff77f777777777777777fddddddddddddfddddfeeeeeeefddddddddddfddffffdddf7777777777777777ffffffffffffffffffffff5555555f55555555555f777777
+        7fff7feef7feef7f77ffbbbbbbbbbbfff777777777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf7777777777777777f777777777777777777777ffffffff55555555555f777777
+        77777ffff7feef777fbbbbbbbbbbbbbbff77777777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf7777777777777777777777777777777777777777777777fffffff555ff777777
+        7777777777fffff7fbbbbbbbbbbbbbbbbbff777777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf77777777777777777777777777777777777777777777777777777ffff7777777
         777777777777777ffbbbbbbbbbbbbbbbbbbff77777777777fddddddddddddfddddfeeeeeeefddddddddddfdddddddddf7777777777777777777777777777777777777777777777777777777777777777
         7777777777777777fbbbbbbbbbbbbbbbbbbbf77777777777fddddddddddddfddddfeeeeeeefdffffffffffdddddddddf7777777777777777777777777777777777777777777777777777777777777777
         7777777777777777fbbbbbbbbbbbbbbbbbbbbf7777777777fdddddddddffffffffffffffffff777777777ffffffffff77777777777777777777777777777777777777777777777777777777777777777
@@ -1325,11 +1569,12 @@ function area_select () {
     Arnold.setPosition(-2000, 0)
     Binglep.setPosition(-1000, 0)
     Zac.setPosition(-1000, 0)
+    Berry_basket.setPosition(-1000, 0)
     area_picture_one.setPosition(tilemap_to_pixels(5), tilemap_to_pixels(6))
     area_picture_two.setPosition(tilemap_to_pixels(9), tilemap_to_pixels(4))
     area_picture_three.setPosition(tilemap_to_pixels(4), tilemap_to_pixels(4))
     area_picture_four.setPosition(tilemap_to_pixels(1), tilemap_to_pixels(6) + 10)
-    area_picture_five.setPosition(tilemap_to_pixels(7), tilemap_to_pixels(3))
+    area_picture_five.setPosition(tilemap_to_pixels(8), tilemap_to_pixels(1))
     area_picture_six.setPosition(tilemap_to_pixels(0), tilemap_to_pixels(1))
     cursor.setImage(img`
         . . . . . . . f f . . . . . . . 
@@ -2970,7 +3215,7 @@ let area_picture_three: Sprite = null
 let area_picture_two: Sprite = null
 let area_picture_one: Sprite = null
 let a_button_signal: Sprite = null
-let BerryBasketOne: Sprite = null
+let Berry_basket: Sprite = null
 let temporaryspritetwo: Sprite = null
 let temporaryspritefour: Sprite = null
 let temporaryspritethree: Sprite = null
@@ -3492,7 +3737,7 @@ temporaryspritetwo = sprites.create(img`
     f1111111111111111111111111111111111111111111f
     `, SpriteKind.Player)
 temporaryspritetwo.setPosition(-2100, 0)
-BerryBasketOne = sprites.create(img`
+Berry_basket = sprites.create(img`
     ..........ffffffffffffffffffff...........
     ........fffeeeeeeeeeeeeeeeeeeefffff......
     ....fffffeeeeeeeffffffffffffeeeeeefff....
@@ -3519,66 +3764,10 @@ BerryBasketOne = sprites.create(img`
     ...feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef...
     ....fffffffffffffffffffffffffffffffff....
     `, SpriteKind.berrybasket)
-BerryBasketOne.setPosition(-3000, 0)
-sprites.setDataNumber(BerryBasketOne, "BerryBasketAmount", 0)
-let BerryBasketTwo = sprites.create(img`
-    ..........ffffffffffffffffffff...........
-    ........fffeeeeeeeeeeeeeeeeeeefffff......
-    ....fffffeeeeeeeffffffffffffeeeeeefff....
-    ...ffeeeeeffffffeeeeeeeeeeeffeeeeeeefff..
-    ...feeefffeeeeeeeeeeeeeeeeeeeffeeeeeeeeff
-    ..ffeffeeeeeeeeeeeeeeeeeeeeeeeeffeeeeeeef
-    ffeefeeeeeeeeeffffffffffffeeeeeeffeeeeeef
-    feefeeeeeeffffddddddddfffdffeeeeeffeeeeef
-    fefeeeffffdddffffdddfff2fffdffeeeeffffeef
-    ffeeeefddddfff22ffdff22222fffdffeeeeefeef
-    ffeeffffffff22222fffff222222fdddfeeeeefff
-    feeff2222ff2222fff222ff22222ffdddfeeeeeff
-    feff222222ffff2f22222ff22ffffffddffffeeef
-    ffeffff22fff2fff222fff2fff222fffff22ffeef
-    feef222fff22222f22f222222ff2f2222f22fffef
-    feef2222ff222222fff2222222ff222222fff2fef
-    feef2222f2222222ff22222222ff222222ff22fef
-    feeffffffffffffffffffffffffffffffffffffef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    .feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.
-    ..feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef..
-    ...feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef...
-    ....fffffffffffffffffffffffffffffffff....
-    `, SpriteKind.berrybasket)
-BerryBasketTwo.setPosition(-3000, 0)
-sprites.setDataNumber(BerryBasketTwo, "BerryBasketAmount", 0)
-let BerryBasketThree = sprites.create(img`
-    ..........ffffffffffffffffffff...........
-    ........fffeeeeeeeeeeeeeeeeeeefffff......
-    ....fffffeeeeeeeffffffffffffeeeeeefff....
-    ...ffeeeeeffffffeeeeeeeeeeeffeeeeeeefff..
-    ...feeefffeeeeeeeeeeeeeeeeeeeffeeeeeeeeff
-    ..ffeffeeeeeeeeeeeeeeeeeeeeeeeeffeeeeeeef
-    ffeefeeeeeeeeeffffffffffffeeeeeeffeeeeeef
-    feefeeeeeeffffddddddddfffdffeeeeeffeeeeef
-    fefeeeffffdddffffdddfff2fffdffeeeeffffeef
-    ffeeeefddddfff22ffdff22222fffdffeeeeefeef
-    ffeeffffffff22222fffff222222fdddfeeeeefff
-    feeff2222ff2222fff222ff22222ffdddfeeeeeff
-    feff222222ffff2f22222ff22ffffffddffffeeef
-    ffeffff22fff2fff222fff2fff222fffff22ffeef
-    feef222fff22222f22f222222ff2f2222f22fffef
-    feef2222ff222222fff2222222ff222222fff2fef
-    feef2222f2222222ff22222222ff222222ff22fef
-    feeffffffffffffffffffffffffffffffffffffef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef
-    .feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef.
-    ..feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef..
-    ...feeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef...
-    ....fffffffffffffffffffffffffffffffff....
-    `, SpriteKind.berrybasket)
-BerryBasketThree.setPosition(-3000, 0)
-sprites.setDataNumber(BerryBasketThree, "BerryBasketAmount", 0)
+Berry_basket.setPosition(-3000, 0)
+let bb_one_amount = 20
+let bb_two_amount = 20
+let bb_three_amount = 20
 a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     1 2 2 2 2 2 2 1 
@@ -3590,6 +3779,7 @@ a_button_signal = sprites.create(img`
     . 1 1 1 1 1 1 . 
     `, SpriteKind.Player)
 a_button_signal.setPosition(-2100, 0)
+// Pig barn
 area_picture_one = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
@@ -3630,6 +3820,7 @@ area_picture_four = sprites.create(img`
     8 8 8 8 8 8 8 8 
     . 8 8 8 8 8 8 . 
     `, SpriteKind.areapicture)
+// Hay bales
 area_picture_five = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
@@ -3640,6 +3831,7 @@ area_picture_five = sprites.create(img`
     8 8 8 8 8 8 8 8 
     . 8 8 8 8 8 8 . 
     `, SpriteKind.areapicture)
+// The forest
 area_picture_six = sprites.create(img`
     . 8 8 8 8 8 8 . 
     8 8 8 8 8 8 8 8 
